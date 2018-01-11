@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import hu.tokingame.towerdefense.BuildingBlocks.BuildingBlock;
 import hu.tokingame.towerdefense.BuildingBlocks.Wall;
 import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
@@ -21,6 +22,7 @@ import hu.tokingame.towerdefense.MyGdxGame;
 public class GameStage extends MyStage {
 
     private ControlStage controlStage;
+    public BuildingBlock[][] map = new BuildingBlock[8][8];
 
     public GameStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -33,10 +35,7 @@ public class GameStage extends MyStage {
 
     @Override
     public void init() {
-        addActor(new Wall(0, 0));
-        addActor(new Wall(7, 0));
-        addActor(new Wall(0, 7));
-        addActor(new Wall(7, 7));
+        //addActor(new Wall(0,0));
     }
 
 
@@ -50,5 +49,15 @@ public class GameStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         controlStage.act(delta);
+    }
+
+
+    void placeElement(int x, int y){
+        if(map[x][y] == null){
+            Wall k = new Wall(x, y);
+            map[x][y] = k;
+            addActor(k);
+            System.out.println("placed "+x+" : "+ y);
+        }
     }
 }

@@ -6,7 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.tokingame.towerdefense.Game.UI.BlockSelector;
+import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
+import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.tokingame.towerdefense.MyBaseClasses.UI.MyTextButton;
 import hu.tokingame.towerdefense.MyGdxGame;
 
@@ -23,22 +25,38 @@ public class ControlStage extends MyStage {
 
     @Override
     public void init() {
-        addActor(new MyTextButton("hello", game.getTextButtonStyle()){
-            @Override
-            public void init() {
-                super.init();
-                this.setPosition(50,50);
-                addListener(new ClickListener(){
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        super.clicked(event, x, y);
-                        System.out.println("asdflksfkljjlsdaf");
-                    }
-                });
-            }
-        });
 
         addActor(new BlockSelector());
 
+
+        initGrid();
+
+    }
+
+
+    void initGrid(){
+        for (int i = 0; i < 8; i++){
+            for (int j = 0; j < 8; j++){
+                final int finalI = i;
+                final int finalJ = j;
+                addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.GRID_SQUARE)){
+                    @Override
+                    public void init() {
+                        super.init();
+                        setSize(90, 90);
+                        setX(280+ finalJ *90);
+                        setY((7- finalI)*90);
+                        addListener(new ClickListener(){
+                            @Override
+                            public void clicked(InputEvent event, float x, float y) {
+                                super.clicked(event, x, y);
+                                System.out.println("clicked "+finalI+" : "+finalJ);
+                                gameStage.placeElement(finalI, finalJ);
+                            }
+                        });
+                    }
+                });
+            }
+        }
     }
 }

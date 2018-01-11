@@ -22,7 +22,7 @@ public class BuildingBlock extends OneSpriteStaticActor {
 
 
     void place(float e, float m){
-        setX(280+m*90);
-        setY((7-e)*90);
+        setX(280+ m *90);
+        setY((7- e)*90);
     }
 }
