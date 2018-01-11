@@ -26,7 +26,7 @@ public class Assets {
 
     static final FreetypeFontLoader.FreeTypeFontLoaderParameter fontParameter = new FreetypeFontLoader.FreeTypeFontLoaderParameter();
     static {
-        fontParameter.fontFileName = "alegreyaregular.otf";//// TODO: 1/11/2018 calibri 
+        fontParameter.fontFileName = "calibril.ttf";////
         fontParameter.fontParameters.size = 50;
         fontParameter.fontParameters.characters = CHARS;
         fontParameter.fontParameters.color = Color.WHITE;
