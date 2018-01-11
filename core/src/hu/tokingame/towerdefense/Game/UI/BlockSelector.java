@@ -1,6 +1,7 @@
 package hu.tokingame.towerdefense.Game.UI;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
@@ -17,15 +18,23 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
  * Created by M on 1/11/2018.
  */
 
-public class BlockSelector extends OneSpriteStaticActor {
+public class BlockSelector extends Group {
 
     private boolean moving = false;
     private State state;
     public BlockSelector() {
-        super(Assets.manager.get(Assets.BADLOGIC_TEXTURE)); // TODO: 1/11/2018 Change BG
+        super();
         this.setSize(250,100);
         this.setPosition(-200, Globals.WORLD_HEIGHT/2f - this.getHeight()/2f);
-        state = State.OUT;
+        addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BADLOGIC_TEXTURE)){
+            @Override
+            public void init() {
+                super.init();
+                this.setSize(BlockSelector.this.getWidth(),BlockSelector.this.getHeight());
+                this.setPosition(0,0);
+            }
+        });
+        state = State.IN;
         addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -65,11 +74,6 @@ public class BlockSelector extends OneSpriteStaticActor {
                 BlockSelector.this.removeAction(BlockSelector.this.getActions().first());
             }
         })));
-    }
-
-    @Override
-    public void init() {
-        super.init();
     }
 
 
