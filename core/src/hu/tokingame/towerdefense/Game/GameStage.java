@@ -1,6 +1,9 @@
 package hu.tokingame.towerdefense.Game;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.tokingame.towerdefense.BuildingBlocks.Wall;
@@ -14,8 +17,12 @@ import hu.tokingame.towerdefense.MyGdxGame;
  */
 
 public class GameStage extends MyStage {
+
+    private ControlStage controlStage;
+
     public GameStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
+        controlStage = new ControlStage(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)),new SpriteBatch(), game, this);
     }
 
     @Override
@@ -38,5 +45,17 @@ public class GameStage extends MyStage {
             if(Globals.map[i][7]) return true;
         }
         return false;
+    }
+
+    @Override
+    public void draw() {
+        super.draw();
+        controlStage.draw();
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        controlStage.act(delta);
     }
 }
