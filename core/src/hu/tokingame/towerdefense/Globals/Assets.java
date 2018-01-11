@@ -36,6 +36,8 @@ public class Assets {
 
     public static final AssetDescriptor<Texture> BADLOGIC_TEXTURE = new AssetDescriptor<Texture>("badlogic.jpg", Texture.class);
 
+    public static final AssetDescriptor<Texture> WALL_TEXTURE = new AssetDescriptor<Texture>("Buildings/wall.png", Texture.class);
+
 
    
 
@@ -53,6 +55,8 @@ public class Assets {
 
         manager.load(BADLOGIC_TEXTURE);
         manager.load(CALIBRI_FONT);
+
+        manager.load(WALL_TEXTURE);
     }
 
     public static void afterLoaded() {

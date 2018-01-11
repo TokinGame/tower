@@ -7,4 +7,8 @@ package hu.tokingame.towerdefense.Globals;
 public class Globals {
     public static final int WORLD_WIDTH = 1280;
     public static final int WORLD_HEIGHT = 720;
+
+
+    public static boolean[][] map = new boolean[8][8]; //true = üres, false = foglalt;
+
 }

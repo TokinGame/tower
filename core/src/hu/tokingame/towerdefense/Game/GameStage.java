@@ -3,6 +3,8 @@ package hu.tokingame.towerdefense.Game;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import hu.tokingame.towerdefense.BuildingBlocks.Wall;
+import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
 import hu.tokingame.towerdefense.MyBaseClasses.UI.MyLabel;
 import hu.tokingame.towerdefense.MyGdxGame;
@@ -18,6 +20,23 @@ public class GameStage extends MyStage {
 
     @Override
     public void init() {
-        addActor(new MyLabel("Hello", game.getLabelStyle()));
+        fillMapWithTrue();
+        addActor(new Wall(280, 0));
+    }
+
+    void fillMapWithTrue(){
+        for (boolean[] b: Globals.map) {
+            for (boolean k :b){
+                k = true;
+            }
+        }
+    }
+
+    boolean canPlace(int x, int y){
+        for(int i = 0; i < 8; i++){
+            if(Globals.map[i][0]) return true;
+            if(Globals.map[i][7]) return true;
+        }
+        return false;
     }
 }

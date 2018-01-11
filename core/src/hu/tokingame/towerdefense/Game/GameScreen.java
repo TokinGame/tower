@@ -18,6 +18,7 @@ public class GameScreen extends MyScreen {
     public GameScreen(MyGdxGame game) {
         super(game);
         gameStage = new GameStage(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)),spriteBatch, game);
+        gameStage.addBackEventStackListener();
     }
 
 
@@ -25,10 +26,18 @@ public class GameScreen extends MyScreen {
     public void render(float delta) {
         super.render(delta);
         gameStage.act(delta);
+        gameStage.draw();
     }
 
     @Override
     public void init() {
 
+    }
+
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        gameStage.dispose();
     }
 }
