@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import hu.tokingame.towerdefense.Game.UI.BlockSelector;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
 import hu.tokingame.towerdefense.MyBaseClasses.UI.MyTextButton;
 import hu.tokingame.towerdefense.MyGdxGame;
@@ -31,11 +32,13 @@ public class ControlStage extends MyStage {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
-                        System.out.println("asdflksfkljjlsdaf;kjlfdsa;jlk");
+                        System.out.println("asdflksfkljjlsdaf");
                     }
                 });
             }
         });
-        
+
+        addActor(new BlockSelector());
+
     }
 }
