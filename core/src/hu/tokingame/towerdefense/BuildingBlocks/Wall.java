@@ -9,7 +9,7 @@ import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
  * Created by davim on 2018. 01. 11..
  */
 
-public class Wall extends OneSpriteStaticActor {
+public class Wall extends BuildingBlock {
     public Wall(float x, float y) {
         super(Assets.manager.get(Assets.WALL_TEXTURE));
         setSize(720,720);
