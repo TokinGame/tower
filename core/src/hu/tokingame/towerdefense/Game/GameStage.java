@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
+import hu.tokingame.towerdefense.MyBaseClasses.UI.MyLabel;
 import hu.tokingame.towerdefense.MyGdxGame;
 
 /**
@@ -17,6 +18,6 @@ public class GameStage extends MyStage {
 
     @Override
     public void init() {
-
+        addActor(new MyLabel("Hello", game.getLabelStyle()));
     }
 }
