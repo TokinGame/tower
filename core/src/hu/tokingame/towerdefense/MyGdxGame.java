@@ -1,5 +1,6 @@
 package hu.tokingame.towerdefense;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 import hu.tokingame.towerdefense.Globals.Assets;
+import hu.tokingame.towerdefense.Loading.LoadingScreen;
 import hu.tokingame.towerdefense.Menu.MenuScreen;
 import hu.tokingame.towerdefense.MyBaseClasses.Game.MyGame;
 
@@ -53,16 +55,21 @@ public class MyGdxGame extends MyGame {
 
 
 	@Override
-	public void create () {
-		setScreen(new MenuScreen(this));
+	public void create() {
+		Assets.prepare();
+		Gdx.input.setCatchBackKey(true);
+		setScreen(new LoadingScreen(this));
 	}
 
 	@Override
-	public void render () {
-
+	public void resume() {
+		super.resume();
+		Assets.manager.update();
 	}
-	
+
 	@Override
-	public void dispose () {
+	public void dispose() {
+		super.dispose();
+		Assets.unload();
 	}
 }
