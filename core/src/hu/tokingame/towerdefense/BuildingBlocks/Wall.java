@@ -11,8 +11,7 @@ import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class Wall extends BuildingBlock {
     public Wall(float x, float y) {
-        super(Assets.manager.get(Assets.WALL_TEXTURE));
-        setSize(720,720);
-        setPosition(x, y);
+        super(Assets.manager.get(Assets.WALL_TEXTURE), x, y);
+
     }
 }

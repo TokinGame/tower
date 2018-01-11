@@ -33,25 +33,12 @@ public class GameStage extends MyStage {
 
     @Override
     public void init() {
-        fillMapWithTrue();
-        addActor(new Wall(280, 0));
+        addActor(new Wall(0, 0));
+        addActor(new Wall(7, 0));
+        addActor(new Wall(0, 7));
+        addActor(new Wall(7, 7));
     }
 
-    void fillMapWithTrue(){
-        for (boolean[] b: Globals.map) {
-            for (boolean k :b){
-                k = true;
-            }
-        }
-    }
-
-    boolean canPlace(int x, int y){
-        for(int i = 0; i < 8; i++){
-            if(Globals.map[i][0]) return true;
-            if(Globals.map[i][7]) return true;
-        }
-        return false;
-    }
 
     @Override
     public void draw() {
