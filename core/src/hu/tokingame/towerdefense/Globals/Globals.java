@@ -11,6 +11,9 @@ public class Globals {
     public static final int WORLD_HEIGHT = 720;
 
 
+    public static final int MAPSIZE = 8;
+
+
 
 
 }
