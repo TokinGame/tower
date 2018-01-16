@@ -22,9 +22,14 @@ public class BlockSelector extends Group {
 
     private boolean moving = false;
     private State state;
+    private SelectedBlock selectedBlock;
+
+    private BlockSelectButton b0, b1, b2;
+
+
     public BlockSelector() {
         super();
-        this.setSize(250,100);
+        this.setSize(250,400);
         this.setPosition(-200, Globals.WORLD_HEIGHT/2f - this.getHeight()/2f);
         addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BADLOGIC_TEXTURE)){
             @Override
@@ -52,6 +57,10 @@ public class BlockSelector extends Group {
             }
         });
 
+        addActor(b0 = new BlockSelectButton(25, 275, this, 0));
+        addActor(b1 = new BlockSelectButton(25, 150, this, 1));
+        addActor(b2 = new BlockSelectButton(25, 25, this, 2));
+
     }
 
     public void slideOut(){
@@ -76,9 +85,21 @@ public class BlockSelector extends Group {
         })));
     }
 
+    public void selected(int id){
+        switch(id){
+            case 0:
+
+        }
+    }
+
+
+
 
     private enum State{
         IN,OUT
+    }
+    private enum SelectedBlock{
+        WALL, TURRET, OTHERTURRET
     }
 
 }
