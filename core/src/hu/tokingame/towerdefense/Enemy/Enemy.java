@@ -30,14 +30,33 @@ public abstract class Enemy extends OneSpriteStaticActor {
         // TODO: 1/17/2018 kell egy tömb, arraylist, vector vagy valami amiben benne vannak a lépések
         // pl ez:
         stepsList = new ArrayList<Step>();
-        stepsList.add(Step.RIGHT);
+        /*stepsList.add(Step.RIGHT);
         stepsList.add(Step.RIGHT);
         stepsList.add(Step.DOWN);
         stepsList.add(Step.DOWN);
         stepsList.add(Step.RIGHT);
         stepsList.add(Step.RIGHT);
         stepsList.add(Step.UP);
-        stepsList.add(Step.LEFT);
+        stepsList.add(Step.LEFT);*/
+        stepsList.add(Step.RIGHT);
+        stepsList.add(Step.RIGHT);
+        stepsList.add(Step.RIGHT);
+        stepsList.add(Step.RIGHT);
+        stepsList.add(Step.RIGHT);
+        stepsList.add(Step.RIGHT);
+        stepsList.add(Step.RIGHT);
+        stepsList.add(Step.RIGHT);
+        stepsList.add(Step.RIGHT);
+        stepsList.add(Step.RIGHT);
+        stepsList.add(Step.DOWN);
+        stepsList.add(Step.DOWN);
+        stepsList.add(Step.DOWN);
+        stepsList.add(Step.DOWN);
+        stepsList.add(Step.DOWN);
+        stepsList.add(Step.DOWN);
+        stepsList.add(Step.DOWN);
+        stepsList.add(Step.DOWN);
+
     }
 
 
@@ -91,5 +110,6 @@ public abstract class Enemy extends OneSpriteStaticActor {
                 steps++;
             }
         }
+
     }
 }

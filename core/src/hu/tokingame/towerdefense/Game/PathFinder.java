@@ -17,11 +17,7 @@ public class PathFinder implements Runnable {
         gameStage = g;
         m = gameStage.map.clone();
 
-        for(int i = 0; i < Path.length; i++){
-            for(int j = 0; j < Path[i].length; j++){
-                Path[i][j] = false;
-            }
-        }
+        resetPath();
     }
 
     @Override
@@ -29,6 +25,7 @@ public class PathFinder implements Runnable {
 
     public boolean canPlace(int x, int y){
         m = gameStage.map.clone();
+        resetPath();
         if(m[x][y] == null){
             Wall k = new Wall(-1, -1);
             m[x][y] = k;
@@ -51,9 +48,9 @@ public class PathFinder implements Runnable {
     }
 
     boolean move(int x, int y){
-        System.out.println("x: " + x + " y: " + y);
+        //System.out.println("x: " + x + " y: " + y);
         if(x < 0 || x > Globals.MAP_SIZE -1 || y < 0 || y > Globals.MAP_SIZE -1) return false;
-        if(x == Globals.MAP_SIZE -1) return true;
+        if(y == Globals.MAP_SIZE -1) return true;
         if(m[x][y] != null) return false;
         if(Path[x][y]) return false;
 
@@ -73,6 +70,14 @@ public class PathFinder implements Runnable {
 
     boolean entrance(int x){
         return m[x][0] == null;
+    }
+
+    void resetPath(){
+        for(int i = 0; i < Path.length; i++){
+            for(int j = 0; j < Path[i].length; j++){
+                Path[i][j] = false;
+            }
+        }
     }
 
 

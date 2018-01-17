@@ -6,6 +6,10 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.physics.box2d.Contact;
+import com.badlogic.gdx.physics.box2d.ContactImpulse;
+import com.badlogic.gdx.physics.box2d.ContactListener;
+import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -13,10 +17,14 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.tokingame.towerdefense.BuildingBlocks.BuildingBlock;
 import hu.tokingame.towerdefense.BuildingBlocks.Wall;
+import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Enemy.Alien;
 import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
+import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
+import hu.tokingame.towerdefense.MyBaseClasses.UI.MyLabel;
 import hu.tokingame.towerdefense.MyGdxGame;
+import jdk.nashorn.internal.objects.Global;
 
 /**
  * Created by M on 1/11/2018.
@@ -27,8 +35,16 @@ public class GameStage extends MyStage {
     private ControlStage controlStage;
     public BuildingBlock[][] map;
     PathFinder pathFinder;
+    Thread t;
+
+    private int healthLeft = Globals.STARTINGHEALTH;
 
     Alien alien;
+
+
+    OneSpriteStaticActor defendedbase;
+
+    MyLabel healthLabel;
 
     public GameStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -43,11 +59,22 @@ public class GameStage extends MyStage {
 
         pathFinder = new PathFinder(this);
         try{
-            Thread t = new Thread(pathFinder);
+            t = new Thread(pathFinder);
             t.start();
         }catch(Exception e){
             e.printStackTrace();
         }
+
+
+
+        addActor(defendedbase = new OneSpriteStaticActor(Assets.manager.get(Assets.BADLOGIC_TEXTURE)){  // bázis, vonja az életet ha belemegy a cucc
+            @Override
+            public void init() {
+                super.init();
+                setSize(200, 200);
+                setPosition(Globals.WORLD_WIDTH-getWidth(), 0);
+            }
+        });
 
         addActor(alien = new Alien(this));
 
@@ -64,6 +91,14 @@ public class GameStage extends MyStage {
                 return true;
             }
         });
+
+        addActor(healthLabel = new MyLabel("10", game.getLabelStyle()){
+            @Override
+            public void init() {
+                super.init();
+                setPosition(1140, 300);
+            }
+        });
     }
 
 
@@ -72,6 +107,10 @@ public class GameStage extends MyStage {
         //addActor(new Wall(0,0));
     }
 
+    @Override
+    public void dispose() {
+        super.dispose();
+    }
 
     @Override
     public void draw() {
@@ -83,6 +122,11 @@ public class GameStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         controlStage.act(delta);
+        if(defendedbase.overlaps(alien)){
+            decreaseHealth();
+            System.out.println("Hinnye támad");
+            alien.remove();
+        }
     }
 
 
@@ -96,8 +140,16 @@ public class GameStage extends MyStage {
             System.out.println("cannot place");
     }
 
+    public void decreaseHealth() {
+        if (healthLeft > 1) healthLeft--;
+        else game.setScreenBackByStackPop();
+        healthLabel.setText(healthLeft+"");
+    }
     public PathFinder getPathFinder() {
         return pathFinder;
     }
 
+    public OneSpriteStaticActor getDefendedbase() {
+        return defendedbase;
+    }
 }
