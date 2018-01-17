@@ -30,7 +30,7 @@ public class ControlStage extends MyStage {
     @Override
     public void init() {
 
-        addActor(new BlockSelector());
+        addActor(new BlockSelector(gameStage));
 
 
         initGrid();

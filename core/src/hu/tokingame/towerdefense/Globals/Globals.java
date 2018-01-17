@@ -19,6 +19,10 @@ public class Globals {
         DOWN
     }
 
+    public enum Selectable{
+        WALL, TURRET, OTHERTURRET
+    }
+
 
     public static final int MAP_SIZE = 8;
 

@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import hu.tokingame.towerdefense.Game.GameStage;
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
@@ -20,12 +21,13 @@ public class BlockSelector extends Group {
 
     private boolean moving = false;
     private State state;
-    private SelectedBlock selectedBlock;
 
     private BlockSelectButton b0, b1, b2;
 
+    GameStage gameStage;
 
-    public BlockSelector() {
+
+    public BlockSelector(GameStage g) {
         super();
         this.setSize(250,400);
         this.setPosition(-200, Globals.WORLD_HEIGHT/2f - this.getHeight()/2f);
@@ -37,6 +39,7 @@ public class BlockSelector extends Group {
                 this.setPosition(0,0);
             }
         });
+        gameStage = g;
         state = State.IN;
         addListener(new ClickListener(){
             @Override
@@ -85,7 +88,9 @@ public class BlockSelector extends Group {
 
     public void selected(int id){
         switch(id){
-            case 0:
+            case 0: gameStage.selectedBlock = Globals.Selectable.WALL; break;
+            case 1: gameStage.selectedBlock = Globals.Selectable.TURRET; break;
+            case 2: gameStage.selectedBlock = Globals.Selectable.OTHERTURRET; break;
 
         }
     }
@@ -96,9 +101,7 @@ public class BlockSelector extends Group {
     private enum State{
         IN,OUT
     }
-    private enum SelectedBlock{
-        WALL, TURRET, OTHERTURRET
-    }
+
 
 }
 

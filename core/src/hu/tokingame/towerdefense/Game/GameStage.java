@@ -16,10 +16,12 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.tokingame.towerdefense.BuildingBlocks.BuildingBlock;
+import hu.tokingame.towerdefense.BuildingBlocks.Turret;
 import hu.tokingame.towerdefense.BuildingBlocks.Wall;
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Enemy.Alien;
 import hu.tokingame.towerdefense.Globals.Globals;
+import hu.tokingame.towerdefense.Globals.Globals.Selectable;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.tokingame.towerdefense.MyBaseClasses.UI.MyLabel;
@@ -36,6 +38,10 @@ public class GameStage extends MyStage {
     public BuildingBlock[][] map;
     PathFinder pathFinder;
     Thread t;
+
+
+
+    public Globals.Selectable selectedBlock = Selectable.WALL;
 
     private int healthLeft = Globals.STARTINGHEALTH;
 
@@ -132,7 +138,13 @@ public class GameStage extends MyStage {
 
     void placeElement(int x, int y){
         if(pathFinder.canPlace(x, y)){
-            Wall k = new Wall(x, y);
+            BuildingBlock k = null;
+            switch(selectedBlock){
+                case WALL: k = new Wall(x, y); break;
+                case TURRET: k = new Turret(x, y, this); break;
+                case OTHERTURRET: k = new Turret(x, y, this); break;
+            }
+
             map[x][y] = k;
             addActor(k);
             System.out.println("placed "+x+" : "+ y);
