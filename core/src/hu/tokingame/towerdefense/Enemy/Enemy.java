@@ -2,6 +2,8 @@ package hu.tokingame.towerdefense.Enemy;
 
 import com.badlogic.gdx.graphics.Texture;
 
+import java.util.ArrayList;
+
 import hu.tokingame.towerdefense.Game.GameStage;
 import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
@@ -14,9 +16,28 @@ public abstract class Enemy extends OneSpriteStaticActor {
 
     protected GameStage stage;
 
+    public static final float MOVE_TIME = 0.5f;
+
+    protected float time = 0;
+
+    protected int steps = 0;
+
+    ArrayList<Step> stepsList;
+
     public Enemy(Texture texture, GameStage gameStage) {
         super(texture);
         this.stage = gameStage;
+        // TODO: 1/17/2018 kell egy tömb, arraylist, vector vagy valami amiben benne vannak a lépések
+        // pl ez:
+        stepsList = new ArrayList<Step>();
+        stepsList.add(Step.RIGHT);
+        stepsList.add(Step.RIGHT);
+        stepsList.add(Step.DOWN);
+        stepsList.add(Step.DOWN);
+        stepsList.add(Step.RIGHT);
+        stepsList.add(Step.RIGHT);
+        stepsList.add(Step.UP);
+        stepsList.add(Step.LEFT);
     }
 
 
@@ -47,4 +68,28 @@ public abstract class Enemy extends OneSpriteStaticActor {
         return completed;
     }
 
+    public enum Step{
+        LEFT,
+        RIGHT,
+        UP,
+        DOWN
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        if(stepsList.size() >= 1){
+            if(time < MOVE_TIME) time += delta;
+            else if(stepsList.size() > steps){
+                time = 0;
+                switch (stepsList.get(steps)){
+                    case UP: moveUp(); break;
+                    case DOWN: moveDown(); break;
+                    case LEFT: moveLeft(); break;
+                    case RIGHT: moveRight(); break;
+                }
+                steps++;
+            }
+        }
+    }
 }
