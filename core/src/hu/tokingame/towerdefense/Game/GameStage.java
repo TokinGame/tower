@@ -142,7 +142,7 @@ public class GameStage extends MyStage {
 
     public void decreaseHealth() {
         if (healthLeft > 1) healthLeft--;
-        else game.setScreenBackByStackPop();
+        else game.setScreenBackByStackPop();     //TODO meghaltál képernyő
         healthLabel.setText(healthLeft+"");
     }
     public PathFinder getPathFinder() {

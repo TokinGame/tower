@@ -38,9 +38,11 @@ public class PathFinder implements Runnable {
     }
 
     public boolean pathExists(){
-        for(int i = 0; i < Globals.MAP_SIZE; i++){
-            if(entrance(i)){
-                if(move(i, 0)) return true;
+        if(hasExit()) {
+            for (int i = 0; i < Globals.MAP_SIZE; i++) {
+                if (entrance(i)) {
+                    if (move(i, 0)) return true;
+                }
             }
         }
 
@@ -78,6 +80,13 @@ public class PathFinder implements Runnable {
                 Path[i][j] = false;
             }
         }
+    }
+
+    boolean hasExit(){
+        for(int i=0; i<Globals.MAP_SIZE; i++){
+            if(m[i][Globals.MAP_SIZE-1] == null) return true;
+        }
+        return false;
     }
 
 
