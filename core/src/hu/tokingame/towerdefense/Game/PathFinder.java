@@ -1,7 +1,5 @@
 package hu.tokingame.towerdefense.Game;
 
-import java.util.Vector;
-
 import hu.tokingame.towerdefense.BuildingBlocks.BuildingBlock;
 import hu.tokingame.towerdefense.BuildingBlocks.Wall;
 import hu.tokingame.towerdefense.Globals.Globals;
@@ -14,7 +12,7 @@ import hu.tokingame.towerdefense.Globals.Globals;
 public class PathFinder implements Runnable {
     GameStage gameStage;
     BuildingBlock[][] m;
-    boolean[][] Path = new boolean[Globals.MAPSIZE][Globals.MAPSIZE];
+    boolean[][] Path = new boolean[Globals.MAP_SIZE][Globals.MAP_SIZE];
     public PathFinder(GameStage g) {
         gameStage = g;
         m = gameStage.map.clone();
@@ -27,9 +25,7 @@ public class PathFinder implements Runnable {
     }
 
     @Override
-    public void run() {
-
-    }
+    public void run() {}
 
     public boolean canPlace(int x, int y){
         m = gameStage.map.clone();
@@ -45,7 +41,7 @@ public class PathFinder implements Runnable {
     }
 
     public boolean pathExists(){
-        for(int i = 0; i < Globals.MAPSIZE; i++){
+        for(int i = 0; i < Globals.MAP_SIZE; i++){
             if(entrance(i)){
                 if(move(i, 0)) return true;
             }
@@ -55,8 +51,9 @@ public class PathFinder implements Runnable {
     }
 
     boolean move(int x, int y){
-        if(x < 0 || x > Globals.MAPSIZE-1 || y < 0 || y > Globals.MAPSIZE-1) return false;
-        if(x == Globals.MAPSIZE-1) return true;
+        System.out.println("x: " + x + " y: " + y);
+        if(x < 0 || x > Globals.MAP_SIZE -1 || y < 0 || y > Globals.MAP_SIZE -1) return false;
+        if(x == Globals.MAP_SIZE -1) return true;
         if(m[x][y] != null) return false;
         if(Path[x][y]) return false;
 

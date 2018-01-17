@@ -9,15 +9,19 @@ import hu.tokingame.towerdefense.Game.UI.BlockSelector;
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
-import hu.tokingame.towerdefense.MyBaseClasses.UI.MyTextButton;
 import hu.tokingame.towerdefense.MyGdxGame;
+
+import static hu.tokingame.towerdefense.Globals.Globals.GRID_HEIGHT;
+import static hu.tokingame.towerdefense.Globals.Globals.GRID_WIDTH;
+import static hu.tokingame.towerdefense.Globals.Globals.MAP_SIZE;
 
 /**
  * Created by davim on 2018. 01. 11..
  */
 
 public class ControlStage extends MyStage {
-    GameStage gameStage;
+    private GameStage gameStage;
+
     public ControlStage(Viewport viewport, Batch batch, MyGdxGame game, GameStage gameStage) {
         super(viewport, batch, game);
         this.gameStage = gameStage;
@@ -35,17 +39,17 @@ public class ControlStage extends MyStage {
 
 
     void initGrid(){
-        for (int i = 0; i < 8; i++){
-            for (int j = 0; j < 8; j++){
+        for (int i = 0; i < MAP_SIZE; i++){
+            for (int j = 0; j < MAP_SIZE; j++){
                 final int finalI = i;
                 final int finalJ = j;
                 addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.GRID_SQUARE)){
                     @Override
                     public void init() {
                         super.init();
-                        setSize(90, 90);
-                        setX(280+ finalJ *90);
-                        setY((7- finalI)*90);
+                        setSize(GRID_WIDTH, GRID_HEIGHT);
+                        setX(280 + finalJ * GRID_WIDTH);
+                        setY((MAP_SIZE - 1 - finalI) * GRID_HEIGHT);
                         addListener(new ClickListener(){
                             @Override
                             public void clicked(InputEvent event, float x, float y) {

@@ -1,6 +1,5 @@
 package hu.tokingame.towerdefense.Game.UI;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -9,7 +8,6 @@ import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
@@ -63,7 +61,7 @@ public class BlockSelector extends Group {
 
     }
 
-    public void slideOut(){
+    private void slideOut(){
         moving = true;
         state = State.OUT;
         this.addAction(sequence(moveTo(0, getY(), 0.5f), run(new Runnable() {
@@ -74,7 +72,7 @@ public class BlockSelector extends Group {
         })));
     }
 
-    public void slideIn(){
+    private void slideIn(){
         moving = true;
         state = State.IN;
         this.addAction(sequence(moveTo(-200, getY(), 0.5f), run(new Runnable() {
