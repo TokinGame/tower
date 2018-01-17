@@ -1,5 +1,9 @@
 package hu.tokingame.towerdefense.Game;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Vector;
+
 import hu.tokingame.towerdefense.BuildingBlocks.BuildingBlock;
 import hu.tokingame.towerdefense.BuildingBlocks.Wall;
 import hu.tokingame.towerdefense.Globals.Globals;
@@ -13,6 +17,9 @@ public class PathFinder implements Runnable {
     GameStage gameStage;
     BuildingBlock[][] m;
     boolean[][] Path = new boolean[Globals.MAP_SIZE][Globals.MAP_SIZE];
+
+    ArrayList<Globals.Step> steps = new ArrayList<Globals.Step>();
+
     public PathFinder(GameStage g) {
         gameStage = g;
         m = gameStage.map.clone();
@@ -26,10 +33,18 @@ public class PathFinder implements Runnable {
     public boolean canPlace(int x, int y){
         m = gameStage.map.clone();
         resetPath();
+        steps.removeAll(steps);
         if(m[x][y] == null){
             Wall k = new Wall(-1, -1);
             m[x][y] = k;
             System.out.println("trying "+x+" : "+ y);
+
+            //Collections.reverse(steps);
+
+            Globals.currentSteps = (ArrayList)steps.clone();
+
+            System.out.println(steps);
+
             return pathExists();
 
 
@@ -58,10 +73,22 @@ public class PathFinder implements Runnable {
 
         Path[x][y] = true;
 
-        if(move(x-1, y)) return true;
-        if(move(x, y-1)) return true;
-        if(move(x+1, y)) return true;
-        if(move(x, y+1)) return true;
+        if(move(x-1, y)){
+            steps.add(Globals.Step.UP);
+            return true;
+        }
+        if(move(x, y-1)){
+            steps.add(Globals.Step.LEFT);
+            return true;
+        }
+        if(move(x+1, y)){
+            steps.add(Globals.Step.DOWN);
+            return true;
+        }
+        if(move(x, y+1)){
+            steps.add(Globals.Step.RIGHT);
+            return true;
+        }
 
         Path[x][y] = false;
 

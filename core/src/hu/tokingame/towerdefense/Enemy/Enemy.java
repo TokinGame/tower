@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import hu.tokingame.towerdefense.Game.GameStage;
 import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
+import hu.tokingame.towerdefense.Globals.Globals.Step;
 
 /**
  * Created by M on 1/17/2018.
@@ -22,14 +23,14 @@ public abstract class Enemy extends OneSpriteStaticActor {
 
     protected int steps = 0;
 
-    ArrayList<Step> stepsList;
+    ArrayList<Globals.Step> stepsList;
 
     public Enemy(Texture texture, GameStage gameStage) {
         super(texture);
         this.stage = gameStage;
         // TODO: 1/17/2018 kell egy tömb, arraylist, vector vagy valami amiben benne vannak a lépések
         // pl ez:
-        stepsList = new ArrayList<Step>();
+        stepsList = new ArrayList<Globals.Step>();
         /*stepsList.add(Step.RIGHT);
         stepsList.add(Step.RIGHT);
         stepsList.add(Step.DOWN);
@@ -87,12 +88,7 @@ public abstract class Enemy extends OneSpriteStaticActor {
         return completed;
     }
 
-    public enum Step{
-        LEFT,
-        RIGHT,
-        UP,
-        DOWN
-    }
+
 
     @Override
     public void act(float delta) {
