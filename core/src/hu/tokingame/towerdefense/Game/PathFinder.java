@@ -20,10 +20,18 @@ public class PathFinder implements Runnable {
 
     ArrayList<Globals.Step> steps = new ArrayList<Globals.Step>();
 
+    public void cloneMap(){
+        m = new BuildingBlock[Globals.MAP_SIZE][Globals.MAP_SIZE];
+        for(int i = 0; i < gameStage.map.length; i++){
+            for(int j = 0; j < gameStage.map[i].length; j++){
+                m[i][j] = gameStage.map[i][j];
+            }
+        }
+    }
+
     public PathFinder(GameStage g) {
         gameStage = g;
-        m = gameStage.map.clone();
-
+        //m = gameStage.map.clone();
         resetPath();
     }
 
@@ -31,7 +39,8 @@ public class PathFinder implements Runnable {
     public void run() {}
 
     public boolean canPlace(int x, int y){
-        m = gameStage.map.clone();
+        //m = gameStage.map.clone();
+        cloneMap();
         resetPath();
         steps.removeAll(steps);
         if(m[x][y] == null){
@@ -55,6 +64,7 @@ public class PathFinder implements Runnable {
     public boolean pathExists(){
         if(hasExit()) {
             for (int i = 0; i < Globals.MAP_SIZE; i++) {
+                System.out.println(i + " - " + 0 + " - " + entrance(i));
                 if (entrance(i)) {
                     if (move(i, 0)) return true;
                 }
