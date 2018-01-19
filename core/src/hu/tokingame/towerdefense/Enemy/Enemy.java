@@ -1,6 +1,8 @@
 package hu.tokingame.towerdefense.Enemy;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 import java.util.ArrayList;
 
@@ -8,6 +10,9 @@ import hu.tokingame.towerdefense.Game.GameStage;
 import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.tokingame.towerdefense.Globals.Globals.Step;
+
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 /**
  * Created by M on 1/17/2018.
@@ -17,7 +22,7 @@ public abstract class Enemy extends OneSpriteStaticActor {
 
     protected GameStage stage;
 
-    public static final float MOVE_TIME = 0.5f;
+    public static final float MOVE_TIME = 0.2f;
 
     protected float time = 0;
 
@@ -63,7 +68,7 @@ public abstract class Enemy extends OneSpriteStaticActor {
 
     public boolean moveRight(){
         boolean completed = true;
-        this.setX(getX() + Globals.GRID_WIDTH);
+        moveTo(getX() + Globals.GRID_WIDTH, getY());
         return completed;
     }
 
@@ -84,8 +89,17 @@ public abstract class Enemy extends OneSpriteStaticActor {
     public boolean moveDown(){
         boolean completed = true;
         if(this.getY() - Globals.GRID_WIDTH < 0) return false;
-        this.setY(getY() - Globals.GRID_HEIGHT);
+        moveTo(getX(),getY() - Globals.GRID_HEIGHT);
         return completed;
+    }
+
+
+    public void moveTo(float x, float y){
+        addAction(sequence(Actions.moveTo(x,y,MOVE_TIME), run(new Runnable() {
+            public void run () {
+
+            }
+        })));
     }
 
 
@@ -104,8 +118,11 @@ public abstract class Enemy extends OneSpriteStaticActor {
                     case RIGHT: moveRight(); break;
                 }
                 steps++;
+            }else{
+                for (Action action: getActions()) {
+                    removeAction(action);
+                }
             }
         }
-
     }
 }
