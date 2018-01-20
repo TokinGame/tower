@@ -121,7 +121,7 @@ public class PathFinder implements Runnable {
 
     boolean hasExit(){
         for(int i=0; i<Globals.MAP_SIZE; i++){
-            if(m[i][Globals.MAP_SIZE-1] == null) return true;
+            if(m[i][Globals.MAP_SIZE-1] == null && m[i][Globals.MAP_SIZE-2] == null) return true;
         }
         return false;
     }
