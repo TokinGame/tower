@@ -32,6 +32,9 @@ public class Globals {
     public static int STARTINGHEALTH = 10;
 
 
+    public static int EntryPoint = -1;
+
+
     public static ArrayList<Step> currentSteps;
 
 

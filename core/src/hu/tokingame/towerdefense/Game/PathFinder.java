@@ -50,9 +50,8 @@ public class PathFinder implements Runnable {
 
             //Collections.reverse(steps);
 
-            Globals.currentSteps = (ArrayList)steps.clone();
 
-            System.out.println(steps);
+
 
             return pathExists();
 
@@ -66,7 +65,14 @@ public class PathFinder implements Runnable {
             for (int i = 0; i < Globals.MAP_SIZE; i++) {
                 System.out.println(i + " - " + 0 + " - " + entrance(i));
                 if (entrance(i)) {
-                    if (move(i, 0)) return true;
+                    if (move(i, 0)) {
+
+                        Collections.reverse(steps);
+                        Globals.currentSteps = (ArrayList)steps.clone();
+                        System.out.println(Globals.currentSteps);
+                        Globals.EntryPoint = i;
+                        return true;
+                    }
                 }
             }
         }
@@ -84,6 +90,14 @@ public class PathFinder implements Runnable {
 
         Path[x][y] = true;
 
+        if(move(x, y+1)){
+            steps.add(Globals.Step.RIGHT);
+            return true;
+        }
+        if(move(x+1, y)){
+            steps.add(Globals.Step.DOWN);
+            return true;
+        }
         if(move(x-1, y)){
             steps.add(Globals.Step.UP);
             return true;
@@ -92,14 +106,8 @@ public class PathFinder implements Runnable {
             steps.add(Globals.Step.LEFT);
             return true;
         }
-        if(move(x+1, y)){
-            steps.add(Globals.Step.DOWN);
-            return true;
-        }
-        if(move(x, y+1)){
-            steps.add(Globals.Step.RIGHT);
-            return true;
-        }
+
+
 
         Path[x][y] = false;
 
