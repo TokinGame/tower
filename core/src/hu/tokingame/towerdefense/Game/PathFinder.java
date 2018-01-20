@@ -77,9 +77,10 @@ public class PathFinder implements Runnable {
     boolean move(int x, int y){
         //System.out.println("x: " + x + " y: " + y);
         if(x < 0 || x > Globals.MAP_SIZE -1 || y < 0 || y > Globals.MAP_SIZE -1) return false;
-        if(y == Globals.MAP_SIZE -1) return true;
         if(m[x][y] != null) return false;
         if(Path[x][y]) return false;
+        if(y == Globals.MAP_SIZE -1) return true;
+
 
         Path[x][y] = true;
 

@@ -61,7 +61,7 @@ public class GameStage extends MyStage {
         inputMultiplexer.addProcessor(controlStage);
         Gdx.input.setInputProcessor(inputMultiplexer);
 
-        map = new BuildingBlock[8][8];
+        map = new BuildingBlock[Globals.MAP_SIZE][Globals.MAP_SIZE];
 
         pathFinder = new PathFinder(this);
         try{
