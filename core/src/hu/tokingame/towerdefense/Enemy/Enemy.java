@@ -30,38 +30,18 @@ public abstract class Enemy extends OneSpriteStaticActor {
 
     ArrayList<Globals.Step> stepsList;
 
+    public void setStepsList(ArrayList<Step> stepsList) {
+        this.stepsList = stepsList;
+    }
+
     public Enemy(Texture texture, GameStage gameStage) {
         super(texture);
         this.stage = gameStage;
         // TODO: 1/17/2018 kell egy tömb, arraylist, vector vagy valami amiben benne vannak a lépések
         // pl ez:
         stepsList = new ArrayList<Globals.Step>();
-        /*stepsList.add(Step.RIGHT);
-        stepsList.add(Step.RIGHT);
-        stepsList.add(Step.DOWN);
-        stepsList.add(Step.DOWN);
-        stepsList.add(Step.RIGHT);
-        stepsList.add(Step.RIGHT);
-        stepsList.add(Step.UP);
-        stepsList.add(Step.LEFT);*/
-        stepsList.add(Step.RIGHT);
-        stepsList.add(Step.RIGHT);
-        stepsList.add(Step.RIGHT);
-        stepsList.add(Step.RIGHT);
-        stepsList.add(Step.RIGHT);
-        stepsList.add(Step.RIGHT);
-        stepsList.add(Step.RIGHT);
-        stepsList.add(Step.RIGHT);
-        stepsList.add(Step.RIGHT);
-        stepsList.add(Step.RIGHT);
-        stepsList.add(Step.DOWN);
-        stepsList.add(Step.DOWN);
-        stepsList.add(Step.DOWN);
-        stepsList.add(Step.DOWN);
-        stepsList.add(Step.DOWN);
-        stepsList.add(Step.DOWN);
-        stepsList.add(Step.DOWN);
-        stepsList.add(Step.DOWN);
+
+
 
     }
 
@@ -81,7 +61,7 @@ public abstract class Enemy extends OneSpriteStaticActor {
 
     public boolean moveUp(){
         boolean completed = true;
-        if(this.getY() + Globals.GRID_WIDTH >  (Globals.MAP_SIZE-1) * Globals.GRID_HEIGHT) return false;
+        if(this.getY() + this.getHeight()>  (Globals.MAP_SIZE-1) * Globals.GRID_HEIGHT) return false;
         this.setY(getY() + Globals.GRID_HEIGHT);
         return completed;
     }

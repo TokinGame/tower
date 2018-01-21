@@ -147,6 +147,8 @@ public class GameStage extends MyStage {
 
             map[x][y] = k;
             addActor(k);
+            addActor(alien = new Alien(this));
+            alien.setStepsList(Globals.currentSteps);
             System.out.println("placed "+x+" : "+ y);
         }else
             System.out.println("cannot place");

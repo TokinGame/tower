@@ -13,7 +13,7 @@ public class Alien extends Enemy {
     public Alien(GameStage gameStage) {
         super(Assets.manager.get(Assets.WALL_TEXTURE), gameStage);
         this.setSize(80,80);
-        this.setPosition(280, (Globals.MAP_SIZE - 1) * Globals.GRID_HEIGHT);
+        this.setPosition(15, Globals.WORLD_HEIGHT-getHeight()-5);
     }
 
 

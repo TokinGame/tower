@@ -70,6 +70,19 @@ public class PathFinder implements Runnable {
                         Collections.reverse(steps);
                         Globals.currentSteps = (ArrayList)steps.clone();
                         System.out.println(Globals.currentSteps);
+                        Globals.currentSteps.add(0, Globals.Step.RIGHT);
+
+                        for(int j = 0; j < i; j++){
+                            Globals.currentSteps.add(0, Globals.Step.DOWN);
+                        }
+                        Globals.currentSteps.add(0, Globals.Step.RIGHT);
+                        Globals.currentSteps.add(0, Globals.Step.RIGHT);
+                        Globals.currentSteps.add(Globals.Step.RIGHT);
+                        Globals.currentSteps.add(Globals.Step.RIGHT);
+                        Globals.currentSteps.add(Globals.Step.RIGHT);
+                        for(int j = i; j <Globals.MAP_SIZE; j++){
+                            Globals.currentSteps.add(Globals.Step.DOWN);
+                        }
                         Globals.EntryPoint = i;
                         return true;
                     }
