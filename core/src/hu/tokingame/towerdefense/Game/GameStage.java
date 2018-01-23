@@ -40,7 +40,7 @@ public class GameStage extends MyStage {
     Thread t;
 
 
-
+    public boolean duringWave = false;
 
     private int healthLeft = Globals.STARTINGHEALTH;
 
@@ -130,30 +130,37 @@ public class GameStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         controlStage.act(delta);
-        if(defendedbase.overlaps(alien)){
+        /*if(defendedbase.overlaps(alien)){                             //TODO normálisan megoldani az életlevonást
             decreaseHealth();
             System.out.println("Hinnye támad");
             alien.remove();
-        }
+        }*/
+
     }
 
 
     void placeElement(int x, int y){
-        if(pathFinder.canPlace(x, y)){
-            BuildingBlock k = null;
-            switch(Globals.selectedBlock){
-                case WALL: k = new Wall(x, y); break;
-                case TURRET: k = new Turret(x, y, this); break;
-                case OTHERTURRET: k = new Turret(x, y, this); break;
-            }
+        if(!duringWave){
+            if(pathFinder.canPlace(x, y)){
+                BuildingBlock k = null;
+                switch(Globals.selectedBlock){
+                    case WALL: k = new Wall(x, y); break;
+                    case TURRET: k = new Turret(x, y, this); break;
+                    case OTHERTURRET: k = new Turret(x, y, this); break;
+                }
+                map[x][y] = k;
+                addActor(k);
+                System.out.println("placed "+x+" : "+ y);
+            }else
+                controlStage.showMessage("Nem zárhatod el az egyetlen utat");
+        } else controlStage.showMessage("Kör közben nem építhetsz");
+    }
 
-            map[x][y] = k;
-            addActor(k);
-            addActor(alien = new Alien(this));
-            alien.setStepsList(Globals.currentSteps);
-            System.out.println("placed "+x+" : "+ y);
-        }else
-            controlStage.showMessage("Nem zárhatod el az egyetlen utat");
+    public void spawnEnemy(int index){                                      //TODO ha lesz több enemy akkor ide pakolni
+        switch(index){
+            case 0: addActor(new Alien(this)); break;
+            default: addActor(new Alien(this)); break;
+        }
     }
 
     public void decreaseHealth() {

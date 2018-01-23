@@ -13,6 +13,7 @@ import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.tokingame.towerdefense.MyBaseClasses.UI.MyLabel;
+import hu.tokingame.towerdefense.MyBaseClasses.UI.MyTextButton;
 import hu.tokingame.towerdefense.MyGdxGame;
 
 import static hu.tokingame.towerdefense.Globals.Globals.GRID_HEIGHT;
@@ -45,6 +46,20 @@ public class ControlStage extends MyStage {
         message.setAlignment(1);
         //message.setVisible(false);
 
+        addActor(new MyTextButton("Kör teszt", game.getTextButtonStyle()){
+            @Override
+            public void init() {
+                super.init();
+                setPosition(Globals.WORLD_WIDTH-getWidth(), Globals.WORLD_HEIGHT-getHeight());
+                addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        gameStage.duringWave = !gameStage.duringWave;
+                    }
+                });
+            }
+        });
     }
 
 
