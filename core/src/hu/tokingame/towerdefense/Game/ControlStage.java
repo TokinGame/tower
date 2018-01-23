@@ -55,7 +55,8 @@ public class ControlStage extends MyStage {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
-                        gameStage.duringWave = !gameStage.duringWave;
+                        if(!gameStage.duringWave)gameStage.startWave();
+                        else gameStage.endWave();
                     }
                 });
             }

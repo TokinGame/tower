@@ -42,6 +42,10 @@ public class GameStage extends MyStage {
 
     public boolean duringWave = false;
 
+    public float waveTimer = 0;
+
+    public int roundsCount = 0;
+
     private int healthLeft = Globals.STARTINGHEALTH;
 
     Alien alien;
@@ -82,7 +86,7 @@ public class GameStage extends MyStage {
             }
         });
 
-        addActor(alien = new Alien(this));
+        //addActor(alien = new Alien(this));
 
         addListener(new InputListener(){
             @Override
@@ -130,6 +134,7 @@ public class GameStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         controlStage.act(delta);
+        if(duringWave) waveTimer += delta;
         /*if(defendedbase.overlaps(alien)){                             //TODO normálisan megoldani az életlevonást
             decreaseHealth();
             System.out.println("Hinnye támad");
@@ -156,11 +161,17 @@ public class GameStage extends MyStage {
         } else controlStage.showMessage("Kör közben nem építhetsz");
     }
 
-    public void spawnEnemy(int index){                                      //TODO ha lesz több enemy akkor ide pakolni
-        switch(index){
-            case 0: addActor(new Alien(this)); break;
-            default: addActor(new Alien(this)); break;
-        }
+    public void spawnEnemy(int identifier, float timing){                       //TODO ha lesz több enemy akkor ide pakolni és az időzítést meg kell csinálni
+        //if(waveTimer > timing) {
+            switch (identifier) {
+                case 0:
+                    addActor(new Alien(this));
+                    break;
+                default:
+                    addActor(new Alien(this));
+                    break;
+            }
+        //}
     }
 
     public void decreaseHealth() {
@@ -168,6 +179,25 @@ public class GameStage extends MyStage {
         else game.setScreenBackByStackPop();     //TODO meghaltál képernyő
         healthLabel.setText(healthLeft+"");
     }
+
+    public void startWave(){
+        duringWave = true;
+        roundsCount++;
+        controlStage.showMessage("A "+roundsCount+" kör elkezdődött");
+        System.out.println("wave started");
+        spawnEnemy(0, 0);
+    }
+
+    public void endWave(){
+        duringWave = false;
+        waveTimer = 0;
+        controlStage.showMessage("A kör véget ért");
+        System.out.println("wave ended");
+    }
+
+
+
+
     public PathFinder getPathFinder() {
         return pathFinder;
     }
