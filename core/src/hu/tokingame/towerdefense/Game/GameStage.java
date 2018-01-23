@@ -41,7 +41,6 @@ public class GameStage extends MyStage {
 
 
 
-    public Globals.Selectable selectedBlock = Selectable.WALL;
 
     private int healthLeft = Globals.STARTINGHEALTH;
 
@@ -55,6 +54,7 @@ public class GameStage extends MyStage {
     public GameStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
         controlStage = new ControlStage(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)),new SpriteBatch(), game, this);
+
 
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(this);
@@ -105,6 +105,8 @@ public class GameStage extends MyStage {
                 setPosition(1140, 300);
             }
         });
+
+        controlStage.showMessage("TEST TEXT");
     }
 
 
@@ -139,7 +141,7 @@ public class GameStage extends MyStage {
     void placeElement(int x, int y){
         if(pathFinder.canPlace(x, y)){
             BuildingBlock k = null;
-            switch(selectedBlock){
+            switch(Globals.selectedBlock){
                 case WALL: k = new Wall(x, y); break;
                 case TURRET: k = new Turret(x, y, this); break;
                 case OTHERTURRET: k = new Turret(x, y, this); break;
@@ -151,7 +153,7 @@ public class GameStage extends MyStage {
             alien.setStepsList(Globals.currentSteps);
             System.out.println("placed "+x+" : "+ y);
         }else
-            System.out.println("cannot place");
+            controlStage.showMessage("Nem zárhatod el az egyetlen utat");
     }
 
     public void decreaseHealth() {

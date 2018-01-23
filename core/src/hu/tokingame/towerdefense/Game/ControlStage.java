@@ -1,14 +1,18 @@
 package hu.tokingame.towerdefense.Game;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.tokingame.towerdefense.Game.UI.BlockSelector;
 import hu.tokingame.towerdefense.Globals.Assets;
+import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
+import hu.tokingame.towerdefense.MyBaseClasses.UI.MyLabel;
 import hu.tokingame.towerdefense.MyGdxGame;
 
 import static hu.tokingame.towerdefense.Globals.Globals.GRID_HEIGHT;
@@ -21,6 +25,7 @@ import static hu.tokingame.towerdefense.Globals.Globals.MAP_SIZE;
 
 public class ControlStage extends MyStage {
     private GameStage gameStage;
+    MyLabel message;
 
     public ControlStage(Viewport viewport, Batch batch, MyGdxGame game, GameStage gameStage) {
         super(viewport, batch, game);
@@ -34,6 +39,11 @@ public class ControlStage extends MyStage {
 
 
         initGrid();
+
+        addActor(message = new MyLabel("", game.getLabelStyle()));
+        message.setPosition(Globals.WORLD_WIDTH/2-getWidth()/2, 600);
+        message.setAlignment(1);
+        //message.setVisible(false);
 
     }
 
@@ -62,5 +72,13 @@ public class ControlStage extends MyStage {
                 });
             }
         }
+
+
+
+    }
+    void showMessage(String text){
+        message.setText(text);
+        message.setPosition(Globals.WORLD_WIDTH/2-message.getWidth()/2, 600);
+        message.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(0.5f), Actions.delay(2), Actions.fadeOut(0.5f), Actions.alpha(0)));
     }
 }

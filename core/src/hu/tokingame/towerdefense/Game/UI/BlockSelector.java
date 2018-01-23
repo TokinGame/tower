@@ -29,6 +29,7 @@ public class BlockSelector extends Group {
 
     public BlockSelector(GameStage g) {
         super();
+        gameStage = g;
         this.setSize(250,400);
         this.setPosition(-200, Globals.WORLD_HEIGHT/2f - this.getHeight()/2f);
         addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BADLOGIC_TEXTURE)){
@@ -39,7 +40,7 @@ public class BlockSelector extends Group {
                 this.setPosition(0,0);
             }
         });
-        gameStage = g;
+
         state = State.IN;
         addListener(new ClickListener(){
             @Override
@@ -88,9 +89,9 @@ public class BlockSelector extends Group {
 
     public void selected(int id){
         switch(id){
-            case 0: gameStage.selectedBlock = Globals.Selectable.WALL; break;
-            case 1: gameStage.selectedBlock = Globals.Selectable.TURRET; break;
-            case 2: gameStage.selectedBlock = Globals.Selectable.OTHERTURRET; break;
+            case 0: Globals.selectedBlock = Globals.Selectable.WALL; break;
+            case 1: Globals.selectedBlock = Globals.Selectable.TURRET; break;
+            case 2: Globals.selectedBlock = Globals.Selectable.OTHERTURRET; break;
 
         }
     }

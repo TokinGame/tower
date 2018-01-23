@@ -23,6 +23,8 @@ public class Globals {
         WALL, TURRET, OTHERTURRET
     }
 
+    public static Selectable selectedBlock = Selectable.WALL;
+
 
     public static final int MAP_SIZE = 8;
 
