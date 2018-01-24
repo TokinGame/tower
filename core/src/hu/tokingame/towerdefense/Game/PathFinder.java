@@ -36,7 +36,10 @@ public class PathFinder implements Runnable {
     }
 
     @Override
-    public void run() {}
+    public void run() {
+        cloneMap();
+        pathExists();
+    }
 
     public boolean canPlace(int x, int y){
         //m = gameStage.map.clone();
