@@ -58,14 +58,14 @@ public abstract class Enemy extends OneSpriteStaticActor {
     public boolean moveLeft(){
         boolean completed = true;
         if(this.getX() - Globals.GRID_WIDTH < 280) return false;
-        this.setX(getX() - Globals.GRID_WIDTH);
+        moveTo(getX() - Globals.GRID_WIDTH,getY());
         return completed;
     }
 
     public boolean moveUp(){
         boolean completed = true;
         if(this.getY() + this.getHeight()>  (Globals.MAP_SIZE-1) * Globals.GRID_HEIGHT) return false;
-        this.setY(getY() + Globals.GRID_HEIGHT);
+        moveTo(getX(),getY() + Globals.GRID_HEIGHT);
         return completed;
     }
 
