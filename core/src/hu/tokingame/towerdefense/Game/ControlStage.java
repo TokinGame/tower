@@ -31,10 +31,6 @@ public class ControlStage extends MyStage {
     public ControlStage(Viewport viewport, Batch batch, MyGdxGame game, GameStage gameStage) {
         super(viewport, batch, game);
         this.gameStage = gameStage;
-    }
-
-    @Override
-    public void init() {
 
         addActor(new BlockSelector(gameStage));
 
@@ -45,6 +41,7 @@ public class ControlStage extends MyStage {
         message.setPosition(Globals.WORLD_WIDTH/2-getWidth()/2, 600);
         message.setAlignment(1);
         //message.setVisible(false);
+        System.out.println("yxcvbnm");
 
         addActor(new MyTextButton("Kör teszt", game.getTextButtonStyle()){
             @Override
@@ -55,7 +52,9 @@ public class ControlStage extends MyStage {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
-                        if(!gameStage.duringWave)gameStage.startWave();
+                        System.out.println("KKLIJKJKJK");
+                        System.out.println(this);
+                        if(!ControlStage.this.gameStage.duringWave)ControlStage.this.gameStage.startWave();
                         //else gameStage.endWave();
                     }
                 });
@@ -63,6 +62,10 @@ public class ControlStage extends MyStage {
         });
     }
 
+    @Override
+    public void init() {
+
+    }
 
     void initGrid(){
         for (int i = 0; i < MAP_SIZE; i++){
@@ -92,6 +95,12 @@ public class ControlStage extends MyStage {
 
 
     }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+    }
+
     void showMessage(String text){
         message.setText(text);
         message.setPosition(Globals.WORLD_WIDTH/2-message.getWidth()/2, 600);

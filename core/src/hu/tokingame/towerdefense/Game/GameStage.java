@@ -63,16 +63,18 @@ public class GameStage extends MyStage {
 
     public GameStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
+
         controlStage = new ControlStage(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)),new SpriteBatch(), game, this);
 
         enemies = new ArrayList<Enemy>();
         enemiesQueue = new ArrayList<EnemyAdder>();
         rem = new ArrayList<EnemyAdder>();
 
-        InputMultiplexer inputMultiplexer = new InputMultiplexer();
-        inputMultiplexer.addProcessor(this);
-        inputMultiplexer.addProcessor(controlStage);
-        Gdx.input.setInputProcessor(inputMultiplexer);
+        //InputMultiplexer inputMultiplexer = new InputMultiplexer();
+        //inputMultiplexer.addProcessor(this);
+        //inputMultiplexer.addProcessor(controlStage);
+        //Gdx.input.setInputProcessor(inputMultiplexer);
+        //Gdx.input.setInputProcessor(controlStage);
 
         map = new BuildingBlock[Globals.MAP_SIZE][Globals.MAP_SIZE];
 
@@ -150,20 +152,22 @@ public class GameStage extends MyStage {
             alien.remove();
         }*/
 
-        rem.clear();
-        System.out.println("wave: " + waveTimer);
-        System.out.println(enemiesQueue);
+
+        //System.out.println("wave: " + waveTimer);
+        //System.out.println(enemiesQueue);
         for (EnemyAdder adder: enemiesQueue) {
-            if(adder.getTimout() >= waveTimer){
+            System.out.println(adder.getTimout());
+            if(adder.getTimout() <= waveTimer){
                 Enemy enemy = adder.getEnemy();
                 rem.add(adder);
                 enemies.add(enemy);
                 addActor(enemy);
             }
         }
-        System.out.println(enemiesQueue);
-        //enemiesQueue.removeAll(rem);
-        System.out.println(enemiesQueue);
+        //System.out.println(enemiesQueue);
+        enemiesQueue.removeAll(rem);
+        rem.clear();
+        //System.out.println(enemiesQueue);
     }
 
 
