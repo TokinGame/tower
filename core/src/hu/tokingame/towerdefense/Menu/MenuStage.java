@@ -5,12 +5,15 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import hu.tokingame.towerdefense.Credits.CreditsScreen;
 import hu.tokingame.towerdefense.Game.GameScreen;
 import hu.tokingame.towerdefense.Globals.Globals;
+import hu.tokingame.towerdefense.HowToPlay.HowToPlayScreen;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.tokingame.towerdefense.MyBaseClasses.UI.MyTextButton;
 import hu.tokingame.towerdefense.MyGdxGame;
+import hu.tokingame.towerdefense.Settings.SettingsScreen;
 
 
 /**
@@ -63,6 +66,7 @@ public class MenuStage extends MyStage {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
+                        game.setScreen(new SettingsScreen(game));
                     }
                 });
             }
@@ -76,6 +80,7 @@ public class MenuStage extends MyStage {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
+                        game.setScreen(new HowToPlayScreen(game));
                     }
                 });
             }
@@ -89,6 +94,7 @@ public class MenuStage extends MyStage {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
+                        game.setScreen(new CreditsScreen(game));
                     }
                 });
             }
