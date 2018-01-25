@@ -28,7 +28,7 @@ public class SettingsStage extends MyStage {
 
 
 
-        addActor(new MyTextButton("Kilépés",game.getTextButtonStyle()){
+        addActor(new MyTextButton("Vissza",game.getTextButtonStyle()){
             @Override
             public void init() {
                 super.init();
@@ -37,6 +37,7 @@ public class SettingsStage extends MyStage {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
+                        game.setScreenBackByStackPop();
                     }
                 });
             }
