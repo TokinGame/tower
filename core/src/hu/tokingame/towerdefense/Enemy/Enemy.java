@@ -22,11 +22,13 @@ public abstract class Enemy extends OneSpriteStaticActor {
 
     protected GameStage stage;
 
-    public static final float MOVE_TIME = 0.2f;
+    private float MOVE_TIME = 1;
 
     protected float time = 0;
 
     protected int steps = 0;
+
+    protected int health = 1;
 
     ArrayList<Globals.Step> stepsList;
 
@@ -34,9 +36,11 @@ public abstract class Enemy extends OneSpriteStaticActor {
         this.stepsList = stepsList;
     }
 
-    public Enemy(Texture texture, GameStage gameStage) {
+    public Enemy(Texture texture, GameStage gameStage, int health, float movetime) {
         super(texture);
         this.stage = gameStage;
+        this.health = health;
+        MOVE_TIME = movetime;
         // TODO: 1/17/2018 kell egy tömb, arraylist, vector vagy valami amiben benne vannak a lépések
         // pl ez:
         stepsList = new ArrayList<Globals.Step>();
@@ -46,6 +50,12 @@ public abstract class Enemy extends OneSpriteStaticActor {
 
 
 
+    }
+
+
+    public void damaged(int hitpoints){
+        health -= hitpoints;
+        if(health < 1) remove();
     }
 
 

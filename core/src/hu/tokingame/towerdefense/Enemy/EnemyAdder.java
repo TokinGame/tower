@@ -6,18 +6,18 @@ package hu.tokingame.towerdefense.Enemy;
 
 public class EnemyAdder{
     private Enemy enemy;
-    private float timout;
+    private float timeOut;
 
     public EnemyAdder(Enemy enemy, float timeout){
         this.enemy = enemy;
-        this.timout = timeout;
+        this.timeOut = timeout;
     }
 
     public Enemy getEnemy() {
         return enemy;
     }
 
-    public float getTimout() {
-        return timout;
+    public float getTimeOut() {
+        return timeOut;
     }
 }

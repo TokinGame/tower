@@ -6,10 +6,6 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -20,17 +16,19 @@ import java.util.ArrayList;
 import hu.tokingame.towerdefense.BuildingBlocks.BuildingBlock;
 import hu.tokingame.towerdefense.BuildingBlocks.Turret;
 import hu.tokingame.towerdefense.BuildingBlocks.Wall;
+import hu.tokingame.towerdefense.Enemy.BlueAlien;
 import hu.tokingame.towerdefense.Enemy.Enemy;
 import hu.tokingame.towerdefense.Enemy.EnemyAdder;
+import hu.tokingame.towerdefense.Enemy.GreenAlien;
+import hu.tokingame.towerdefense.Enemy.RedAlien;
+import hu.tokingame.towerdefense.Enemy.YellowAlien;
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Enemy.Alien;
 import hu.tokingame.towerdefense.Globals.Globals;
-import hu.tokingame.towerdefense.Globals.Globals.Selectable;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.tokingame.towerdefense.MyBaseClasses.UI.MyLabel;
 import hu.tokingame.towerdefense.MyGdxGame;
-import jdk.nashorn.internal.objects.Global;
 
 /**
  * Created by M on 1/11/2018.
@@ -154,7 +152,7 @@ public class GameStage extends MyStage {
         System.out.println("wave: " + waveTimer);
         System.out.println(enemiesQueue);
         for (EnemyAdder adder: enemiesQueue) {
-            if(adder.getTimout() >= waveTimer){
+            if(adder.getTimeOut() >= waveTimer){
                 Enemy enemy = adder.getEnemy();
                 rem.add(adder);
                 enemies.add(enemy);
@@ -186,11 +184,20 @@ public class GameStage extends MyStage {
 
     public void spawnEnemy(int identifier, float timing){                       //TODO ha lesz több enemy akkor ide pakolni és az időzítést meg kell csinálni
             switch (identifier) {
-                case 0:
-                    enemiesQueue.add(new EnemyAdder(new Alien(this), timing));
+                case 1:
+                    enemiesQueue.add(new EnemyAdder(new GreenAlien(this), timing));
+                    break;
+                case 2:
+                    enemiesQueue.add(new EnemyAdder(new BlueAlien(this), timing));
+                    break;
+                case 3:
+                    enemiesQueue.add(new EnemyAdder(new YellowAlien(this), timing));
+                    break;
+                case 4:
+                    enemiesQueue.add(new EnemyAdder(new RedAlien(this), timing));
                     break;
                 default:
-                    enemiesQueue.add(new EnemyAdder(new Alien(this), timing));
+                    enemiesQueue.add(new EnemyAdder(new GreenAlien(this), timing));
                     break;
             }
     }
