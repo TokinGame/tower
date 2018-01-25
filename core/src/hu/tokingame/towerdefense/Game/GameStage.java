@@ -20,8 +20,12 @@ import java.util.ArrayList;
 import hu.tokingame.towerdefense.BuildingBlocks.BuildingBlock;
 import hu.tokingame.towerdefense.BuildingBlocks.Turret;
 import hu.tokingame.towerdefense.BuildingBlocks.Wall;
+import hu.tokingame.towerdefense.Enemy.BlueAlien;
 import hu.tokingame.towerdefense.Enemy.Enemy;
 import hu.tokingame.towerdefense.Enemy.EnemyAdder;
+import hu.tokingame.towerdefense.Enemy.GreenAlien;
+import hu.tokingame.towerdefense.Enemy.RedAlien;
+import hu.tokingame.towerdefense.Enemy.YellowAlien;
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Enemy.Alien;
 import hu.tokingame.towerdefense.Globals.Globals;
@@ -63,7 +67,6 @@ public class GameStage extends MyStage {
 
     public GameStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
-
         controlStage = new ControlStage(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)),new SpriteBatch(), game, this);
 
         enemies = new ArrayList<Enemy>();
@@ -190,11 +193,20 @@ public class GameStage extends MyStage {
 
     public void spawnEnemy(int identifier, float timing){                       //TODO ha lesz több enemy akkor ide pakolni és az időzítést meg kell csinálni
             switch (identifier) {
-                case 0:
-                    enemiesQueue.add(new EnemyAdder(new Alien(this), timing));
+                case 1:
+                    enemiesQueue.add(new EnemyAdder(new GreenAlien(this), timing));
+                    break;
+                case 2:
+                    enemiesQueue.add(new EnemyAdder(new BlueAlien(this), timing));
+                    break;
+                case 3:
+                    enemiesQueue.add(new EnemyAdder(new YellowAlien(this), timing));
+                    break;
+                case 4:
+                    enemiesQueue.add(new EnemyAdder(new RedAlien(this), timing));
                     break;
                 default:
-                    enemiesQueue.add(new EnemyAdder(new Alien(this), timing));
+                    enemiesQueue.add(new EnemyAdder(new GreenAlien(this), timing));
                     break;
             }
     }
