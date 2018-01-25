@@ -82,7 +82,6 @@ public class PathFinder implements Runnable {
                         Globals.currentSteps.add(0, Globals.Step.RIGHT);
                         Globals.currentSteps.add(Globals.Step.RIGHT);
                         Globals.currentSteps.add(Globals.Step.RIGHT);
-                        Globals.currentSteps.add(Globals.Step.RIGHT);
                         for(int j = i; j <Globals.MAP_SIZE; j++){
                             Globals.currentSteps.add(Globals.Step.DOWN);
                         }

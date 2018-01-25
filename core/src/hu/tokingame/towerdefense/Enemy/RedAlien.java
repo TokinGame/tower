@@ -9,6 +9,6 @@ import hu.tokingame.towerdefense.Globals.Assets;
 
 public class RedAlien extends Alien {
     public RedAlien(GameStage gameStage) {
-        super(gameStage, Assets.manager.get(Assets.WALL_TEXTURE), 4, 1);
+        super(gameStage, Assets.manager.get(Assets.RED_ALIEN), 4, 1);
     }
 }

@@ -13,7 +13,7 @@ import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class Turret extends BuildingBlock {
     public Turret(float x, float y, GameStage gameStage) {
-        super(Assets.manager.get(Assets.BADLOGIC_TEXTURE), x, y);
+        super(Assets.manager.get(Assets.TURRET_TEXTURE), x, y);
 
     }
 }

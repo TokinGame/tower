@@ -58,6 +58,8 @@ public class GameStage extends MyStage {
 
     public int Moneys = 500;
 
+    int moneyToBeAdded = 0;
+
     Alien alien;
     private ArrayList<Enemy> enemies;
     private ArrayList<EnemyAdder> enemiesQueue;
@@ -125,7 +127,6 @@ public class GameStage extends MyStage {
             }
         });
 
-        controlStage.showMessage("TEST TEXT");
     }
 
 
@@ -243,6 +244,9 @@ public class GameStage extends MyStage {
     public void endWave(){
         duringWave = false;
         waveTimer = 0;
+        Moneys += moneyToBeAdded;
+        moneyToBeAdded = 0;
+        controlStage.updateMoneys();
         controlStage.showMessage("A kör véget ért");
         System.out.println("wave ended");
     }
@@ -258,6 +262,12 @@ public class GameStage extends MyStage {
         }
         return true;
     }
+
+    public void nextMoney(int amount){
+        moneyToBeAdded = amount;
+    }
+
+
 
 
     public PathFinder getPathFinder() {
