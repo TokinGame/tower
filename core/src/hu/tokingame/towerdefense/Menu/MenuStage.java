@@ -26,6 +26,7 @@ public class MenuStage extends MyStage {
 
     public MenuStage(Viewport viewport, Batch batch, MyGdxGame gam) {
         super(viewport, batch, gam);
+        System.out.println("asdf");
         game = gam;
 
 

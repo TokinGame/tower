@@ -56,6 +56,8 @@ public class GameStage extends MyStage {
 
     private int healthLeft = Globals.STARTINGHEALTH;
 
+    public int Moneys = 500;
+
     Alien alien;
     private ArrayList<Enemy> enemies;
     private ArrayList<EnemyAdder> enemiesQueue;
@@ -73,11 +75,10 @@ public class GameStage extends MyStage {
         enemiesQueue = new ArrayList<EnemyAdder>();
         rem = new ArrayList<EnemyAdder>();
 
-        //InputMultiplexer inputMultiplexer = new InputMultiplexer();
-        //inputMultiplexer.addProcessor(this);
-        //inputMultiplexer.addProcessor(controlStage);
-        //Gdx.input.setInputProcessor(inputMultiplexer);
-        //Gdx.input.setInputProcessor(controlStage);
+        InputMultiplexer inputMultiplexer = new InputMultiplexer();
+        inputMultiplexer.addProcessor(this);
+        inputMultiplexer.addProcessor(controlStage);
+        Gdx.input.setInputProcessor(inputMultiplexer);
 
         map = new BuildingBlock[Globals.MAP_SIZE][Globals.MAP_SIZE];
 
@@ -159,8 +160,8 @@ public class GameStage extends MyStage {
         //System.out.println("wave: " + waveTimer);
         //System.out.println(enemiesQueue);
         for (EnemyAdder adder: enemiesQueue) {
-            System.out.println(adder.getTimout());
-            if(adder.getTimout() <= waveTimer){
+            System.out.println(adder.getTimeOut());
+            if(adder.getTimeOut() <= waveTimer){
                 Enemy enemy = adder.getEnemy();
                 rem.add(adder);
                 enemies.add(enemy);
@@ -175,23 +176,35 @@ public class GameStage extends MyStage {
 
 
     void placeElement(int x, int y){
-        if(!duringWave){
-            if(pathFinder.canPlace(x, y)){
-                BuildingBlock k = null;
-                switch(Globals.selectedBlock){
-                    case WALL: k = new Wall(x, y); break;
-                    case TURRET: k = new Turret(x, y, this); break;
-                    case OTHERTURRET: k = new Turret(x, y, this); break;
-                }
-                map[x][y] = k;
-                addActor(k);
-                System.out.println("placed "+x+" : "+ y);
-            }else
-                controlStage.showMessage("Nem zárhatod el az egyetlen utat");
+        if(!duringWave) {
+            if(hasEnoughMoney()){
+                if (pathFinder.canPlace(x, y)) {
+                    BuildingBlock k = null;
+                    switch (Globals.selectedBlock) {
+                        case WALL:
+                            k = new Wall(x, y);
+                            Moneys -= Globals.costs[0];
+                            break;
+                        case TURRET:
+                            k = new Turret(x, y, this);
+                            Moneys -= Globals.costs[1];
+                            break;
+                        case OTHERTURRET:
+                            k = new Turret(x, y, this);
+                            Moneys -= Globals.costs[2];
+                            break;
+                    }
+                    map[x][y] = k;
+                    addActor(k);
+                    System.out.println("placed " + x + " : " + y);
+                } else
+                    controlStage.showMessage("Nem zárhatod el az egyetlen utat");
+            } else controlStage.showMessage("Nincs elég pénzed");
         } else controlStage.showMessage("Kör közben nem építhetsz");
+        controlStage.updateMoneys();
     }
 
-    public void spawnEnemy(int identifier, float timing){                       //TODO ha lesz több enemy akkor ide pakolni és az időzítést meg kell csinálni
+    public void spawnEnemy(int identifier, float timing){
             switch (identifier) {
                 case 1:
                     enemiesQueue.add(new EnemyAdder(new GreenAlien(this), timing));
@@ -234,7 +247,17 @@ public class GameStage extends MyStage {
         System.out.println("wave ended");
     }
 
-
+    boolean hasEnoughMoney(){
+        switch(Globals.selectedBlock){
+            case WALL:
+                if (Moneys - Globals.costs[0] < 1) return false;
+            case TURRET:
+                if (Moneys - Globals.costs[1] < 1) return false;
+            case OTHERTURRET:
+                if (Moneys - Globals.costs[2] < 1) return false;
+        }
+        return true;
+    }
 
 
     public PathFinder getPathFinder() {

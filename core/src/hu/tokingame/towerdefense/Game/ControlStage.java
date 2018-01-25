@@ -26,7 +26,7 @@ import static hu.tokingame.towerdefense.Globals.Globals.MAP_SIZE;
 
 public class ControlStage extends MyStage {
     private GameStage gameStage;
-    MyLabel message;
+    MyLabel message, moneylabel;
 
     public ControlStage(Viewport viewport, Batch batch, MyGdxGame game, GameStage gameStage) {
         super(viewport, batch, game);
@@ -60,6 +60,13 @@ public class ControlStage extends MyStage {
                 });
             }
         });
+        addActor(moneylabel = new MyLabel(gameStage.Moneys+" Űrforint", game.getLabelStyle()));
+        moneylabel.setPosition(Globals.WORLD_WIDTH-moneylabel.getWidth(), Globals.WORLD_HEIGHT-moneylabel.getHeight()*2);
+    }
+
+    public void updateMoneys(){
+        moneylabel.setText(gameStage.Moneys+" Űrforint");
+        moneylabel.setPosition(Globals.WORLD_WIDTH-moneylabel.getWidth(), Globals.WORLD_HEIGHT-moneylabel.getHeight()*2);
     }
 
     @Override

@@ -23,6 +23,8 @@ public class Globals {
         WALL, TURRET, OTHERTURRET
     }
 
+    public static final int[] costs = {100, 250, 250};
+
     public static Selectable selectedBlock = Selectable.WALL;
 
 
