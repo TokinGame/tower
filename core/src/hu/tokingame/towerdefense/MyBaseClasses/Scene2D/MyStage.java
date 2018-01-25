@@ -30,7 +30,6 @@ abstract public class MyStage extends Stage implements InitableInterface {
 
     public void addBackEventStackListener()    {
         addListener(new InputListener() {
-
             @Override
             public boolean keyDown(InputEvent event, int keycode) {
                 if(keycode== Input.Keys.ESCAPE) {

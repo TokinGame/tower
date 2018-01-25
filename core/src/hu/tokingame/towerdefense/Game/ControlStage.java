@@ -31,7 +31,9 @@ public class ControlStage extends MyStage {
     public ControlStage(Viewport viewport, Batch batch, MyGdxGame game, GameStage gameStage) {
         super(viewport, batch, game);
         this.gameStage = gameStage;
-
+        for(StackTraceElement s: Thread.currentThread().getStackTrace()){
+            System.out.println(s);
+        }
         addActor(new BlockSelector(gameStage));
 
 
@@ -55,7 +57,7 @@ public class ControlStage extends MyStage {
                         System.out.println("KKLIJKJKJK");
                         System.out.println(this);
                         if(!ControlStage.this.gameStage.duringWave)ControlStage.this.gameStage.startWave();
-                        //else gameStage.endWave();
+                        else ControlStage.this.gameStage.endWave();
                     }
                 });
             }

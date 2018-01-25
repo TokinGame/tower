@@ -18,7 +18,6 @@ public class MenuScreen extends MyScreen {
         super(game);
         menuStage = new MenuStage(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT), spriteBatch, game);
         menuStage.addBackEventStackListener();
-        Gdx.input.setInputProcessor(menuStage);
 
     }
 

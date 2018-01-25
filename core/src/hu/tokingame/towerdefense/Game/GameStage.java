@@ -82,6 +82,8 @@ public class GameStage extends MyStage {
         inputMultiplexer.addProcessor(controlStage);
         Gdx.input.setInputProcessor(inputMultiplexer);
 
+
+
         map = new BuildingBlock[Globals.MAP_SIZE][Globals.MAP_SIZE];
 
         pathFinder = new PathFinder(this);
@@ -158,7 +160,7 @@ public class GameStage extends MyStage {
         }*/
 
 
-        //System.out.println("wave: " + waveTimer);
+        System.out.println("wave: " + waveTimer);
         //System.out.println(enemiesQueue);
         for (EnemyAdder adder: enemiesQueue) {
             System.out.println(adder.getTimeOut());
@@ -237,8 +239,8 @@ public class GameStage extends MyStage {
         controlStage.showMessage("A "+roundsCount+" kör elkezdődött");
         System.out.println("wave started");
         spawnEnemy(0, 1);
-        spawnEnemy(0, 2);
-        spawnEnemy(0, 3);
+        spawnEnemy(0, 4);
+        spawnEnemy(0, 7);
     }
 
     public void endWave(){

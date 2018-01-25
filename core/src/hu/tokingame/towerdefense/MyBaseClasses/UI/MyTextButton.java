@@ -12,7 +12,6 @@ public class MyTextButton extends MyButton{
 
     public MyTextButton(String text, TextButtonStyle style) {
         super(text, style);
-        init();
     }
 
     public void init() {

@@ -1,5 +1,6 @@
 package hu.tokingame.towerdefense.Menu;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -28,6 +29,11 @@ public class MenuStage extends MyStage {
         super(viewport, batch, gam);
         System.out.println("asdf");
         game = gam;
+        Gdx.input.setInputProcessor(this);
+
+        for(StackTraceElement s: Thread.currentThread().getStackTrace()){
+            System.out.println(s);
+        }
 
 
         addActor(new MyTextButton("Játék",game.getTextButtonStyle()){
