@@ -15,9 +15,13 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.ArrayList;
+
 import hu.tokingame.towerdefense.BuildingBlocks.BuildingBlock;
 import hu.tokingame.towerdefense.BuildingBlocks.Turret;
 import hu.tokingame.towerdefense.BuildingBlocks.Wall;
+import hu.tokingame.towerdefense.Enemy.Enemy;
+import hu.tokingame.towerdefense.Enemy.EnemyAdder;
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Enemy.Alien;
 import hu.tokingame.towerdefense.Globals.Globals;
@@ -49,7 +53,9 @@ public class GameStage extends MyStage {
     private int healthLeft = Globals.STARTINGHEALTH;
 
     Alien alien;
-
+    private ArrayList<Enemy> enemies;
+    private ArrayList<EnemyAdder> enemiesQueue;
+    private ArrayList<EnemyAdder> rem;
 
     OneSpriteStaticActor defendedbase;
 
@@ -59,6 +65,9 @@ public class GameStage extends MyStage {
         super(viewport, batch, game);
         controlStage = new ControlStage(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)),new SpriteBatch(), game, this);
 
+        enemies = new ArrayList<Enemy>();
+        enemiesQueue = new ArrayList<EnemyAdder>();
+        rem = new ArrayList<EnemyAdder>();
 
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(this);
@@ -141,6 +150,20 @@ public class GameStage extends MyStage {
             alien.remove();
         }*/
 
+        rem.clear();
+        System.out.println("wave: " + waveTimer);
+        System.out.println(enemiesQueue);
+        for (EnemyAdder adder: enemiesQueue) {
+            if(adder.getTimout() >= waveTimer){
+                Enemy enemy = adder.getEnemy();
+                rem.add(adder);
+                enemies.add(enemy);
+                addActor(enemy);
+            }
+        }
+        System.out.println(enemiesQueue);
+        //enemiesQueue.removeAll(rem);
+        System.out.println(enemiesQueue);
     }
 
 
@@ -162,16 +185,14 @@ public class GameStage extends MyStage {
     }
 
     public void spawnEnemy(int identifier, float timing){                       //TODO ha lesz több enemy akkor ide pakolni és az időzítést meg kell csinálni
-        //if(waveTimer > timing) {
             switch (identifier) {
                 case 0:
-                    addActor(new Alien(this));
+                    enemiesQueue.add(new EnemyAdder(new Alien(this), timing));
                     break;
                 default:
-                    addActor(new Alien(this));
+                    enemiesQueue.add(new EnemyAdder(new Alien(this), timing));
                     break;
             }
-        //}
     }
 
     public void decreaseHealth() {
@@ -185,7 +206,9 @@ public class GameStage extends MyStage {
         roundsCount++;
         controlStage.showMessage("A "+roundsCount+" kör elkezdődött");
         System.out.println("wave started");
-        spawnEnemy(0, 0);
+        spawnEnemy(0, 1);
+        spawnEnemy(0, 2);
+        spawnEnemy(0, 3);
     }
 
     public void endWave(){
