@@ -120,7 +120,7 @@ public abstract class Enemy extends OneSpriteStaticActor {
 
         if(getX()> Globals.WORLD_WIDTH-240 && getY() < 160){
             stage.decreaseHealth();
-            System.out.println("Bement a köcsög");
+            //System.out.println("Bement a köcsög");
             remove();
         }
     }

@@ -25,4 +25,9 @@ public class BuildingBlock extends OneSpriteStaticActor {
         setX(280+ m *90);
         setY((7- e)*90);
     }
+
+
+    public void upgrade(){
+
+    }
 }

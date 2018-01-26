@@ -175,27 +175,37 @@ public class GameStage extends MyStage {
     void placeElement(int x, int y){
         if(!duringWave) {
             if(hasEnoughMoney()){
-                if (pathFinder.canPlace(x, y)) {
-                    BuildingBlock k = null;
-                    switch (Globals.selectedBlock) {
-                        case WALL:
-                            k = new Wall(x, y);
-                            Moneys -= Globals.costs[0];
-                            break;
-                        case TURRET:
-                            k = new Turret(x, y, this);
-                            Moneys -= Globals.costs[1];
-                            break;
-                        case OTHERTURRET:
-                            k = new Turret(x, y, this);
-                            Moneys -= Globals.costs[2];
-                            break;
-                    }
-                    map[x][y] = k;
-                    addActor(k);
-                    System.out.println("placed " + x + " : " + y);
-                } else
-                    controlStage.showMessage("Nem zárhatod el az egyetlen utat");
+                if(map[x][y] == null) {
+                    if (pathFinder.canPlace(x, y)) {
+                        BuildingBlock k = null;
+                        switch (Globals.selectedBlock) {
+                            case WALL:
+                                k = new Wall(x, y);
+                                Moneys -= Globals.costs[0];
+                                break;
+                            case TURRET:
+                                k = new Turret(x, y, this);
+                                Moneys -= Globals.costs[1];
+                                break;
+                            case OTHERTURRET:
+                                k = new Turret(x, y, this);
+                                Moneys -= Globals.costs[2];
+                                break;
+                        }
+                        map[x][y] = k;
+                        addActor(k);
+                        System.out.println("placed " + x + " : " + y);
+                    } else
+                        controlStage.showMessage("Nem zárhatod el az egyetlen utat");
+                }else if(map[x][y].getClass().isInstance(new Turret(-1,-1, this))){
+                    map[x][y].upgrade();
+                    Moneys-=Globals.costs[1];
+                    controlStage.showMessage("Lövegtorony fejlesztve");
+                }else if(map[x][y].getClass().isInstance(new Turret(-1,-1, this))){
+                    map[x][y].upgrade();
+                    Moneys-=Globals.costs[2];
+                    controlStage.showMessage("Lövegtorony fejlesztve");
+                }
             } else controlStage.showMessage("Nincs elég pénzed");
         } else controlStage.showMessage("Kör közben nem építhetsz");
         controlStage.updateMoneys();

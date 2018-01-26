@@ -16,4 +16,11 @@ public class Turret extends BuildingBlock {
         super(Assets.manager.get(Assets.TURRET_TEXTURE), x, y);
 
     }
+
+
+    @Override
+    public void upgrade() {
+        super.upgrade();
+        System.out.println("UPGRADED");
+    }
 }
