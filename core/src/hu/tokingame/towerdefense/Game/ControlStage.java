@@ -67,7 +67,7 @@ public class ControlStage extends MyStage {
         addActor(moneylabel = new MyLabel(gameStage.Moneys+" Űrforint", game.getLabelStyle()));
         moneylabel.setPosition(Globals.WORLD_WIDTH-moneylabel.getWidth(), Globals.WORLD_HEIGHT-moneylabel.getHeight()*2);
 
-        addActor(healthLabel = new MyLabel("10", game.getLabelStyle()){
+        addActor(healthLabel = new MyLabel("", game.getLabelStyle()){
             @Override
             public void init() {
                 super.init();
@@ -83,6 +83,7 @@ public class ControlStage extends MyStage {
 
     public void setHealthLabel(int healthleft){
         healthLabel.setText(healthleft+"");
+        healthLabel.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(0.5f), Actions.delay(2), Actions.fadeOut(0.5f), Actions.alpha(0)));
     }
 
     @Override
@@ -128,6 +129,7 @@ public class ControlStage extends MyStage {
     void showMessage(String text){
         message.setText(text);
         message.setPosition(Globals.WORLD_WIDTH/2-message.getWidth()/2, 600);
-        message.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(0.5f), Actions.delay(2), Actions.fadeOut(0.5f), Actions.alpha(0)));
+        message.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeIn(0.3f), Actions.delay(1), Actions.fadeOut(0.5f), Actions.alpha(0)));
     }
+
 }

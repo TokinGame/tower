@@ -2,6 +2,7 @@ package hu.tokingame.towerdefense.BuildingBlocks;
 
 import com.badlogic.gdx.graphics.Texture;
 
+import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 /**
@@ -22,8 +23,8 @@ public class BuildingBlock extends OneSpriteStaticActor {
 
 
     void place(float e, float m){
-        setX(280+ m *90);
-        setY((7- e)*90);
+        setX(280+ m *Globals.GRID_WIDTH);
+        setY(((Globals.MAP_SIZE-1) - e)*Globals.GRID_HEIGHT);
     }
 
 

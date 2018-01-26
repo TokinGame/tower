@@ -48,8 +48,6 @@ public abstract class Enemy extends OneSpriteStaticActor {
 
         setStepsList(Globals.currentSteps);
 
-
-
     }
 
 

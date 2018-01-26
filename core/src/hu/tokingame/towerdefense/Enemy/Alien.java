@@ -1,6 +1,7 @@
 package hu.tokingame.towerdefense.Enemy;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 import hu.tokingame.towerdefense.Game.GameStage;
 import hu.tokingame.towerdefense.Globals.Assets;
@@ -16,6 +17,8 @@ public class Alien extends Enemy {
         super(texture, gameStage, hp, speeds);
         this.setSize(80,80);
         this.setPosition(15, Globals.WORLD_HEIGHT-getHeight()-5);
+
+
     }
 
 

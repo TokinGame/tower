@@ -22,6 +22,7 @@ import hu.tokingame.towerdefense.Enemy.EnemyAdder;
 import hu.tokingame.towerdefense.Enemy.GreenAlien;
 import hu.tokingame.towerdefense.Enemy.RedAlien;
 import hu.tokingame.towerdefense.Enemy.YellowAlien;
+import hu.tokingame.towerdefense.Game.UI.MoneySpentText;
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Enemy.Alien;
 import hu.tokingame.towerdefense.Globals.Globals;
@@ -182,14 +183,17 @@ public class GameStage extends MyStage {
                             case WALL:
                                 k = new Wall(x, y);
                                 Moneys -= Globals.costs[0];
+                                addActor(new MoneySpentText(Assets.manager.get(Assets.M100FT), x, y));
                                 break;
                             case TURRET:
                                 k = new Turret(x, y, this);
                                 Moneys -= Globals.costs[1];
+                                addActor(new MoneySpentText(Assets.manager.get(Assets.M250FT), x, y));
                                 break;
                             case OTHERTURRET:
                                 k = new Turret(x, y, this);
                                 Moneys -= Globals.costs[2];
+                                addActor(new MoneySpentText(Assets.manager.get(Assets.M250FT), x, y));
                                 break;
                         }
                         map[x][y] = k;
@@ -201,11 +205,13 @@ public class GameStage extends MyStage {
                     map[x][y].upgrade();
                     Moneys-=Globals.costs[1];
                     controlStage.showMessage("Lövegtorony fejlesztve");
+                    addActor(new MoneySpentText(Assets.manager.get(Assets.M250FT), x, y));
                 }else if(map[x][y].getClass().isInstance(new Turret(-1,-1, this))){
                     map[x][y].upgrade();
                     Moneys-=Globals.costs[2];
+                    addActor(new MoneySpentText(Assets.manager.get(Assets.M250FT), x, y));
                     controlStage.showMessage("Lövegtorony fejlesztve");
-                }
+                }else controlStage.showMessage("Ide nem építhetsz");
             } else controlStage.showMessage("Nincs elég pénzed");
         } else controlStage.showMessage("Kör közben nem építhetsz");
         controlStage.updateMoneys();
