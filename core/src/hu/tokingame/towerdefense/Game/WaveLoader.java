@@ -32,8 +32,12 @@ public class WaveLoader implements Runnable {
                 String[] t = br.readLine().split(" ");
                 gameStage.spawnEnemy(new Integer(t[0]), new Integer(t[1]));
             }
-            gameStage.startWave();
-        } catch (Exception e) {
+            //gameStage.startWave();
+        }catch(FileNotFoundException fileex){
+            gameStage.messageRelay(fileex.getLocalizedMessage());
+            fileex.printStackTrace();
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 

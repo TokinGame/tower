@@ -6,10 +6,6 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.physics.box2d.Contact;
-import com.badlogic.gdx.physics.box2d.ContactImpulse;
-import com.badlogic.gdx.physics.box2d.ContactListener;
-import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -29,12 +25,9 @@ import hu.tokingame.towerdefense.Enemy.YellowAlien;
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Enemy.Alien;
 import hu.tokingame.towerdefense.Globals.Globals;
-import hu.tokingame.towerdefense.Globals.Globals.Selectable;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
-import hu.tokingame.towerdefense.MyBaseClasses.UI.MyLabel;
 import hu.tokingame.towerdefense.MyGdxGame;
-import jdk.nashorn.internal.objects.Global;
 
 /**
  * Created by M on 1/11/2018.
@@ -45,7 +38,8 @@ public class GameStage extends MyStage {
     private ControlStage controlStage;
     public BuildingBlock[][] map;
     PathFinder pathFinder;
-    Thread t;
+    WaveLoader waveLoader;
+    Thread pathThread, loadThread;
 
 
     public boolean duringWave = false;
@@ -86,8 +80,15 @@ public class GameStage extends MyStage {
 
         pathFinder = new PathFinder(this);
         try{
-            t = new Thread(pathFinder);
-            t.start();
+            pathThread = new Thread(pathFinder);
+            pathThread.start();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        waveLoader = new WaveLoader(this);
+        try{
+            loadThread = new Thread(waveLoader);
+            loadThread.start();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -227,13 +228,14 @@ public class GameStage extends MyStage {
     }
 
     public void startWave(){
-        duringWave = true;
         roundsCount++;
+        waveLoader.load(roundsCount);
+        duringWave = true;
         controlStage.showMessage("A "+roundsCount+" kör elkezdődött");
         System.out.println("wave started");
-        spawnEnemy(0, 1);
+        /*spawnEnemy(0, 1);
         spawnEnemy(0, 4);
-        spawnEnemy(0, 7);
+        spawnEnemy(0, 7);*/
     }
 
     public void endWave(){
@@ -273,6 +275,10 @@ public class GameStage extends MyStage {
     }
 
 
+
+    public void messageRelay(String m){
+        controlStage.showMessage(m);
+    }
 
 
     public PathFinder getPathFinder() {
