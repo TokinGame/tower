@@ -67,8 +67,6 @@ public class GameStage extends MyStage {
 
     OneSpriteStaticActor defendedbase;
 
-    MyLabel healthLabel;
-
     public GameStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
         controlStage = new ControlStage(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)),new SpriteBatch(), game, this);
@@ -121,13 +119,7 @@ public class GameStage extends MyStage {
             }
         });
 
-        addActor(healthLabel = new MyLabel("10", game.getLabelStyle()){
-            @Override
-            public void init() {
-                super.init();
-                setPosition(1140, 300);
-            }
-        });
+
 
     }
 
@@ -160,10 +152,10 @@ public class GameStage extends MyStage {
         }*/
 
 
-        System.out.println("wave: " + waveTimer);
+        //System.out.println("wave: " + waveTimer);
         //System.out.println(enemiesQueue);
         for (EnemyAdder adder: enemiesQueue) {
-            System.out.println(adder.getTimeOut());
+           // System.out.println(adder.getTimeOut());
             if(adder.getTimeOut() <= waveTimer){
                 Enemy enemy = adder.getEnemy();
                 rem.add(adder);
@@ -175,6 +167,7 @@ public class GameStage extends MyStage {
         enemiesQueue.removeAll(rem);
         rem.clear();
         //System.out.println(enemiesQueue);
+        //System.out.println(Moneys+" moneys");
     }
 
 
@@ -230,7 +223,7 @@ public class GameStage extends MyStage {
     public void decreaseHealth() {
         if (healthLeft > 1) healthLeft--;
         else game.setScreenBackByStackPop();     //TODO meghaltál képernyő
-        healthLabel.setText(healthLeft+"");
+        controlStage.setHealthLabel(healthLeft);
     }
 
     public void startWave(){
@@ -254,15 +247,25 @@ public class GameStage extends MyStage {
     }
 
     boolean hasEnoughMoney(){
+        System.out.println("having shit calculated");
         switch(Globals.selectedBlock){
             case WALL:
-                if (Moneys - Globals.costs[0] < 1) return false;
+                if (Moneys - Globals.costs[0] >= 0){
+                    System.out.println("wall, "+Moneys+" - "+ Globals.costs[0]+" = "+(Moneys-Globals.costs[0]));
+                    return true;
+                }
             case TURRET:
-                if (Moneys - Globals.costs[1] < 1) return false;
+                if (Moneys - Globals.costs[1] >= 0){
+                    System.out.println("turret "+Moneys+" - "+ Globals.costs[1]+" = "+(Moneys-Globals.costs[1]));
+                    return true;
+                }
             case OTHERTURRET:
-                if (Moneys - Globals.costs[2] < 1) return false;
+                if (Moneys - Globals.costs[2] >= 0){
+                    System.out.println("otherturret "+Moneys+" - "+ Globals.costs[2]+" = "+(Moneys-Globals.costs[2]));
+                    return true;
+                }
         }
-        return true;
+        return false;
     }
 
     public void nextMoney(int amount){

@@ -28,6 +28,8 @@ public class ControlStage extends MyStage {
     private GameStage gameStage;
     MyLabel message, moneylabel;
 
+    MyLabel healthLabel;
+
     public ControlStage(Viewport viewport, Batch batch, MyGdxGame game, GameStage gameStage) {
         super(viewport, batch, game);
         this.gameStage = gameStage;
@@ -64,11 +66,23 @@ public class ControlStage extends MyStage {
         });
         addActor(moneylabel = new MyLabel(gameStage.Moneys+" Űrforint", game.getLabelStyle()));
         moneylabel.setPosition(Globals.WORLD_WIDTH-moneylabel.getWidth(), Globals.WORLD_HEIGHT-moneylabel.getHeight()*2);
+
+        addActor(healthLabel = new MyLabel("10", game.getLabelStyle()){
+            @Override
+            public void init() {
+                super.init();
+                setPosition(1140, 300);
+            }
+        });
     }
 
     public void updateMoneys(){
         moneylabel.setText(gameStage.Moneys+" Űrforint");
         moneylabel.setPosition(Globals.WORLD_WIDTH-moneylabel.getWidth(), Globals.WORLD_HEIGHT-moneylabel.getHeight()*2);
+    }
+
+    public void setHealthLabel(int healthleft){
+        healthLabel.setText(healthleft+"");
     }
 
     @Override
@@ -108,6 +122,7 @@ public class ControlStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
+
     }
 
     void showMessage(String text){

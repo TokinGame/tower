@@ -94,6 +94,7 @@ public class BlockSelector extends Group {
             case 2: Globals.selectedBlock = Globals.Selectable.OTHERTURRET; break;
 
         }
+        System.out.println(Globals.selectedBlock);
     }
 
 
