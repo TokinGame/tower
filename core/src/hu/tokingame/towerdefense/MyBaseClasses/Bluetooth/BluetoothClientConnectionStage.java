@@ -46,7 +46,7 @@ abstract public class BluetoothClientConnectionStage extends BluetoothStage {
     public void init() {
         Gdx.app.error("BTM", "Client start discovering");
         startBluetoothDiscovering();
-        addActor(waitingLabel = new MyLabel("", game.getLabelStyle()));
+        addActor(waitingLabel = new MyLabel("", game.getLabelStyle_Yellow()));
         waitingLabel.setPosition(300,300);
     }
 

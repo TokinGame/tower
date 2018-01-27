@@ -43,8 +43,7 @@ public class Assets {
     public static final AssetDescriptor<Texture> YELLOW_ALIEN = new AssetDescriptor<Texture>("Creatures/leny_sarga.png", Texture.class);
     public static final AssetDescriptor<Texture> RED_ALIEN = new AssetDescriptor<Texture>("Creatures/leny_piros.png", Texture.class);
     public static final AssetDescriptor<Texture> GRID_SQUARE = new AssetDescriptor<Texture>("UI/grid_square.png", Texture.class);
-    public static final AssetDescriptor<Texture> M250FT = new AssetDescriptor<Texture>("UI/minus250.png", Texture.class);
-    public static final AssetDescriptor<Texture> M100FT = new AssetDescriptor<Texture>("UI/minus100.png", Texture.class);
+
 
 
 
@@ -73,9 +72,6 @@ public class Assets {
         manager.load(BLUE_ALIEN);
         manager.load(YELLOW_ALIEN);
         manager.load(RED_ALIEN);
-
-        manager.load(M100FT);
-        manager.load(M250FT);
     }
 
     public static void afterLoaded() {

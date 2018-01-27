@@ -183,17 +183,17 @@ public class GameStage extends MyStage {
                             case WALL:
                                 k = new Wall(x, y);
                                 Moneys -= Globals.costs[0];
-                                addActor(new MoneySpentText(Assets.manager.get(Assets.M100FT), x, y));
+                                addActor(new MoneySpentText("-"+Globals.costs[0]+" Ft", game.getLabelStyle_Red(), x, y));
                                 break;
                             case TURRET:
                                 k = new Turret(x, y, this);
                                 Moneys -= Globals.costs[1];
-                                addActor(new MoneySpentText(Assets.manager.get(Assets.M250FT), x, y));
+                                addActor(new MoneySpentText("-"+Globals.costs[1]+" Ft", game.getLabelStyle_Red(), x, y));
                                 break;
                             case OTHERTURRET:
                                 k = new Turret(x, y, this);
                                 Moneys -= Globals.costs[2];
-                                addActor(new MoneySpentText(Assets.manager.get(Assets.M250FT), x, y));
+                                addActor(new MoneySpentText("-"+Globals.costs[2]+" Ft", game.getLabelStyle_Red(), x, y));
                                 break;
                         }
                         map[x][y] = k;
@@ -205,11 +205,11 @@ public class GameStage extends MyStage {
                     map[x][y].upgrade();
                     Moneys-=Globals.costs[1];
                     controlStage.showMessage("Lövegtorony fejlesztve");
-                    addActor(new MoneySpentText(Assets.manager.get(Assets.M250FT), x, y));
+                    addActor(new MoneySpentText("-"+Globals.costs[1]+" Ft", game.getLabelStyle_Red(), x, y));
                 }else if(map[x][y].getClass().isInstance(new Turret(-1,-1, this))){
                     map[x][y].upgrade();
                     Moneys-=Globals.costs[2];
-                    addActor(new MoneySpentText(Assets.manager.get(Assets.M250FT), x, y));
+                    addActor(new MoneySpentText("-"+Globals.costs[2]+" Ft", game.getLabelStyle_Red(), x, y));
                     controlStage.showMessage("Lövegtorony fejlesztve");
                 }else controlStage.showMessage("Ide nem építhetsz");
             } else controlStage.showMessage("Nincs elég pénzed");
@@ -258,6 +258,7 @@ public class GameStage extends MyStage {
         duringWave = false;
         waveTimer = 0;
         Moneys += moneyToBeAdded;
+        addActor(new MoneySpentText("+"+moneyToBeAdded+" Ft", game.getLabelStyle_Green(), 5, 9));
         moneyToBeAdded = 0;
         controlStage.updateMoneys();
         controlStage.showMessage("A kör véget ért");

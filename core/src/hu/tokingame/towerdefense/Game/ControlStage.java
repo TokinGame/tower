@@ -1,7 +1,6 @@
 package hu.tokingame.towerdefense.Game;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -41,7 +40,7 @@ public class ControlStage extends MyStage {
 
         initGrid();
 
-        addActor(message = new MyLabel("", game.getLabelStyle()));
+        addActor(message = new MyLabel("", game.getLabelStyle_Yellow()));
         message.setPosition(Globals.WORLD_WIDTH/2-getWidth()/2, 600);
         message.setAlignment(1);
         //message.setVisible(false);
@@ -64,10 +63,10 @@ public class ControlStage extends MyStage {
                 });
             }
         });
-        addActor(moneylabel = new MyLabel(gameStage.Moneys+" Űrforint", game.getLabelStyle()));
+        addActor(moneylabel = new MyLabel(gameStage.Moneys+" Űrforint", game.getLabelStyle_Yellow()));
         moneylabel.setPosition(Globals.WORLD_WIDTH-moneylabel.getWidth(), Globals.WORLD_HEIGHT-moneylabel.getHeight()*2);
 
-        addActor(healthLabel = new MyLabel("", game.getLabelStyle()){
+        addActor(healthLabel = new MyLabel("", game.getLabelStyle_Yellow()){
             @Override
             public void init() {
                 super.init();

@@ -17,11 +17,35 @@ public class MyGdxGame extends MyGame {
 	SpriteBatch batch;
 	Texture img;
 
-	public Label.LabelStyle getLabelStyle() {
+	public Label.LabelStyle getLabelStyle_Yellow() {
 		Label.LabelStyle style;
 		style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
 		style.font = Assets.manager.get(Assets.CALIBRI_FONT);
 		style.fontColor = Color.YELLOW;
+		return style;
+	}
+
+	public Label.LabelStyle getLabelStyle_Red() {
+		Label.LabelStyle style;
+		style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
+		style.font = Assets.manager.get(Assets.CALIBRI_FONT);
+		style.fontColor = Color.RED;
+		return style;
+	}
+
+	public Label.LabelStyle getLabelStyle_Green() {
+		Label.LabelStyle style;
+		style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
+		style.font = Assets.manager.get(Assets.CALIBRI_FONT);
+		style.fontColor = Color.GREEN;
+		return style;
+	}
+
+	public Label.LabelStyle getLabelStyle_White() {
+		Label.LabelStyle style;
+		style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
+		style.font = Assets.manager.get(Assets.CALIBRI_FONT);
+		style.fontColor = Color.WHITE;
 		return style;
 	}
 
