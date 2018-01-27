@@ -45,6 +45,8 @@ public class GameStage extends MyStage {
 
     public boolean duringWave = false;
 
+    public boolean addHealthAfterRound = false;
+
     public float waveTimer = 0;
 
     public int roundsCount = 0;
@@ -262,6 +264,10 @@ public class GameStage extends MyStage {
         moneyToBeAdded = 0;
         controlStage.updateMoneys();
         controlStage.showMessage("A kör véget ért");
+        if(addHealthAfterRound){
+            healthLeft++;
+            controlStage.setHealthLabel(healthLeft);
+        }
         System.out.println("wave ended");
     }
 
