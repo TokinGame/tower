@@ -54,7 +54,7 @@ public class GameStage extends MyStage {
 
     private int healthLeft = Globals.STARTINGHEALTH;
 
-    public int Moneys = 500;
+    public int Moneys = 500, enemiesAlive = 0;
 
     int moneyToBeAdded = 0;
 
@@ -108,7 +108,7 @@ public class GameStage extends MyStage {
             }
         });
 
-        //addActor(alien = new Alien(this));
+        alien = new Alien(this, Assets.manager.get(Assets.BADLOGIC_TEXTURE), 0, 0);
 
         addListener(new InputListener(){
             @Override
@@ -149,12 +149,9 @@ public class GameStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         controlStage.act(delta);
-        if(duringWave) waveTimer += delta;
-        /*if(defendedbase.overlaps(alien)){                             //TODO normálisan megoldani az életlevonást
-            decreaseHealth();
-            System.out.println("Hinnye támad");
-            alien.remove();
-        }*/
+        if(duringWave){
+            waveTimer += delta;
+        }
 
 
         //System.out.println("wave: " + waveTimer);
@@ -173,6 +170,9 @@ public class GameStage extends MyStage {
         rem.clear();
         //System.out.println(enemiesQueue);
         //System.out.println(Moneys+" moneys");
+
+        if(duringWave && enemiesAlive == 0) endWave();
+
     }
 
 
@@ -244,6 +244,7 @@ public class GameStage extends MyStage {
                     enemiesQueue.add(new EnemyAdder(new GreenAlien(this), timing));
                     break;
             }
+            enemiesAlive++;
     }
 
     public void decreaseHealth() {

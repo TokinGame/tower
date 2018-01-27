@@ -53,7 +53,11 @@ public abstract class Enemy extends OneSpriteStaticActor {
 
     public void damaged(int hitpoints){
         health -= hitpoints;
-        if(health < 1) remove();
+        if(health < 1) {
+            stage.enemiesAlive--;
+            remove();
+
+        }
     }
 
 
@@ -119,6 +123,7 @@ public abstract class Enemy extends OneSpriteStaticActor {
         if(getX()> Globals.WORLD_WIDTH-240 && getY() < 160){
             stage.decreaseHealth();
             //System.out.println("Bement a köcsög");
+            stage.enemiesAlive--;
             remove();
         }
     }
