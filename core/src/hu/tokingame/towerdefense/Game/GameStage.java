@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.ArrayList;
 
 import hu.tokingame.towerdefense.BuildingBlocks.BuildingBlock;
+import hu.tokingame.towerdefense.BuildingBlocks.ShortRangeTurret;
 import hu.tokingame.towerdefense.BuildingBlocks.Turret;
 import hu.tokingame.towerdefense.BuildingBlocks.Wall;
 import hu.tokingame.towerdefense.Enemy.BlueAlien;
@@ -193,7 +194,7 @@ public class GameStage extends MyStage {
                                 addActor(new MoneySpentText("-"+Globals.costs[1]+" Ft", game.getLabelStyle_Red(), x, y));
                                 break;
                             case OTHERTURRET:
-                                k = new Turret(x, y, this);
+                                k = new ShortRangeTurret(x, y, this);
                                 Moneys -= Globals.costs[2];
                                 addActor(new MoneySpentText("-"+Globals.costs[2]+" Ft", game.getLabelStyle_Red(), x, y));
                                 break;
@@ -203,16 +204,22 @@ public class GameStage extends MyStage {
                         System.out.println("placed " + x + " : " + y);
                     } else
                         controlStage.showMessage("Nem zárhatod el az egyetlen utat");
-                }else if(map[x][y].getClass().isInstance(new Turret(-1,-1, this))){
+                }else if(map[x][y].getClass().isAssignableFrom(Turret.class)){
+
                     map[x][y].upgrade();
                     Moneys-=Globals.costs[1];
                     controlStage.showMessage("Lövegtorony fejlesztve");
                     addActor(new MoneySpentText("-"+Globals.costs[1]+" Ft", game.getLabelStyle_Red(), x, y));
-                }else if(map[x][y].getClass().isInstance(new Turret(-1,-1, this))){
+
+
+                }else if(map[x][y].getClass().isAssignableFrom(ShortRangeTurret.class)){
+
                     map[x][y].upgrade();
                     Moneys-=Globals.costs[2];
                     addActor(new MoneySpentText("-"+Globals.costs[2]+" Ft", game.getLabelStyle_Red(), x, y));
                     controlStage.showMessage("Lövegtorony fejlesztve");
+
+
                 }else controlStage.showMessage("Ide nem építhetsz");
             } else controlStage.showMessage("Nincs elég pénzed");
         } else controlStage.showMessage("Kör közben nem építhetsz");
