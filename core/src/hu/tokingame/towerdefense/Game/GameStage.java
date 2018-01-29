@@ -6,8 +6,11 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -27,6 +30,7 @@ import hu.tokingame.towerdefense.Game.UI.MoneySpentText;
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Enemy.Alien;
 import hu.tokingame.towerdefense.Globals.Globals;
+import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyActor;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.tokingame.towerdefense.MyGdxGame;
@@ -42,6 +46,8 @@ public class GameStage extends MyStage {
     PathFinder pathFinder;
     WaveLoader waveLoader;
     Thread pathThread, loadThread;
+
+    private Alien testAlien;
 
 
     public boolean duringWave = false;
@@ -125,7 +131,22 @@ public class GameStage extends MyStage {
         });
 
 
+        testAlien = new Alien(this, Assets.manager.get(Assets.BLUE_ALIEN), 50, 1){
+            @Override
+            public void init() {
+                super.init();
+            }
+        };
+/*
+        addListener(new ClickListener(){
+            @Override
+            public boolean mouseMoved(InputEvent event, float x, float y) {
+                testAlien.setPosition(x,y);
+                return super.mouseMoved(event, x, y);
+            }
 
+        });
+*/
     }
 
 
@@ -145,10 +166,26 @@ public class GameStage extends MyStage {
         controlStage.draw();
     }
 
+    ArrayList<Turret> turrets = new ArrayList<Turret>();
+
     @Override
     public void act(float delta) {
         super.act(delta);
         controlStage.act(delta);
+        for (Actor turret: getActors()) {
+            if(turret instanceof Turret){
+                turrets.add((Turret) turret);
+            }
+        }
+
+        for (Actor actor: getActors()) {
+            if(actor instanceof Alien){
+                for (Turret turret: turrets) {
+                    System.out.println(((Alien) actor).getMyOverlappedShapeKeys(turret));
+                }
+            }
+        }
+
         if(duringWave){
             waveTimer += delta;
         }

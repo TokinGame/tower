@@ -59,9 +59,9 @@ public class BlockSelector extends Group {
             }
         });
 
-        addActor(b0 = new BlockSelectButton(25, 275, this, 0));
-        addActor(b1 = new BlockSelectButton(25, 150, this, 1));
-        addActor(b2 = new BlockSelectButton(25, 25, this, 2));
+        addActor(b0 = new BlockSelectButton(25, 275, this, 0, Assets.manager.get(Assets.WALL_TEXTURE)));
+        addActor(b1 = new BlockSelectButton(25, 150, this, 1, Assets.manager.get(Assets.TURRET_TEXTURE)));
+        addActor(b2 = new BlockSelectButton(25, 25, this, 2, Assets.manager.get(Assets.TURRET_TEXTURE)));
 
     }
 

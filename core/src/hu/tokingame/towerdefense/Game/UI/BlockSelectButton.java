@@ -15,8 +15,8 @@ import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class BlockSelectButton extends OneSpriteStaticActor {
     BlockSelector blockSelector;
     private final int id;
-    public BlockSelectButton(float x, float y, BlockSelector bs, int i) {
-        super(Assets.manager.get(Assets.WALL_TEXTURE));
+    public BlockSelectButton(float x, float y, BlockSelector bs, int i, Texture texture) {
+        super(texture);
         blockSelector = bs;
         setPosition(x, y);
         setSize(200, 100);

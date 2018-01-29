@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import hu.tokingame.towerdefense.Game.GameStage;
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyActor;
+import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyCircle;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 /**
@@ -17,6 +18,8 @@ public class Turret extends BuildingBlock {
 
     public Turret(float x, float y, GameStage gameStage) {
         super(Assets.manager.get(Assets.TURRET_TEXTURE), x, y);
+        setOrigintoCenter();
+        addCollisionShape("Range",new MyCircle((float) (Math.sqrt(getWidth()* range * getHeight()* range) / 2), 0, 0, getOriginX(), getOriginY(), getX(), getY(), true));
         System.out.println("range "+range+" damage " +damage);
     }
 
@@ -28,5 +31,10 @@ public class Turret extends BuildingBlock {
         if(damage%5 == 0) range++;
         System.out.println("UPGRADED");
         System.out.println("range "+range+" damage " +damage);
+    }
+
+
+    public int getDamage() {
+        return damage;
     }
 }
