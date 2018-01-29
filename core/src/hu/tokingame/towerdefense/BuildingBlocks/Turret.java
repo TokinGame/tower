@@ -19,7 +19,7 @@ public class Turret extends BuildingBlock {
     public Turret(float x, float y, GameStage gameStage) {
         super(Assets.manager.get(Assets.TURRET_TEXTURE), x, y);
         setOrigintoCenter();
-        addCollisionShape("Range",new MyCircle((float) (Math.sqrt(getWidth()* range * getHeight()* range) / 2), 0, 0, getOriginX(), getOriginY(), getX(), getY(), true));
+        addCollisionShape("Range",new MyCircle((float) (Math.sqrt(getWidth()* range * getHeight()* range) / 2), 0, 0, getOriginX(), getOriginY(), getX()+getWidth()/2, getY()+getHeight()/2, false));
         System.out.println("range "+range+" damage " +damage);
     }
 
@@ -28,7 +28,11 @@ public class Turret extends BuildingBlock {
     public void upgrade() {
         super.upgrade();
         damage++;
-        if(damage%5 == 0) range++;
+        if(damage%5 == 0) {
+            range++;
+            removeCollisionShape("Range");
+            addCollisionShape("Range",new MyCircle((float) (Math.sqrt(getWidth()* range * getHeight()* range) / 2), 0, 0, getOriginX(), getOriginY(), getX()+getWidth()/2, getY()+getHeight()/2, false));
+        }
         System.out.println("UPGRADED");
         System.out.println("range "+range+" damage " +damage);
     }

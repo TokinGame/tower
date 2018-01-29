@@ -14,11 +14,11 @@ import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyRectangle;
 
 public class Alien extends Enemy {
 
-    public Alien(GameStage gameStage, Texture texture, int hp, float speed) {
-        super(texture, gameStage, hp, speed);
-        this.setSize(80,80);
+    public Alien(GameStage gameStage, Texture texture, int hp, float speeds) {
+        super(texture, gameStage, hp, speeds);
+        this.setSize(Globals.GRID_WIDTH-10,Globals.GRID_HEIGHT-10);
         this.setPosition(15, Globals.WORLD_HEIGHT-getHeight()-5);
-        // TODO: 1/29/2018 Szar helyen van 
+        // TODO: 1/29/2018 Szar helyen van
         addCollisionShape(this.toString(),new MyRectangle(getWidth(),getHeight(),0,0,getOriginX(), getOriginY(), getRotation(), 0, true));
 
     }

@@ -13,7 +13,7 @@ public class BuildingBlock extends OneSpriteStaticActor {
     public BuildingBlock(Texture texture, float x, float y) {
         super(texture);
         place(x, y);
-        setSize(90,90);
+        setSize(Globals.GRID_WIDTH,Globals.GRID_HEIGHT);
     }
 
     @Override
