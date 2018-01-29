@@ -1,5 +1,8 @@
 package hu.tokingame.towerdefense.Globals;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
+
 import java.util.ArrayList;
 
 import hu.tokingame.towerdefense.BuildingBlocks.BuildingBlock;
@@ -38,9 +41,15 @@ public class Globals {
 
     public static int EntryPoint = -1;
 
+    public static final Preferences prefs = Gdx.app.getPreferences("main");
 
     public static ArrayList<Step> currentSteps;
 
+    public static boolean soundFX = true, music = prefs.getBoolean("music",true);
+
+    public static Preferences getPrefs(){
+        return prefs;
+    }
 
 
 
