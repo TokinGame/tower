@@ -29,6 +29,8 @@ abstract public class MyActor extends Actor implements InitableInterface {
     protected Circle circle = new Circle();
     protected HashMap<String, MyShape> shapeMap;
 
+    protected static float debugPointSize = 30f;
+
     public HashMap<String, MyShape> getCollisionShapeMap(){
         return shapeMap;
     }
@@ -77,6 +79,16 @@ abstract public class MyActor extends Actor implements InitableInterface {
         return null;
     }
 
+
+    public static float getDebugPointSize() {
+        return debugPointSize;
+    }
+
+    public static void setDebugPointSize(float debugPointSize) {
+        MyActor.debugPointSize = debugPointSize;
+    }
+
+
     public static void drawDebugLines(Vector2[] v, ShapeRenderer shapes){
         for (int i = 0; i < v.length - 1; i++) {
             shapes.line(v[i].x, v[i].y, v[i + 1].x, v[i + 1].y);
@@ -87,19 +99,44 @@ abstract public class MyActor extends Actor implements InitableInterface {
     @Override
     protected void drawDebugBounds(ShapeRenderer shapes) {
         super.drawDebugBounds(shapes);
-        if (shapeMap!=null) {
-            for (MyShape shape:shapeMap.values()) {
-                float w = 0.8f + (float)Math.cos(elapsedTime * 10f)/5f;
-                shapes.setColor(new Color(w, w, w, w));
-                drawDebugLines(shape.getCorners(), shapes);
+
+        if (shapeMap != null) {
+            switch ((((int) ((elapsedTime) * 4)) % 4)) {
+                case 0:
+                    shapes.setColor(Color.WHITE);
+                    break;
+                case 1:
+                    shapes.setColor(Color.GRAY);
+                    break;
+                case 2:
+                    shapes.setColor(Color.DARK_GRAY);
+                    break;
+            }
+            if (((((int) ((elapsedTime) * 4)) % 4)) < 3) {
+                for (MyShape shape : shapeMap.values()) {
+                    if (shape.active) {
+                        drawDebugLines(shape.getCorners(), shapes);
+                        shapes.circle(shape.originX + shape.centerX + shape.offsetX, shape.originY + shape.centerY + shape.offsetY, getWidth() / debugPointSize, 7);
+                        shapes.circle(shape.realCenterX, shape.realCenterY, getWidth() / debugPointSize, 3);
+                    }
+                }
             }
         }
+        shapes.setColor(Color.GREEN);
+        shapes.circle(getOriginX() + getX(), getOriginY() + getY(), getWidth() / debugPointSize, 3);
     }
 
 
     public MyActor() {
         super();
         debug();
+    }
+
+    @Override
+    public void init() {
+        //setSize(1,1);
+        //System.out.println(getWidth());
+        setOrigintoCenter();
     }
 
     @Override
@@ -111,14 +148,37 @@ abstract public class MyActor extends Actor implements InitableInterface {
     @Override
     protected void sizeChanged() {
         super.sizeChanged();
-        setOrigin(getWidth() / 2, getHeight() / 2);
+        //setOrigin(getWidth() / 2, getHeight() / 2);
         rectangle.setSize(getWidth(), getHeight());
         circle.setRadius((getWidth() + getHeight()) / 2f);
+        /*
         if (shapeMap!=null) {
             for (MyShape shape:shapeMap.values()) {
                 shape.setSize(getWidth(),getHeight());
             }
         }
+        */
+    }
+
+    public void setOrigintoCenter(){
+        setOrigin(getWidth()/2, getHeight()/2);
+    }
+
+    @Override
+    public void setSize(float width, float height) {
+        float w = width / getWidth();
+        float h = height / getHeight();
+        if (shapeMap!=null) {
+            for (MyShape shape : shapeMap.values()) {
+                shape.setSize(shape.getWidth() * w, shape.getHeight() * h);
+                shape.offsetX *= w;
+                shape.offsetY *= h;
+                shape.originX *= w;
+                shape.originY *= h;
+            }
+        }
+        setOrigin(getOriginX() *w, getOriginY() *h);
+        super.setSize(width, height);
     }
 
     @Override
@@ -174,8 +234,10 @@ abstract public class MyActor extends Actor implements InitableInterface {
         if (actorB.getCollisionShapeMap() == null) return false;
         for(MyShape shapeA : actorA.getCollisionShapeMap().values()){
             for(MyShape shapeB : actorB.getCollisionShapeMap().values()){
-                if(shapeA.overlaps(shapeB)){
-                    return true;
+                if (shapeA.active && shapeB.active) {
+                    if (shapeA.overlaps(shapeB)) {
+                        return true;
+                    }
                 }
             }
         }
@@ -186,8 +248,10 @@ abstract public class MyActor extends Actor implements InitableInterface {
         ArrayList<String> strings = new ArrayList<String>();
         for(Map.Entry shapeA : actorA.getCollisionShapeMap().entrySet()){
             for(Map.Entry shapeB : actorB.getCollisionShapeMap().entrySet()){
-                if(((MyShape)shapeA.getValue()).overlaps((MyShape)shapeB.getValue())){
-                    strings.add((String)(shapeA.getKey()));
+                if (((MyShape) shapeA.getValue()).active && ((MyShape) shapeB.getValue()).active) {
+                    if (((MyShape) shapeA.getValue()).overlaps((MyShape) shapeB.getValue())) {
+                        strings.add((String) (shapeA.getKey()));
+                    }
                 }
             }
         }
@@ -210,8 +274,10 @@ abstract public class MyActor extends Actor implements InitableInterface {
         ArrayList<MyShape> strings = new ArrayList<MyShape>();
         for(Map.Entry shapeA : actorA.getCollisionShapeMap().entrySet()){
             for(Map.Entry shapeB : actorB.getCollisionShapeMap().entrySet()){
-                if(((MyShape)shapeA.getValue()).overlaps((MyShape)shapeB.getValue())){
-                    strings.add((MyShape)(shapeA.getValue()));
+                if (((MyShape) shapeA.getValue()).active && ((MyShape) shapeB.getValue()).active) {
+                    if (((MyShape) shapeA.getValue()).overlaps((MyShape) shapeB.getValue())) {
+                        strings.add((MyShape) (shapeA.getValue()));
+                    }
                 }
             }
         }
@@ -234,8 +300,10 @@ abstract public class MyActor extends Actor implements InitableInterface {
         ArrayList<Map.Entry<String, MyShape>> strings = new ArrayList<Map.Entry<String, MyShape>>();
         for(Map.Entry shapeA : actorA.getCollisionShapeMap().entrySet()){
             for(Map.Entry shapeB : actorB.getCollisionShapeMap().entrySet()){
-                if(((MyShape)shapeA.getValue()).overlaps((MyShape)shapeB.getValue())){
-                    strings.add((Map.Entry<String, MyShape>)(shapeA));
+                if (((MyShape) shapeA.getValue()).active && ((MyShape) shapeB.getValue()).active) {
+                    if (((MyShape) shapeA.getValue()).overlaps((MyShape) shapeB.getValue())) {
+                        strings.add((Map.Entry<String, MyShape>) (shapeA));
+                    }
                 }
             }
         }
@@ -274,32 +342,247 @@ abstract public class MyActor extends Actor implements InitableInterface {
 
 
 
-    public void fitToViewportRealWorldSize(){
-        throw new NotImplementedException();
-    }
-    public void fitToViewportMinWorldSize(){
-        throw new NotImplementedException();
-    }
-    public void stretchToViewportRealWorldSizeWithoutBlackBars(){
-        throw new NotImplementedException();
-    }
-    public void stretchToViewportMinWorldSizeWithoutBlackBars(){
-        throw new NotImplementedException();
-    }
-    public void fitToViewportRealWorldSizeWithoutBlackBars(){
+    public void fitToViewportRealWorldSizeWithBlackBars() {
         Stage s;
-        ExtendViewport ev;
-        if ((s = getStage()) != null){
-            ev = (ExtendViewport)s.getViewport();
-            setSize(ev.getWorldHeight()*getWidth()/getHeight(), ev.getWorldHeight());
-            if (getWidth() < ev.getWorldWidth()){
-                float mul = ev.getWorldWidth()/getWidth();
-                setSize(getWidth()*mul, getHeight()*mul);
+        Viewport ev;
+        if ((s = getStage()) != null) {
+            ev = s.getViewport();
+            float mulw = ev.getWorldWidth() / getWidth();
+            float mulh = ev.getWorldHeight() / getHeight();
+            if (mulw < mulh) {
+                setSize(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSize(getWidth() * mulh, getHeight() * mulh);
             }
         }
     }
+
+    public void fitToViewportMinWorldSizeWithBlackBars(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            float mulw = ev.getMinWorldWidth() / getWidth();
+            float mulh = ev.getMinWorldHeight() / getHeight();
+            if (mulw < mulh) {
+                setSize(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSize(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+
+    public void fitToViewportMaxWorldSizeWithBlackBars(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            float mulw = ev.getMaxWorldWidth() / getWidth();
+            float mulh = ev.getMaxWorldHeight() / getHeight();
+            if (mulw < mulh) {
+                setSize(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSize(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+    public void stretchToViewportRealWorldSizeWithoutBlackBars(){
+        Stage s;
+        Viewport ev;
+        if ((s = getStage()) != null) {
+            ev = s.getViewport();
+            setSize(ev.getWorldWidth(), ev.getWorldHeight());
+        }
+    }
+
+    public void stretchToViewportMinWorldSizeWithoutBlackBars(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            setSize(ev.getMinWorldWidth(), ev.getMinWorldHeight());
+        }
+    }
+
+
+    public void stretchToViewportMaxWorldSizeWithoutBlackBars(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            setSize(ev.getMaxWorldWidth(), ev.getMaxWorldHeight());
+        }
+    }
+
+    public void fitToViewportRealWorldSizeWithoutBlackBars(){
+        Stage s;
+        Viewport ev;
+        if ((s = getStage()) != null) {
+            ev = s.getViewport();
+            float mulw = ev.getWorldWidth() / getWidth();
+            float mulh = ev.getWorldHeight() / getHeight();
+            if (mulw > mulh) {
+                setSize(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSize(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
     public void fitToViewportMinWorldSizeWithoutBlackBars(){
-        throw new NotImplementedException();
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            float mulw = ev.getMinWorldWidth() / getWidth();
+            float mulh = ev.getMinWorldHeight() / getHeight();
+            if (mulw > mulh) {
+                setSize(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSize(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+
+    public void fitToViewportMaxWorldSizeWithoutBlackBars(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            float mulw = ev.getMaxWorldWidth() / getWidth();
+            float mulh = ev.getMaxWorldHeight() / getHeight();
+            if (mulw > mulh) {
+                setSize(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSize(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+
+
+
+    public void fitToViewportRealWorldSizeWithBlackBarsByOrigin() {
+        Stage s;
+        Viewport ev;
+        if ((s = getStage()) != null) {
+            ev = s.getViewport();
+            float mulw = ev.getWorldWidth() / getWidth();
+            float mulh = ev.getWorldHeight() / getHeight();
+            if (mulw < mulh) {
+                setSizeByOrigin(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSizeByOrigin(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+    public void fitToViewportMinWorldSizeWithBlackBarsByOrigin(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            float mulw = ev.getMinWorldWidth() / getWidth();
+            float mulh = ev.getMinWorldHeight() / getHeight();
+            if (mulw < mulh) {
+                setSizeByOrigin(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSizeByOrigin(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+
+    public void fitToViewportMaxWorldSizeWithBlackBarsByOrigin(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            float mulw = ev.getMaxWorldWidth() / getWidth();
+            float mulh = ev.getMaxWorldHeight() / getHeight();
+            if (mulw < mulh) {
+                setSizeByOrigin(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSizeByOrigin(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+    public void stretchToViewportRealWorldSizeWithoutBlackBarsByOrigin(){
+        Stage s;
+        Viewport ev;
+        if ((s = getStage()) != null) {
+            ev = s.getViewport();
+            setSizeByOrigin(ev.getWorldWidth(), ev.getWorldHeight());
+        }
+    }
+
+    public void stretchToViewportMinWorldSizeWithoutBlackBarsByOrigin(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            setSizeByOrigin(ev.getMinWorldWidth(), ev.getMinWorldHeight());
+        }
+    }
+
+
+    public void stretchToViewportMaxWorldSizeWithoutBlackBarsByOrigin(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            setSizeByOrigin(ev.getMaxWorldWidth(), ev.getMaxWorldHeight());
+        }
+    }
+
+    public void fitToViewportRealWorldSizeWithoutBlackBarsByOrigin(){
+        Stage s;
+        Viewport ev;
+        if ((s = getStage()) != null) {
+            ev = s.getViewport();
+            float mulw = ev.getWorldWidth() / getWidth();
+            float mulh = ev.getWorldHeight() / getHeight();
+            if (mulw > mulh) {
+                setSizeByOrigin(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSizeByOrigin(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+    public void fitToViewportMinWorldSizeWithoutBlackBarsByOrigin(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            float mulw = ev.getMinWorldWidth() / getWidth();
+            float mulh = ev.getMinWorldHeight() / getHeight();
+            if (mulw > mulh) {
+                setSizeByOrigin(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSizeByOrigin(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
+    }
+
+
+    public void fitToViewportMaxWorldSizeWithoutBlackBarsByOrigin(){
+        Stage s;
+        ExtendViewport ev;
+        if ((s = getStage()) != null) {
+            ev = (ExtendViewport)s.getViewport();
+            float mulw = ev.getMaxWorldWidth() / getWidth();
+            float mulh = ev.getMaxWorldHeight() / getHeight();
+            if (mulw > mulh) {
+                setSizeByOrigin(getWidth() * mulw, getHeight() * mulw);
+            } else {
+                setSizeByOrigin(getWidth() * mulh, getHeight() * mulh);
+            }
+        }
     }
 
     public void setPositionCenterOfActorToCenterOfViewport(){
@@ -314,18 +597,25 @@ abstract public class MyActor extends Actor implements InitableInterface {
 
     @Override
     public void setOriginX(float originX) {
-        super.setOriginX(originX);
+        setOrigin(originX, getOriginY());
         originChanged();
     }
 
     @Override
     public void setOriginY(float originY) {
-        super.setOriginY(originY);
+        setOrigin(getOriginX(),originY);
         originChanged();
     }
 
     @Override
     public void setOrigin(float originX, float originY) {
+        if (shapeMap != null) {
+            for (MyShape shape : getCollisionShapeMap().values()) {
+                //shape.setOriginFromCenter(shape.originX + (originX-getOriginX()) + shape.offsetX, shape.originY + (originY-getOriginY())+shape.offsetY);
+                //shape.setOriginFromCenter(shape.originX + (originX-getOriginX()) + shape.offsetX, shape.originY + (originY-getOriginY())+shape.offsetY);
+                shape.setOrigin(originX, originY);
+            }
+        }
         super.setOrigin(originX, originY);
         originChanged();
     }
@@ -339,4 +629,51 @@ abstract public class MyActor extends Actor implements InitableInterface {
     protected void originChanged(){
 
     }
+
+    public boolean isInFrustum(){
+        MyStage m = (MyStage)getStage();
+        return m.isActorShowing(this);
+    }
+    public boolean isInFrustum(float zoom){
+        MyStage m = (MyStage)getStage();
+        return m.isActorShowing(this, zoom);
+    }
+
+    public void setWidthWhithAspectRatio(float width){
+        setSize(width, getHeight()*(width/getWidth()));
+    }
+
+    public void seHeightWhithAspectRatio(float height){
+        setSize(getWidth()*(height/getHeight()), height);
+    }
+
+    public void magnify(float mul){
+        setSize(getWidth()*mul, getHeight()*mul);
+    }
+
+    public void setSizeByOrigin(float width, float height) {
+        setPosition(getX() + (getWidth() - width) / (getWidth() / getOriginX()), getY() + (getHeight() - height) / (getHeight() / getOriginY()));
+        setSize(width, height);
+    }
+
+    public void magnifyByOrigin(float mul){
+        setSizeByOrigin(getWidth()*mul, getHeight()*mul);
+    }
+
+    public void setWidthWhithAspectRatioByOrigin(float width){
+        setSizeByOrigin(width, getHeight()*(width/getWidth()));
+    }
+
+    public void seHeightWhithAspectRatioByOrigin(float height){
+        setSizeByOrigin(getWidth()*(height/getHeight()), height);
+    }
+
+    public void setWidthByOrigin(float width) {
+        setSizeByOrigin(width, getHeight());
+    }
+
+    public void setHeightByOrigin(float height) {
+        setSizeByOrigin(getWidth(), getHeight());
+    }
+
 }

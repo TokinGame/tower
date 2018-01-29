@@ -2,6 +2,7 @@ package hu.tokingame.towerdefense.MyBaseClasses.Scene2D;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -9,19 +10,39 @@ import com.badlogic.gdx.math.Vector2;
  */
 
 public class OffsetSprite extends Sprite {
-    private Vector2 offsetVector;
-    static protected float PI = (float) Math.PI;
+    protected Vector2 offsetVector;
 
+    public boolean visible = true;
+
+    static protected float PI = (float) Math.PI;
 
     public OffsetSprite(Texture texture, float xOffset, float yOffset) {
         super(texture);
         offsetVector = new Vector2(xOffset, yOffset);
     }
 
+    public OffsetSprite(TextureRegion texture, float xOffset, float yOffset) {
+        super(texture);
+        offsetVector = new Vector2(xOffset, yOffset);
+    }
+
+
+    public OffsetSprite(Texture texture, float xOffset, float yOffset, float width, float height) {
+        super(texture);
+        offsetVector = new Vector2(xOffset, yOffset);
+        setSize(width, height);
+    }
+
+    public OffsetSprite(TextureRegion texture, float xOffset, float yOffset, float width, float height) {
+        super(texture);
+        offsetVector = new Vector2(xOffset, yOffset);
+        setSize(width, height);
+    }
+
+
     public Vector2 getOffsetVector() {
         return offsetVector;
     }
-
 
     public Vector2[] getCorners() {
 
@@ -44,6 +65,14 @@ public class OffsetSprite extends Sprite {
         vector2[2] = new Vector2( rotCenter.x + radius * (float) Math.cos(radrot + PI - angle),  rotCenter.y + radius * (float) Math.sin(radrot + PI - angle));
         vector2[3] = new Vector2( rotCenter.x + radius * (float) Math.cos(radrot + PI + angle),  rotCenter.y + radius * (float) Math.sin(radrot + PI + angle));
         return vector2;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 
 
