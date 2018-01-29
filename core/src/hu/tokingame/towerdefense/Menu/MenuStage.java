@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import javax.xml.bind.annotation.XmlElementDecl;
+
 import hu.tokingame.towerdefense.Credits.CreditsScreen;
 import hu.tokingame.towerdefense.Game.GameScreen;
 import hu.tokingame.towerdefense.Globals.Globals;
@@ -40,7 +42,7 @@ public class MenuStage extends MyStage {
             @Override
             public void init() {
                 super.init();
-                setPosition(Globals.WORLD_WIDTH/2-this.getWidth()/2, Globals.WORLD_HEIGHT/2-this.getHeight()/2);
+                setPosition(10, Globals.WORLD_HEIGHT-this.getHeight()-10);
                 addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
@@ -50,6 +52,52 @@ public class MenuStage extends MyStage {
                 });
             }
         });
+
+        addActor(new MyTextButton("Hogyan Játssz",game.getTextButtonStyle()){
+            @Override
+            public void init() {
+                super.init();
+                setPosition(10, (Globals.WORLD_HEIGHT/5-this.getHeight()/5)*3);
+                addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        game.setScreen(new HowToPlayScreen(game));
+                    }
+                });
+            }
+        });
+
+        addActor(new MyTextButton("Készítők",game.getTextButtonStyle()){
+            @Override
+            public void init() {
+                super.init();
+                setPosition(10, (Globals.WORLD_HEIGHT/5-this.getHeight()/5)*2);
+                addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        game.setScreen(new CreditsScreen(game));
+                    }
+                });
+            }
+        });
+
+        addActor(new MyTextButton("Beállítások",game.getTextButtonStyle()){
+            @Override
+            public void init() {
+                super.init();
+                setPosition(10, Globals.WORLD_HEIGHT/5-this.getHeight()/5);
+                addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        game.setScreen(new SettingsScreen(game));
+                    }
+                });
+            }
+        });
+
         addActor(new MyTextButton("Kilépés",game.getTextButtonStyle()){
             @Override
             public void init() {
@@ -63,48 +111,9 @@ public class MenuStage extends MyStage {
                 });
             }
         });
-        addActor(new MyTextButton("Beállítások",game.getTextButtonStyle()){
-            @Override
-            public void init() {
-                super.init();
-                setPosition(Globals.WORLD_WIDTH-getWidth()-10, 10);
-                addListener(new ClickListener(){
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        super.clicked(event, x, y);
-                        game.setScreen(new SettingsScreen(game));
-                    }
-                });
-            }
-        });
-        addActor(new MyTextButton("Hogyan Játssz",game.getTextButtonStyle()){
-            @Override
-            public void init() {
-                super.init();
-                setPosition(Globals.WORLD_WIDTH-getWidth()-10, 110);
-                addListener(new ClickListener(){
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        super.clicked(event, x, y);
-                        game.setScreen(new HowToPlayScreen(game));
-                    }
-                });
-            }
-        });
-        addActor(new MyTextButton("Készítők",game.getTextButtonStyle()){
-            @Override
-            public void init() {
-                super.init();
-                setPosition(10, 110);
-                addListener(new ClickListener(){
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        super.clicked(event, x, y);
-                        game.setScreen(new CreditsScreen(game));
-                    }
-                });
-            }
-        });
+
+
+
 
     }
 
