@@ -166,11 +166,12 @@ public class GameStage extends MyStage {
 
             for(Turret turret: turrets){
                 for (Enemy enemy: enemies) {
-                    System.out.println(turrets);
+                    /*System.out.println(turrets);
                     System.out.println(enemies);
-                    System.out.println(turret.getOtherOverlappedShapeKeys(enemy));
+                    System.out.println(turret.getOtherOverlappedShapeKeys(enemy));*/
                     if(turret.getOtherOverlappedShapeKeys(enemy).contains("Enemy")){
-                        enemy.takeDamage(turret.getDamage());
+                        //enemy.takeDamage(turret.getDamage());
+                        turret.shoot(enemy);
                     }
                 }
             }

@@ -103,19 +103,6 @@ public abstract class Enemy extends OneSpriteStaticActor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        /*if(health < 1){
-            System.out.println("lkasdjf;lkasdjflk;asdjfasldijfoiausdfjoasidfjoiauwejfuoiasdhfiuawehfiwsduafhewiaufhiuaswehfiu");
-            for(Action action: getActions()){
-                removeAction(action);
-            }
-            stage.enemiesAlive--;
-            stage.removeEnemy(this);
-            remove();
-        }*/
-
-
-
-
         if(stepsList != null){
             if(stepsList.size() >= 1){
                 if(time < MOVE_TIME) time += delta;
