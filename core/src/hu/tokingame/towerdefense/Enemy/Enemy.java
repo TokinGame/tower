@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import hu.tokingame.towerdefense.Game.GameStage;
 import hu.tokingame.towerdefense.Globals.Globals;
+import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyRectangle;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.tokingame.towerdefense.Globals.Globals.Step;
 
@@ -44,16 +45,18 @@ public abstract class Enemy extends OneSpriteStaticActor {
         // TODO: 1/17/2018 kell egy tömb, arraylist, vector vagy valami amiben benne vannak a lépések
         // pl ez:
         stepsList = new ArrayList<Globals.Step>();
-
-
         setStepsList(Globals.currentSteps);
-
+        addCollisionShape("Enemy", new MyRectangle(getWidth(),getHeight(),0,0,getOriginX(), getOriginY(), getRotation(), 0, true));
     }
 
 
     public void takeDamage(int hitpoints){
         System.out.println("rip: " + health + "      " + (health - hitpoints));
         health -= hitpoints;
+        if(health < 1){
+            clearActions();
+            remove();
+        }
     }
 
 
@@ -98,6 +101,10 @@ public abstract class Enemy extends OneSpriteStaticActor {
     public void act(float delta) {
         super.act(delta);
         if(health < 1){
+            System.out.println("lkasdjf;lkasdjflk;asdjfasldijfoiausdfjoasidfjoiauwejfuoiasdhfiuawehfiwsduafhewiaufhiuaswehfiu");
+            for(Action action: getActions()){
+                removeAction(action);
+            }
             stage.enemiesAlive--;
             stage.removeEnemy(this);
             remove();

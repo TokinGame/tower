@@ -157,22 +157,23 @@ public class GameStage extends MyStage {
         super.act(delta);
         controlStage.act(delta);
         turretTimer += delta;
-        if(turretTimer > 1){
+        if(turretTimer > 5){
             for (Actor turret: getActors()) {
-                if(turret instanceof Turret){
+                if(turret instanceof Turret && !turrets.contains(turret)){
                     turrets.add((Turret) turret);
                 }
             }
 
-            for(Enemy enemy: enemies){
-                for (Turret turret: turrets) {
-                    System.out.println(enemy.getMyOverlappedShapeKeys(turret));
-                    if(enemy.getMyOverlappedShapeKeys(turret).contains("GreenAlien")){
+            for(Turret turret: turrets){
+                for (Enemy enemy: enemies) {
+                    System.out.println(turrets);
+                    System.out.println(enemies);
+                    System.out.println(turret.getOtherOverlappedShapeKeys(enemy));
+                    if(turret.getOtherOverlappedShapeKeys(enemy).contains("Enemy")){
                         alien.takeDamage(turret.getDamage());
                     }
                 }
             }
-
             turretTimer = 0;
         }
 
