@@ -21,9 +21,9 @@ public class Turret extends BuildingBlock {
     private int range = 4, damage = 1;
     float timing = 1;
 
-    protected float moveAmount = 5;
-
     private float debugtimer = 2;
+
+    protected float moveAmount = 5;
 
     ShapeRenderer shapeRenderer;
 
