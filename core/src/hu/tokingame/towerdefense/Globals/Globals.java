@@ -12,6 +12,9 @@ import hu.tokingame.towerdefense.BuildingBlocks.BuildingBlock;
  */
 
 public class Globals {
+
+    public static final boolean DEBUG = false;
+
     public static final int WORLD_WIDTH = 1280;
     public static final int WORLD_HEIGHT = 720;
 

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.MyBaseClasses.Game.InitableInterface;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -129,7 +130,7 @@ abstract public class MyActor extends Actor implements InitableInterface {
 
     public MyActor() {
         super();
-        debug();
+        if(Globals.DEBUG) debug();
     }
 
     @Override

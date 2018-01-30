@@ -1,6 +1,8 @@
 package hu.tokingame.towerdefense.BuildingBlocks;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 
 import hu.tokingame.towerdefense.Enemy.Enemy;
 import hu.tokingame.towerdefense.Game.GameStage;
@@ -19,6 +21,10 @@ public class Turret extends BuildingBlock {
     private int range = 4, damage = 1;
     float timing = 1;
 
+    private float debugtimer = 2;
+
+    ShapeRenderer shapeRenderer;
+
     public Turret(float x, float y, GameStage gameStage, int r, int d) {
         super(Assets.manager.get(Assets.TURRET_TEXTURE), x, y);
         setOrigintoCenter();
@@ -26,6 +32,7 @@ public class Turret extends BuildingBlock {
         damage = d;
         addCollisionShape("Range",new MyCircle((float) (Math.sqrt(getWidth()* range * getHeight()* range) / 2), 0, 0, getOriginX(), getOriginY(), getX()+getWidth()/2, getY()+getHeight()/2, false));
         System.out.println("range "+range+" damage " +damage);
+
 
     }
 
@@ -49,6 +56,7 @@ public class Turret extends BuildingBlock {
         }
         System.out.println("UPGRADED");
         System.out.println("range "+range+" damage " +damage);
+        debugtimer = 2;
     }
 
     public void shoot(Enemy enemy){
@@ -96,12 +104,28 @@ public class Turret extends BuildingBlock {
                 this.setY(this.getY() - 10);
             }
 
+            if(debugtimer > 0) {
+                debugtimer -= delta;
+                System.out.println("debug drawn for range");
+                //drawDebugLines(new Vector2[0], shapeRenderer);
+
+            }
+
+            //drawDebugBounds(shapeRenderer);
+
+
 
         }
 
         @Override
         public void init() {
             super.init();
+            /*shapeRenderer = new ShapeRenderer(200);
+            shapeRenderer.setProjectionMatrix();
+            shapeRenderer.begin();
+            shapeRenderer.setColor(1, 1, 0, 1);
+            shapeRenderer.circle(getX(), getY(), (float) (Math.sqrt(getWidth()* range * getHeight()* range) / 2));*/
+            //shapeRenderer.end();
         }
     }
 }
