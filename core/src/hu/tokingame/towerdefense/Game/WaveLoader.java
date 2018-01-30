@@ -1,8 +1,10 @@
 package hu.tokingame.towerdefense.Game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
@@ -30,8 +32,7 @@ public class WaveLoader implements Runnable {
 
     public void load(int l){
         try {
-            FileInputStream fis = new FileInputStream("Waves/"+l+".txt");
-            InputStreamReader isr = new InputStreamReader(fis);
+            InputStreamReader isr = new InputStreamReader(Gdx.files.internal("Waves/"+l+".txt").read());
             BufferedReader br = new BufferedReader(isr);
             //gameStage.nextMoney(new Integer(br.readLine()));
             String k[] = br.readLine().split(" ");
