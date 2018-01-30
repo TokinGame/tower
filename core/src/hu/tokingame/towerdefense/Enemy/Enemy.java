@@ -31,6 +31,8 @@ public abstract class Enemy extends OneSpriteStaticActor {
 
     protected int health = 1;
 
+    protected boolean flaggedForRemoval = false;
+
     ArrayList<Globals.Step> stepsList;
 
     public void setStepsList(ArrayList<Step> stepsList) {
@@ -54,8 +56,9 @@ public abstract class Enemy extends OneSpriteStaticActor {
         System.out.println("rip: " + health + "      " + (health - hitpoints));
         health -= hitpoints;
         if(health < 1){
-            clearActions();
-            remove();
+            //clearActions();
+            flaggedForRemoval = true;
+            System.out.println("meghótam");
         }
     }
 
@@ -100,7 +103,7 @@ public abstract class Enemy extends OneSpriteStaticActor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if(health < 1){
+        /*if(health < 1){
             System.out.println("lkasdjf;lkasdjflk;asdjfasldijfoiausdfjoasidfjoiauwejfuoiasdhfiuawehfiwsduafhewiaufhiuaswehfiu");
             for(Action action: getActions()){
                 removeAction(action);
@@ -108,7 +111,11 @@ public abstract class Enemy extends OneSpriteStaticActor {
             stage.enemiesAlive--;
             stage.removeEnemy(this);
             remove();
-        }
+        }*/
+
+
+
+
         if(stepsList != null){
             if(stepsList.size() >= 1){
                 if(time < MOVE_TIME) time += delta;
@@ -134,6 +141,13 @@ public abstract class Enemy extends OneSpriteStaticActor {
             //System.out.println("Bement a köcsög");
             stage.enemiesAlive--;
             remove();
+        }
+
+        if(flaggedForRemoval) {
+            stage.enemiesAlive--;
+            System.out.println("ded");
+            remove();
+
         }
     }
 }

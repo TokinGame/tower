@@ -170,7 +170,7 @@ public class GameStage extends MyStage {
                     System.out.println(enemies);
                     System.out.println(turret.getOtherOverlappedShapeKeys(enemy));
                     if(turret.getOtherOverlappedShapeKeys(enemy).contains("Enemy")){
-                        alien.takeDamage(turret.getDamage());
+                        enemy.takeDamage(turret.getDamage());
                     }
                 }
             }
