@@ -51,13 +51,9 @@ public abstract class Enemy extends OneSpriteStaticActor {
     }
 
 
-    public void damaged(int hitpoints){
+    public void takeDamage(int hitpoints){
+        System.out.println("rip: " + health + "      " + (health - hitpoints));
         health -= hitpoints;
-        if(health < 1) {
-            stage.enemiesAlive--;
-            remove();
-
-        }
     }
 
 
@@ -92,7 +88,6 @@ public abstract class Enemy extends OneSpriteStaticActor {
     public void moveTo(float x, float y){
         addAction(sequence(Actions.moveTo(x,y,MOVE_TIME), run(new Runnable() {
             public void run () {
-
             }
         })));
     }
@@ -102,25 +97,32 @@ public abstract class Enemy extends OneSpriteStaticActor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if(stepsList.size() >= 1){
-            if(time < MOVE_TIME) time += delta;
-            else if(stepsList.size() > steps){
-                time = 0;
-                switch (stepsList.get(steps)){
-                    case UP: moveUp(); break;
-                    case DOWN: moveDown(); break;
-                    case LEFT: moveLeft(); break;
-                    case RIGHT: moveRight(); break;
-                }
-                steps++;
-            }else{
-                for (Action action: getActions()) {
-                    removeAction(action);
+        if(health < 1){
+            stage.enemiesAlive--;
+            stage.removeEnemy(this);
+            remove();
+        }
+        if(stepsList != null){
+            if(stepsList.size() >= 1){
+                if(time < MOVE_TIME) time += delta;
+                else if(stepsList.size() > steps){
+                    time = 0;
+                    switch (stepsList.get(steps)){
+                        case UP: moveUp(); break;
+                        case DOWN: moveDown(); break;
+                        case LEFT: moveLeft(); break;
+                        case RIGHT: moveRight(); break;
+                    }
+                    steps++;
+                }else{
+                    for (Action action: getActions()) {
+                        removeAction(action);
+                    }
                 }
             }
         }
 
-        if(getX()> Globals.WORLD_WIDTH-240 && getY() < 160){
+        if(getX() > Globals.WORLD_WIDTH-240 && getY() < 160){
             stage.decreaseHealth();
             //System.out.println("Bement a köcsög");
             stage.enemiesAlive--;

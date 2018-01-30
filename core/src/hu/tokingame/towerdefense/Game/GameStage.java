@@ -55,6 +55,7 @@ public class GameStage extends MyStage {
     public boolean addHealthAfterRound = false;
 
     public float waveTimer = 0;
+    public float turretTimer = 0;
 
     public int roundsCount = 0;
 
@@ -129,24 +130,6 @@ public class GameStage extends MyStage {
                 return true;
             }
         });
-
-
-        testAlien = new Alien(this, Assets.manager.get(Assets.BLUE_ALIEN), 50, 1){
-            @Override
-            public void init() {
-                super.init();
-            }
-        };
-/*
-        addListener(new ClickListener(){
-            @Override
-            public boolean mouseMoved(InputEvent event, float x, float y) {
-                testAlien.setPosition(x,y);
-                return super.mouseMoved(event, x, y);
-            }
-
-        });
-*/
     }
 
 
@@ -172,18 +155,24 @@ public class GameStage extends MyStage {
     public void act(float delta) {
         super.act(delta);
         controlStage.act(delta);
-        for (Actor turret: getActors()) {
-            if(turret instanceof Turret){
-                turrets.add((Turret) turret);
-            }
-        }
-
-        for (Actor actor: getActors()) {
-            if(actor instanceof Alien){
-                for (Turret turret: turrets) {
-                    System.out.println(((Alien) actor).getMyOverlappedShapeKeys(turret));
+        turretTimer += delta;
+        if(turretTimer > 1){
+            for (Actor turret: getActors()) {
+                if(turret instanceof Turret){
+                    turrets.add((Turret) turret);
                 }
             }
+
+            for(Enemy enemy: enemies){
+                for (Turret turret: turrets) {
+                    System.out.println(enemy.getMyOverlappedShapeKeys(turret));
+                    if(enemy.getMyOverlappedShapeKeys(turret).contains("GreenAlien")){
+                        alien.takeDamage(turret.getDamage());
+                    }
+                }
+            }
+
+            turretTimer = 0;
         }
 
         if(duringWave){
@@ -210,6 +199,11 @@ public class GameStage extends MyStage {
 
         if(duringWave && enemiesAlive == 0) endWave();
 
+    }
+
+
+    public void removeEnemy(Enemy enemy){
+        enemies.remove(enemy);
     }
 
 
