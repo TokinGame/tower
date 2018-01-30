@@ -8,19 +8,10 @@ import hu.tokingame.towerdefense.Game.GameStage;
 
 public class ShortRangeTurret extends Turret {
 
-    private int range = 1, damage = 3;
 
     public ShortRangeTurret(float x, float y, GameStage gameStage) {
-        super(x, y, gameStage);
-        System.out.println("range "+range+" damage " +damage);
+        super(x, y, gameStage, 2, 3);
     }
 
 
-    @Override
-    public void upgrade() {
-        //super.upgrade();
-        damage++;
-        if(damage%5==0) range++;
-        System.out.println("range "+range+" damage " +damage);
-    }
 }

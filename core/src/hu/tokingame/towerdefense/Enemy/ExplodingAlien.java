@@ -26,6 +26,7 @@ public class ExplodingAlien extends Alien {
         if(getX() > explodePoint){
             System.out.println("Allahu akbar");
             stage.addActor(new Explosion(getX()-getWidth(), getY()-getHeight(), getWidth()*3));
+            stage.enemiesAlive--;
             remove();
         }
     }
