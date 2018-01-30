@@ -14,14 +14,25 @@ import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class Turret extends BuildingBlock {
 
-    private int range = 3, damage = 1;
+    private int range = 4, damage = 1;
     float timing = 1;
+
+    public Turret(float x, float y, GameStage gameStage, int r, int d) {
+        super(Assets.manager.get(Assets.TURRET_TEXTURE), x, y);
+        setOrigintoCenter();
+        range = r;
+        damage = d;
+        addCollisionShape("Range",new MyCircle((float) (Math.sqrt(getWidth()* range * getHeight()* range) / 2), 0, 0, getOriginX(), getOriginY(), getX()+getWidth()/2, getY()+getHeight()/2, false));
+        System.out.println("range "+range+" damage " +damage);
+
+    }
 
     public Turret(float x, float y, GameStage gameStage) {
         super(Assets.manager.get(Assets.TURRET_TEXTURE), x, y);
         setOrigintoCenter();
         addCollisionShape("Range",new MyCircle((float) (Math.sqrt(getWidth()* range * getHeight()* range) / 2), 0, 0, getOriginX(), getOriginY(), getX()+getWidth()/2, getY()+getHeight()/2, false));
         System.out.println("range "+range+" damage " +damage);
+
     }
 
 
