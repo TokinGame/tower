@@ -21,6 +21,8 @@ public class Turret extends BuildingBlock {
     private int range = 4, damage = 1;
     float timing = 1;
 
+    private float moveAmount = 5;
+
     private float debugtimer = 2;
 
     ShapeRenderer shapeRenderer;
@@ -31,7 +33,7 @@ public class Turret extends BuildingBlock {
         range = r;
         damage = d;
         addCollisionShape("Range",new MyCircle((float) (Math.sqrt(getWidth()* range * getHeight()* range) / 2), 0, 0, getOriginX(), getOriginY(), getX()+getWidth()/2, getY()+getHeight()/2, false));
-        System.out.println("range "+range+" damage " +damage);
+        System.out.println("range "+range+" damage " + damage);
 
 
     }
@@ -40,7 +42,7 @@ public class Turret extends BuildingBlock {
         super(Assets.manager.get(Assets.TURRET_TEXTURE), x, y);
         setOrigintoCenter();
         addCollisionShape("Range",new MyCircle((float) (Math.sqrt(getWidth()* range * getHeight()* range) / 2), 0, 0, getOriginX(), getOriginY(), getX()+getWidth()/2, getY()+getHeight()/2, false));
-        System.out.println("range "+range+" damage " +damage);
+        System.out.println("range "+range+" damage " + damage);
 
     }
 
@@ -61,7 +63,7 @@ public class Turret extends BuildingBlock {
 
     public void shoot(Enemy enemy){
         if(getStage() != null){
-            getStage().addActor(new TurretProjectile(enemy, this, getDamage()));
+            getStage().addActor(new TurretProjectile(enemy, this, damage));
         }
     }
 
@@ -86,22 +88,23 @@ public class Turret extends BuildingBlock {
         @Override
         public void act(float delta) {
             super.act(delta);
-            System.out.println(this.getOtherOverlappedShapeKeys(toFollow));
-            if(this.getOtherOverlappedShapeKeys(toFollow).contains("ProjRect")){
-                toFollow.takeDamage(damage);
+            //System.out.println(this.getMyOverlappedShapeEntries(toFollow));
+            if(this.getMyOverlappedShapeKeys(toFollow).contains("ProjRect")){
+                System.out.println("damage: " + damage);
                 this.remove();
+                toFollow.takeDamage(damage);
             }
 
             if(!(toFollow.getX() + 3 < getX())){
-                this.setX(this.getX() + 10);
+                this.setX(this.getX() + moveAmount);
             }else if(!(toFollow.getX() - 3 > getX())){
-                this.setX(this.getX() - 10);
+                this.setX(this.getX() - moveAmount);
             }
 
             if(!(toFollow.getY() + 3 < getY())){
                 this.setY(this.getY() + 10);
             }else if(!(toFollow.getY() - 3 > getY())){
-                this.setY(this.getY() - 10);
+                this.setY(this.getY() - moveAmount);
             }
 
             if(debugtimer > 0) {
