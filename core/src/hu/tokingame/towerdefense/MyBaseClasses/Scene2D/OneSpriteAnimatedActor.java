@@ -19,6 +19,13 @@ public class OneSpriteAnimatedActor extends OneSpriteActor {
     private int prevFrame = 0;
 
 
+    protected boolean removeAfterCycle = false;
+
+
+    public void setRemoveAfterCycle(boolean removeAfterCycle) {
+        this.removeAfterCycle = removeAfterCycle;
+    }
+
     public boolean isLooping() {
         return looping;
     }
@@ -30,6 +37,7 @@ public class OneSpriteAnimatedActor extends OneSpriteActor {
     public int getActualFrame() {
         return actualFrame;
     }
+
 
     public OneSpriteAnimatedActor(String file) {
         super(null);
@@ -69,7 +77,11 @@ public class OneSpriteAnimatedActor extends OneSpriteActor {
                 repeated();
                 if (!looping) {
                     stop();
+                    if(removeAfterCycle) {
+                        remove();
+                    }
                     return;
+
                 }
             }
             setFrame(actualFrame);

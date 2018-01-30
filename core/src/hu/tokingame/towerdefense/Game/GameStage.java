@@ -23,6 +23,7 @@ import hu.tokingame.towerdefense.BuildingBlocks.Wall;
 import hu.tokingame.towerdefense.Enemy.BlueAlien;
 import hu.tokingame.towerdefense.Enemy.Enemy;
 import hu.tokingame.towerdefense.Enemy.EnemyAdder;
+import hu.tokingame.towerdefense.Enemy.ExplodingAlien;
 import hu.tokingame.towerdefense.Enemy.GreenAlien;
 import hu.tokingame.towerdefense.Enemy.RedAlien;
 import hu.tokingame.towerdefense.Enemy.YellowAlien;
@@ -276,6 +277,9 @@ public class GameStage extends MyStage {
                     break;
                 case 4:
                     enemiesQueue.add(new EnemyAdder(new RedAlien(this), timing));
+                    break;
+                case 5:
+                    enemiesQueue.add(new EnemyAdder(new ExplodingAlien(this), timing));
                     break;
                 default:
                     enemiesQueue.add(new EnemyAdder(new GreenAlien(this), timing));
