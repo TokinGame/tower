@@ -105,6 +105,8 @@ public class GameStage extends MyStage {
             e.printStackTrace();
         }
 
+        waveLoader.load(1);
+
 
 
         addActor(defendedbase = new OneSpriteStaticActor(Assets.manager.get(Assets.BADLOGIC_TEXTURE)){  // bázis, vonja az életet ha belemegy a cucc
@@ -137,6 +139,7 @@ public class GameStage extends MyStage {
     @Override
     public void init() {
         //addActor(new Wall(0,0));
+
     }
 
     @Override
@@ -291,9 +294,10 @@ public class GameStage extends MyStage {
 
     public void startWave(){
         roundsCount++;
-        waveLoader.load(roundsCount);
+
+        spawnWave();
         duringWave = true;
-        controlStage.showMessage("A "+roundsCount+" kör elkezdődött");
+        controlStage.showMessage("A(z) "+roundsCount+". kör elkezdődött");
         System.out.println("wave started");
         /*spawnEnemy(0, 1);
         spawnEnemy(0, 4);
@@ -313,6 +317,7 @@ public class GameStage extends MyStage {
             controlStage.setHealthLabel(healthLeft);
         }
         System.out.println("wave ended");
+        waveLoader.load(roundsCount+1);
     }
 
     boolean hasEnoughMoney(){
@@ -354,5 +359,12 @@ public class GameStage extends MyStage {
 
     public OneSpriteStaticActor getDefendedbase() {
         return defendedbase;
+    }
+
+
+    void spawnWave(){
+        for(int[] k : waveLoader.getUpcoming()){
+            spawnEnemy(k[0], k[1]);
+        }
     }
 }

@@ -6,12 +6,18 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 /**
  * Created by davim on 2018. 01. 25..
  */
 
 public class WaveLoader implements Runnable {
+
+
+
+    ArrayList<int[]> upcoming = new ArrayList<int[]>();
+
     GameStage gameStage;
     public WaveLoader(GameStage g) {
         gameStage = g;
@@ -33,7 +39,8 @@ public class WaveLoader implements Runnable {
             if(k.length>1) gameStage.addHealthAfterRound = true;
             while(br.ready()){
                 String[] t = br.readLine().split(" ");
-                gameStage.spawnEnemy(new Integer(t[0]), new Integer(t[1]));
+                int[] kl = {new Integer(t[0]), new Integer(t[1])};
+                upcoming.add(kl);
             }
             //gameStage.startWave();
         }catch(FileNotFoundException fileex){
@@ -44,5 +51,9 @@ public class WaveLoader implements Runnable {
             e.printStackTrace();
         }
 
+    }
+
+    public ArrayList<int[]> getUpcoming() {
+        return upcoming;
     }
 }
