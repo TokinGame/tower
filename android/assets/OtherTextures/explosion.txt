@@ -1,0 +1,89 @@
+explosion.png
+size: 860, 645
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+frame_00_delay-2s
+  rotate: false
+  xy: 1, 1
+  size: 213, 213
+  orig: 213, 213
+  offset: 0, 0
+  index: -1
+frame_01_delay-s
+  rotate: false
+  xy: 216, 1
+  size: 213, 213
+  orig: 213, 213
+  offset: 0, 0
+  index: -1
+frame_02_delay-s
+  rotate: false
+  xy: 431, 1
+  size: 213, 213
+  orig: 213, 213
+  offset: 0, 0
+  index: -1
+frame_03_delay-s
+  rotate: false
+  xy: 646, 1
+  size: 213, 213
+  orig: 213, 213
+  offset: 0, 0
+  index: -1
+frame_04_delay-s
+  rotate: false
+  xy: 1, 216
+  size: 213, 213
+  orig: 213, 213
+  offset: 0, 0
+  index: -1
+frame_05_delay-s
+  rotate: false
+  xy: 216, 216
+  size: 213, 213
+  orig: 213, 213
+  offset: 0, 0
+  index: -1
+frame_06_delay-s
+  rotate: false
+  xy: 431, 216
+  size: 213, 213
+  orig: 213, 213
+  offset: 0, 0
+  index: -1
+frame_07_delay-s
+  rotate: false
+  xy: 646, 216
+  size: 213, 213
+  orig: 213, 213
+  offset: 0, 0
+  index: -1
+frame_08_delay-s
+  rotate: false
+  xy: 1, 431
+  size: 213, 213
+  orig: 213, 213
+  offset: 0, 0
+  index: -1
+frame_09_delay-s
+  rotate: false
+  xy: 216, 431
+  size: 213, 213
+  orig: 213, 213
+  offset: 0, 0
+  index: -1
+frame_10_delay-s
+  rotate: false
+  xy: 431, 431
+  size: 213, 213
+  orig: 213, 213
+  offset: 0, 0
+  index: -1
+frame_11_delay-s
+  rotate: false
+  xy: 646, 431
+  size: 213, 213
+  orig: 213, 213
+  offset: 0, 0
+  index: -1
