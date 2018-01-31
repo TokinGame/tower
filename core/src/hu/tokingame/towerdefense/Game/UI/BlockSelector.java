@@ -59,16 +59,16 @@ public class BlockSelector extends Group {
             }
         });
 
-        addActor(b0 = new BlockSelectButton(25, 275, this, 0, Assets.manager.get(Assets.WALL_TEXTURE)));
-        addActor(b1 = new BlockSelectButton(25, 150, this, 1, Assets.manager.get(Assets.TURRET_TEXTURE)));
-        addActor(b2 = new BlockSelectButton(25, 25, this, 2, Assets.manager.get(Assets.TURRET_TEXTURE)));
+        addActor(b0 = new BlockSelectButton(125, 275, this, 0, Assets.manager.get(Assets.WALL_TEXTURE)));
+        addActor(b1 = new BlockSelectButton(125, 150, this, 1, Assets.manager.get(Assets.TURRET_TEXTURE)));
+        addActor(b2 = new BlockSelectButton(125, 25, this, 2, Assets.manager.get(Assets.TURRET_TEXTURE)));
 
     }
 
     private void slideOut(){
         moving = true;
         state = State.OUT;
-        this.addAction(sequence(moveTo(0, getY(), 0.5f), run(new Runnable() {
+        this.addAction(sequence(moveTo(-75, getY(), 0.5f), run(new Runnable() {
             public void run () {
                 moving = false;
                 BlockSelector.this.removeAction(BlockSelector.this.getActions().first());
