@@ -1,5 +1,7 @@
 package hu.tokingame.towerdefense.Exit;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -25,6 +27,7 @@ public class ExitStage extends MyStage {
         super(viewport, batch, gam);
 
         game = gam;
+        Gdx.input.setCatchBackKey(true);
 
 
 
@@ -53,7 +56,7 @@ public class ExitStage extends MyStage {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
-                        //TODO kilépés
+                        Gdx.app.exit();
                     }
                 });
             }
@@ -76,6 +79,14 @@ public class ExitStage extends MyStage {
 
 
 
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        if(keycode == Input.Keys.BACK){
+            game.setScreenBackByStackPop();
+        }
+        return false;
     }
 
     @Override
