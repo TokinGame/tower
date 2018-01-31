@@ -16,6 +16,7 @@ public class Explosion extends OneSpriteAnimatedActor {
         setPosition(x, y);
         setFps(10);
         setLooping(false);
+        setRemoveAfterCycle(true);
         addCollisionShape("Explosion", new MyCircle((float) Math.sqrt(getWidth() * getHeight()) / 2, 0, 0, getOriginX(), getOriginY(), getX(), getY(), true));
     }
 
