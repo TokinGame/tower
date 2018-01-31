@@ -1,5 +1,7 @@
 package hu.tokingame.towerdefense.High;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -26,6 +28,7 @@ public class HighStage extends MyStage {
         super(viewport, batch, gam);
 
         game = gam;
+        Gdx.input.setCatchBackKey(true);
 
 
 
@@ -48,6 +51,14 @@ public class HighStage extends MyStage {
 
 
 
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        if(keycode == Input.Keys.BACK){
+            game.setScreenBackByStackPop();
+        }
+        return false;
     }
 
     @Override

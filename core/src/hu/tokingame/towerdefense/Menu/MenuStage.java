@@ -1,6 +1,7 @@
 package hu.tokingame.towerdefense.Menu;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -31,13 +32,14 @@ public class MenuStage extends MyStage {
     MyGdxGame game;
     int selected=1;
 
+
     public MenuStage(Viewport viewport, Batch batch, MyGdxGame gam) {
         super(viewport, batch, gam);
         selected=1;
         System.out.println("asdf");
         game = gam;
         Gdx.input.setInputProcessor(this);
-
+        Gdx.input.setCatchBackKey(true);
         for(StackTraceElement s: Thread.currentThread().getStackTrace()){
             System.out.println(s);
         }
@@ -127,6 +129,7 @@ public class MenuStage extends MyStage {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
+                        game.setScreen(new ExitScreen(game));
                     }
                 });
             }
@@ -261,6 +264,14 @@ public class MenuStage extends MyStage {
 
 
 
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        if(keycode == Input.Keys.BACK){
+            game.setScreen(new ExitScreen(game));
+        }
+        return false;
     }
 
     @Override

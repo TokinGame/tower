@@ -1,5 +1,7 @@
 package hu.tokingame.towerdefense.HowToPlay;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -10,6 +12,7 @@ import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.Menu.MenuScreen;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
+import hu.tokingame.towerdefense.MyBaseClasses.UI.MyLabel;
 import hu.tokingame.towerdefense.MyBaseClasses.UI.MyTextButton;
 import hu.tokingame.towerdefense.MyGdxGame;
 
@@ -26,8 +29,16 @@ public class HowToPlayStage extends MyStage {
         super(viewport, batch, gam);
 
         game = gam;
+        Gdx.input.setCatchBackKey(true);
 
-
+        addActor(new MyLabel("Játék menete:\nA játék során az ellenség hullámokban fog érzekni,\nhogy elpusztítsák a bázist.\nA feledat ezt megakadályozni falak és ágyúk segítségével\n Az eszköztárban lehet választani, fal és ágyú között,\nmelyeket Űrforintért lehet vásárolni, és lehelyezni a pályára\n Sok Sikert!", game.getLabelStyle_White()){
+            @Override
+            public void init() {
+                super.init();
+                setPosition(Globals.WORLD_WIDTH/2-getWidth()/2, 200);
+                setAlignment(2);
+            }
+        });
 
         addActor(new MyTextButton("Vissza",game.getTextButtonStyle()){
             @Override
@@ -47,6 +58,14 @@ public class HowToPlayStage extends MyStage {
 
 
 
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        if(keycode == Input.Keys.BACK){
+            game.setScreenBackByStackPop();
+        }
+        return false;
     }
 
     @Override
