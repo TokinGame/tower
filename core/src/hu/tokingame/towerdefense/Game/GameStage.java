@@ -263,21 +263,23 @@ public class GameStage extends MyStage {
                             case WALL:
                                 k = new Wall(x, y);
                                 Moneys -= Globals.costs[0];
+                                addActor(k);
                                 addActor(new MoneySpentText("-"+Globals.costs[0]+" Ft", game.getLabelStyle_Red(), x, y));
                                 break;
                             case TURRET:
                                 k = new Turret(x, y, this);
                                 Moneys -= Globals.costs[1];
+                                addActor(k);
                                 addActor(new MoneySpentText("-"+Globals.costs[1]+" Ft", game.getLabelStyle_Red(), x, y));
                                 break;
                             case OTHERTURRET:
                                 k = new ShortRangeTurret(x, y, this);
                                 Moneys -= Globals.costs[2];
+                                addActor(k);
                                 addActor(new MoneySpentText("-"+Globals.costs[2]+" Ft", game.getLabelStyle_Red(), x, y));
                                 break;
                         }
                         map[x][y] = k;
-                        addActor(k);
                         System.out.println("placed " + x + " : " + y);
                     } else
                         controlStage.showMessage("Nem zárhatod el az egyetlen utat");

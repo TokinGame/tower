@@ -16,8 +16,10 @@ public class MoneySpentText extends MyLabel {
     public MoneySpentText(String text, LabelStyle labelStyle, float x, float y) {
         super(text, labelStyle);
         setSize(80, 40);
-        setX(280+ y * Globals.GRID_WIDTH);
-        setY(((Globals.MAP_SIZE-1) - x)*Globals.GRID_HEIGHT+ Globals.GRID_HEIGHT);
+        setX(280 + y * Globals.GRID_WIDTH);
+        float ySet = ((Globals.MAP_SIZE - 1) - x) * Globals.GRID_HEIGHT + Globals.GRID_HEIGHT;
+        if(ySet >=  Globals.WORLD_HEIGHT) ySet = Globals.WORLD_HEIGHT - this.getHeight() - 50;
+        setY(ySet);
         addAction(Actions.sequence(Actions.moveTo(getX(), getY()+40, 0.4f), Actions.removeActor()));
     }
 }
