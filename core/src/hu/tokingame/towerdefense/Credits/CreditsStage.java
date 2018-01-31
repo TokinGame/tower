@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.tokingame.towerdefense.Game.GameScreen;
 import hu.tokingame.towerdefense.Globals.Globals;
+import hu.tokingame.towerdefense.Menu.MenuScreen;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.tokingame.towerdefense.MyBaseClasses.UI.MyTextButton;
@@ -37,7 +38,7 @@ public class CreditsStage extends MyStage {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
-                        game.setScreenBackByStackPop();
+                        game.setScreen(new MenuScreen(game));
                     }
                 });
             }

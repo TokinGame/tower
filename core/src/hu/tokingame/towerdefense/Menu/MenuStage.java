@@ -9,8 +9,11 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import javax.xml.bind.annotation.XmlElementDecl;
 
 import hu.tokingame.towerdefense.Credits.CreditsScreen;
+import hu.tokingame.towerdefense.Exit.ExitScreen;
 import hu.tokingame.towerdefense.Game.GameScreen;
+import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Globals.Globals;
+import hu.tokingame.towerdefense.High.HighScreen;
 import hu.tokingame.towerdefense.HowToPlay.HowToPlayScreen;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
@@ -26,9 +29,11 @@ import hu.tokingame.towerdefense.Settings.SettingsScreen;
 public class MenuStage extends MyStage {
 
     MyGdxGame game;
+    int selected=1;
 
     public MenuStage(Viewport viewport, Batch batch, MyGdxGame gam) {
         super(viewport, batch, gam);
+        selected=1;
         System.out.println("asdf");
         game = gam;
         Gdx.input.setInputProcessor(this);
@@ -48,6 +53,21 @@ public class MenuStage extends MyStage {
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
                         game.setScreen(new GameScreen(game));
+                    }
+                });
+            }
+        });
+
+        addActor(new MyTextButton("High Scores",game.getTextButtonStyle()){
+            @Override
+            public void init() {
+                super.init();
+                setPosition(10, (Globals.WORLD_HEIGHT/5-this.getHeight()/5)*4);
+                addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        game.setScreen(new HighScreen(game));
                     }
                 });
             }
@@ -107,6 +127,132 @@ public class MenuStage extends MyStage {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
+                    }
+                });
+            }
+        });
+
+
+        addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BADLOGIC_TEXTURE)){
+            @Override
+            public void init() {
+                super.init();
+                setSize(50, 50);
+                setPosition((Globals.WORLD_WIDTH/2-getWidth()/2), (Globals.WORLD_HEIGHT/2-getHeight()/2)+50);
+                addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        selected--;
+                        if (selected==0){
+                            selected=6;
+                        }
+                        if (selected==7){
+                            selected=1;
+                        }
+                    }
+                });
+            }
+        });
+        addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BADLOGIC_TEXTURE)){
+            @Override
+            public void init() {
+                super.init();
+                setSize(50, 50);
+                setPosition((Globals.WORLD_WIDTH/2-getWidth()/2), (Globals.WORLD_HEIGHT/2-getHeight()/2)-50);
+                addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        selected++;
+                        if (selected==0){
+                            selected=6;
+                        }
+                        if (selected==7){
+                            selected=1;
+                        }
+                    }
+                });
+            }
+        });
+        addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BADLOGIC_TEXTURE)){
+            @Override
+            public void init() {
+                super.init();
+                setSize(50, 50);
+                setPosition((Globals.WORLD_WIDTH/2-getWidth()/2)+50, (Globals.WORLD_HEIGHT/2-getHeight()/2));
+                addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        selected--;
+                        if (selected==0){
+                            selected=6;
+                        }
+                        if (selected==7){
+                            selected=1;
+                        }
+                    }
+                });
+            }
+        });
+        addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BADLOGIC_TEXTURE)){
+            @Override
+            public void init() {
+                super.init();
+                setSize(50, 50);
+                setPosition((Globals.WORLD_WIDTH/2-getWidth()/2)-50, (Globals.WORLD_HEIGHT/2-getHeight()/2));
+                addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        selected++;
+                        if (selected==0){
+                            selected=6;
+                        }
+                        if (selected==7){
+                            selected=1;
+                        }
+                    }
+                });
+            }
+        });
+        addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BADLOGIC_TEXTURE)){
+            @Override
+            public void init() {
+                super.init();
+                setSize(50, 50);
+                setPosition((Globals.WORLD_WIDTH/2-getWidth()/2)+150, (Globals.WORLD_HEIGHT/2-getHeight()/2));
+                addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        /*switch (selected){
+                            case 1: game.setScreen(new GameScreen(game));
+                            case 2: game.setScreen(new HighScreen(game));
+                            case 3: game.setScreen(new HowToPlayScreen(game));
+                            case 4: game.setScreen(new CreditsScreen(game));
+                            case 5: game.setScreen(new SettingsScreen(game));
+                            case 6: game.setScreen(new ExitScreen(game));//TODO exit screen
+                        }*/
+                        if (selected==1){
+                            game.setScreen(new GameScreen(game));
+                        }
+                        else if (selected==2){
+                            game.setScreen(new HighScreen(game));
+                        }
+                        else if (selected==3){
+                            game.setScreen(new HowToPlayScreen(game));
+                        }
+                        else if (selected==4){
+                            game.setScreen(new CreditsScreen(game));
+                        }
+                        else if (selected==5){
+                            game.setScreen(new SettingsScreen(game));
+                        }
+                        else if (selected==6){
+                            game.setScreen(new ExitScreen(game));
+                        }
                     }
                 });
             }
