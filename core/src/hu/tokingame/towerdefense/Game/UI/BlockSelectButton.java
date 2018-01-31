@@ -19,7 +19,7 @@ public class BlockSelectButton extends OneSpriteStaticActor {
         super(texture);
         blockSelector = bs;
         setPosition(x, y);
-        setSize(200, 100);
+        setSize(100, 100);
         id = i;
         addListener(new ClickListener(){
             @Override
