@@ -3,6 +3,7 @@ package hu.tokingame.towerdefense.BuildingBlocks;
 import com.badlogic.gdx.graphics.Texture;
 
 import hu.tokingame.towerdefense.Globals.Globals;
+import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyRectangle;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 /**
@@ -13,7 +14,8 @@ public class BuildingBlock extends OneSpriteStaticActor {
     public BuildingBlock(Texture texture, float x, float y) {
         super(texture);
         place(x, y);
-        setSize(Globals.GRID_WIDTH,Globals.GRID_HEIGHT);
+        setSize(Globals.GRID_WIDTH, Globals.GRID_HEIGHT);
+        addCollisionShape("Block", new MyRectangle(getWidth(),getHeight(),0,0, getOriginX(), getOriginY(), getRotation(),0, getX(), getY(), true));
     }
 
     @Override

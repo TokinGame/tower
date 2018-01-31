@@ -27,6 +27,7 @@ import hu.tokingame.towerdefense.Enemy.ExplodingAlien;
 import hu.tokingame.towerdefense.Enemy.GreenAlien;
 import hu.tokingame.towerdefense.Enemy.RedAlien;
 import hu.tokingame.towerdefense.Enemy.YellowAlien;
+import hu.tokingame.towerdefense.Entities.Explosion;
 import hu.tokingame.towerdefense.Game.UI.MoneySpentText;
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Enemy.Alien;
@@ -70,6 +71,7 @@ public class GameStage extends MyStage {
     private ArrayList<Enemy> enemies;
     private ArrayList<EnemyAdder> enemiesQueue;
     private ArrayList<EnemyAdder> rem;
+    private ArrayList<BuildingBlock> blocksToRemove;
 
     OneSpriteStaticActor defendedbase;
 
@@ -80,6 +82,7 @@ public class GameStage extends MyStage {
         enemies = new ArrayList<Enemy>();
         enemiesQueue = new ArrayList<EnemyAdder>();
         rem = new ArrayList<EnemyAdder>();
+        blocksToRemove = new ArrayList<BuildingBlock>();
 
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(this);
@@ -118,7 +121,7 @@ public class GameStage extends MyStage {
             }
         });
 
-        alien = new Alien(this, Assets.manager.get(Assets.BADLOGIC_TEXTURE), 0, 0);
+        //alien = new Alien(this, Assets.manager.get(Assets.BADLOGIC_TEXTURE), 0, 0);
 
         addListener(new InputListener(){
             @Override
@@ -161,8 +164,9 @@ public class GameStage extends MyStage {
         controlStage.act(delta);
         turretTimer += delta;
         if(turretTimer > 5){
+            turrets.clear();
             for (Actor turret: getActors()) {
-                if(turret instanceof Turret && !turrets.contains(turret)){
+                if(turret instanceof Turret){
                     turrets.add((Turret) turret);
                 }
             }
@@ -180,6 +184,26 @@ public class GameStage extends MyStage {
             }
             turretTimer = 0;
         }
+
+        blocksToRemove.clear();
+        for (Actor exp: getActors()) {
+            if(exp instanceof Explosion) {
+                for (BuildingBlock[] blcks: map) {
+                    for (BuildingBlock block: blcks) {
+                        if(block != null){
+                            if(((MyActor) exp).getMyOverlappedShapeKeys(block).contains("Explosion")){
+                                blocksToRemove.add(block);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if(blocksToRemove.size() > 0){
+            // TODO: 1/31/2018 remove map element
+        }
+
 
         if(duringWave){
             waveTimer += delta;
@@ -340,7 +364,8 @@ public class GameStage extends MyStage {
                     return true;
                 }
         }
-        return false;
+        // TODO: 1/31/2018 nem
+        return true;
     }
 
     public void nextMoney(int amount){

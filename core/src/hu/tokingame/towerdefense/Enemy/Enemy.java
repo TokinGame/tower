@@ -48,7 +48,7 @@ public abstract class Enemy extends OneSpriteStaticActor {
         // pl ez:
         stepsList = new ArrayList<Globals.Step>();
         setStepsList(Globals.currentSteps);
-        addCollisionShape("Enemy", new MyRectangle(getWidth(),getHeight(),0,0,getOriginX(), getOriginY(), getRotation(), 0, true));
+        addCollisionShape("Enemy", new MyRectangle(getWidth(),getHeight(),0,0, getOriginX(), getOriginY(), getRotation(),0, getX(), getY(), true));
     }
 
 
