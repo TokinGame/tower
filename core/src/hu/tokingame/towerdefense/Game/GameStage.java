@@ -364,8 +364,7 @@ public class GameStage extends MyStage {
                     return true;
                 }
         }
-        // TODO: 1/31/2018 nem
-        return true;
+        return false;
     }
 
     public void nextMoney(int amount){
