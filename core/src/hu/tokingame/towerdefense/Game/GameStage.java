@@ -188,6 +188,7 @@ public class GameStage extends MyStage {
         blocksToRemove.clear();
         for (Actor exp: getActors()) {
             if(exp instanceof Explosion) {
+                /*
                 for (BuildingBlock[] blcks: map) {
                     for (BuildingBlock block: blcks) {
                         if(block != null){
@@ -196,12 +197,27 @@ public class GameStage extends MyStage {
                             }
                         }
                     }
+                }*/
+
+                for (int i = 0; i < map.length; i++) {
+                    for (int j = 0; j < map[0].length; j++) {
+                        BuildingBlock block = map[i][j];
+                        if(block != null){
+                            if(((MyActor) exp).getMyOverlappedShapeKeys(block).contains("Explosion")){
+                                blocksToRemove.add(block);
+                                map[i][j] = null;
+                            }
+                        }
+                    }
                 }
+                
             }
         }
 
         if(blocksToRemove.size() > 0){
-            // TODO: 1/31/2018 remove map element
+            for (BuildingBlock block: blocksToRemove) {
+                block.remove();
+            }
         }
 
 
