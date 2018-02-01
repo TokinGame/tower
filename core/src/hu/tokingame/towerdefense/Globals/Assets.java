@@ -50,6 +50,7 @@ public class Assets {
     public static final AssetDescriptor<Texture> ROBBANT_PARLAMENT = new AssetDescriptor<Texture>("UI/parlament_robbant.png", Texture.class);
     public static final AssetDescriptor<Texture> STEEL = new AssetDescriptor<Texture>("UI/steel_texture.png", Texture.class);
     public static final AssetDescriptor<Texture> SZIV = new AssetDescriptor<Texture>("UI/sziv.png", Texture.class);
+    public static final AssetDescriptor<Texture> LABEL_BG = new AssetDescriptor<Texture>("UI/labelbg.png", Texture.class);
 
 
 
