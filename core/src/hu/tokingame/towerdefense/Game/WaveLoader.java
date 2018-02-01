@@ -86,8 +86,13 @@ public class WaveLoader implements Runnable {
             System.out.println("hhhhhhhhkkkkk "+hk);
 
 
+            for(int i = 1; i <= hk; i++){
+                int kl[] = {ll, i*4};
+                upcoming.add(kl);
+            }
 
-            if(rd(1,10) > 8){
+
+            if(rd(1,10) > 9){
                 int kl[] = {5, 3};
                 System.out.println("BOMBU");
                 upcoming.add(kl);
