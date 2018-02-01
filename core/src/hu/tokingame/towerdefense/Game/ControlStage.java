@@ -29,6 +29,8 @@ public class ControlStage extends MyStage {
 
     MyLabel healthLabel;
 
+    MyTextButton gomb;
+
     public ControlStage(Viewport viewport, Batch batch, MyGdxGame game, GameStage gameStage) {
         super(viewport, batch, game);
         this.gameStage = gameStage;
@@ -40,13 +42,13 @@ public class ControlStage extends MyStage {
 
         addActor(new BlockSelector(gameStage));
 
-        addActor(message = new MyLabel("", game.getLabelStyle_Yellow()));
+        addActor(message = new MyLabel("", game.getLabelStyle_White_DarkBG()));
         message.setPosition(Globals.WORLD_WIDTH/2-getWidth()/2, 600);
         message.setAlignment(1);
         //message.setVisible(false);
         System.out.println("yxcvbnm");
 
-        addActor(new MyTextButton("Kör Indítása", game.getTextButtonStyle()){
+        addActor(gomb = new MyTextButton("Kör Indítása", game.getTextButtonStyle()){
             @Override
             public void init() {
                 super.init();
@@ -62,16 +64,23 @@ public class ControlStage extends MyStage {
                 });
             }
         });
-        addActor(moneylabel = new MyLabel(gameStage.Moneys+" Űrforint", game.getLabelStyle_Yellow()));
+        addActor(moneylabel = new MyLabel(gameStage.Moneys+" Űrforint", game.getLabelStyle_White_DarkBG()));
         moneylabel.setPosition(10, 10);
 
-        addActor(healthLabel = new MyLabel("", game.getLabelStyle_Yellow()){
+        addActor(healthLabel = new MyLabel("", game.getLabelStyle_Red()){
             @Override
             public void init() {
                 super.init();
                 setPosition(1140, 300);
             }
         });
+    }
+
+    public void disableButton(){
+        gomb.setVisible(false);
+    }
+    public void enableButton(){
+        gomb.setVisible(true);
     }
 
     public void updateMoneys(){
