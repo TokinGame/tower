@@ -66,6 +66,7 @@ public class Turret extends BuildingBlock {
 
     public void circle(){
         for(int i=0; i<32;i++) {
+            if(getStage() != null)
             getStage().addActor(new CircleActor(getX() + getWidth() / 2f, getY() + getHeight() / 2f, 200f*((float)i/5+1), ((MyCircle)getCollisionShape("Range")).getRadius()));
         }
     }
