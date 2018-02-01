@@ -87,7 +87,7 @@ public class Turret extends BuildingBlock {
         private int damage;
 
         public TurretProjectile(Enemy toFollow, Turret turret, int damage) {
-            super(Assets.manager.get(Assets.BADLOGIC_TEXTURE));
+            super(Assets.manager.get(Assets.PROJ));
             this.toFollow = toFollow;
             this.damage = damage;
             this.setSize(20,20);

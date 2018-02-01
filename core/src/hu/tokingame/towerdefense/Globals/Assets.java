@@ -60,6 +60,7 @@ public class Assets {
     public static final AssetDescriptor<Texture> STEEL = new AssetDescriptor<Texture>("UI/steel_texture.png", Texture.class);
     public static final AssetDescriptor<Texture> SZIV = new AssetDescriptor<Texture>("UI/sziv.png", Texture.class);
     public static final AssetDescriptor<Texture> LABEL_BG = new AssetDescriptor<Texture>("UI/labelbg.png", Texture.class);
+    public static final AssetDescriptor<Texture> PROJ = new AssetDescriptor<Texture>("OtherTextures/proj.png", Texture.class);
     public static final AssetDescriptor<Music> MAIN_MUSIC = new AssetDescriptor<Music>("music/menuzene.wav", Music.class);
     public static final AssetDescriptor<Texture>[] ROCKET_LAUNCH = new AssetDescriptor[]{
             new AssetDescriptor<Texture>("rocketlaunch/1.png", Texture.class),
@@ -139,6 +140,7 @@ public class Assets {
         manager.load(BLUE_BOSS);
         manager.load(YELLOW_BOSS);
         manager.load(RED_BOSS);
+        manager.load(PROJ);
 
         for (AssetDescriptor<Texture> frame: ROCKET_LAUNCH) {
             manager.load(frame);
