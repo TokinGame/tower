@@ -21,14 +21,14 @@ import hu.tokingame.towerdefense.MyGdxGame;
 public class SettingsStage extends MyStage {
 
     MyGdxGame game;
-    private static final String SOUDNFX_LABEL = "Hangeffektek: ", MUSIC_LABEL = "Zene: ";
+    public static final String SOUDNFX_LABEL = "Hangeffektek: ", MUSIC_LABEL = "Zene: ";
 
     public SettingsStage(Viewport viewport, Batch batch, MyGdxGame gam) {
         super(viewport, batch, gam);
 
         game = gam;
 
-        addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND)){
+        addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_NOCON)){
             @Override
             public void init() {
                 super.init();
@@ -37,9 +37,9 @@ public class SettingsStage extends MyStage {
             }
         });
 
-        /*addActor(new MyTextButton(MUSIC_LABEL){
+        addActor(new MyTextButton(MUSIC_LABEL, game.getTextButtonStyle()){
             @Override
-            protected void init() {
+            public void init() {
                 super.init();
                 this.setText(MUSIC_LABEL + (Globals.music ? "Be" : "Ki"));
                 this.setPosition(Globals.WORLD_WIDTH/2-this.getWidth()/2, 400);
@@ -59,9 +59,9 @@ public class SettingsStage extends MyStage {
         });
 
 
-        addActor(new MyTextButton(SOUDNFX_LABEL){
+        addActor(new MyTextButton(SOUDNFX_LABEL, game.getTextButtonStyle()){
             @Override
-            protected void init() {
+            public void init() {
                 super.init();
                 this.setText(SOUDNFX_LABEL + (Globals.soundFX ? "Be" : "Ki"));
                 this.setPosition(Globals.WORLD_WIDTH/2-this.getWidth()/2, 500);
@@ -76,7 +76,7 @@ public class SettingsStage extends MyStage {
                     }
                 });
             }
-        });*/
+        });
 
 
         addActor(new MyTextButton("Vissza",game.getTextButtonStyle()){

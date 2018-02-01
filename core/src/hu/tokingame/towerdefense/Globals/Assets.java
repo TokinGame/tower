@@ -10,6 +10,7 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -51,6 +52,7 @@ public class Assets {
     public static final AssetDescriptor<Texture> STEEL = new AssetDescriptor<Texture>("UI/steel_texture.png", Texture.class);
     public static final AssetDescriptor<Texture> SZIV = new AssetDescriptor<Texture>("UI/sziv.png", Texture.class);
     public static final AssetDescriptor<Texture> LABEL_BG = new AssetDescriptor<Texture>("UI/labelbg.png", Texture.class);
+    public static final AssetDescriptor<Music> MAIN_MUSIC = new AssetDescriptor<Music>("music/menuzene.wav", Music.class);
 
 
 
@@ -86,10 +88,14 @@ public class Assets {
         manager.load(ROBBANT_PARLAMENT);
         manager.load(STEEL);
         manager.load(SZIV);
+        manager.load(MAIN_MUSIC);
+
     }
 
     public static void afterLoaded() {
-        // TODO: 1/5/2018 zene 
+        // TODO: 1/5/2018 zene
+        manager.get(MAIN_MUSIC).setLooping(true);
+        if (Globals.music) manager.get(MAIN_MUSIC).play();
     }
 
     public static void unload() {

@@ -32,7 +32,7 @@ public class GameOverStage extends MyStage {
         Gdx.input.setCatchBackKey(true);
 
 
-        addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND)){
+        addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_NOCON)){
             @Override
             public void init() {
                 super.init();
