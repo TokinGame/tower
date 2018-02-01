@@ -30,7 +30,7 @@ public class Heart extends OneSpriteStaticActor {
     private GameStage gameStage;
 
     public Heart(float x, float y, final GameStage gameStage) {
-        super(Assets.manager.get(Assets.WALL_TEXTURE));
+        super(Assets.manager.get(Assets.SZIV));
         this.gameStage = gameStage;
         setSize(40, 40);
         this.setPosition(x, y);
