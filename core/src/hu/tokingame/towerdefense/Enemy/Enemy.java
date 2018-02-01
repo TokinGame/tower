@@ -125,7 +125,7 @@ public abstract class Enemy extends OneSpriteStaticActor {
             }
         }
 
-        if(getX() > Globals.WORLD_WIDTH-240 && getY() < 160){
+        if(getX() > Globals.WORLD_WIDTH-240 && getY() < 120){
             stage.decreaseHealth();
             //System.out.println("Bement a köcsög");
             stage.enemiesAlive--;

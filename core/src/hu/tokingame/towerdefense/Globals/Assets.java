@@ -56,6 +56,7 @@ public class Assets {
     public static final AssetDescriptor<Texture> BACKGROUND_NOCON = new AssetDescriptor<Texture>("UI/hatter_sima.png", Texture.class);
     public static final AssetDescriptor<Texture> BACKGROUND_GAME = new AssetDescriptor<Texture>("szakkor/jatekhatter.png", Texture.class);
     public static final AssetDescriptor<Texture> ROBBANT_PARLAMENT = new AssetDescriptor<Texture>("UI/parlament_robbant.png", Texture.class);
+    public static final AssetDescriptor<Texture> PARLAMENT = new AssetDescriptor<Texture>("UI/parlament.png", Texture.class);
     public static final AssetDescriptor<Texture> STEEL = new AssetDescriptor<Texture>("UI/steel_texture.png", Texture.class);
     public static final AssetDescriptor<Texture> SZIV = new AssetDescriptor<Texture>("UI/sziv.png", Texture.class);
     public static final AssetDescriptor<Texture> LABEL_BG = new AssetDescriptor<Texture>("UI/labelbg.png", Texture.class);
@@ -126,6 +127,7 @@ public class Assets {
 
         manager.load(BACKGROUND_NOCON);
         manager.load(ROBBANT_PARLAMENT);
+        manager.load(PARLAMENT);
         manager.load(STEEL);
         manager.load(SZIV);
 
@@ -152,6 +154,5 @@ public class Assets {
     public static void unload() {
         manager.dispose();
     }
-
 }
 

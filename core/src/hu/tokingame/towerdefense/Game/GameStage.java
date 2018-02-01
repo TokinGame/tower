@@ -127,11 +127,11 @@ public class GameStage extends MyStage {
         });
 
 
-        addActor(defendedbase = new OneSpriteStaticActor(Assets.manager.get(Assets.BADLOGIC_TEXTURE)){  // bázis, vonja az életet ha belemegy a cucc
+        addActor(defendedbase = new OneSpriteStaticActor(Assets.manager.get(Assets.PARLAMENT)){  // bázis, vonja az életet ha belemegy a cucc
             @Override
             public void init() {
                 super.init();
-                setSize(200, 200);
+                setSize(250, 150);
                 setPosition(Globals.WORLD_WIDTH-getWidth(), 0);
             }
         });
