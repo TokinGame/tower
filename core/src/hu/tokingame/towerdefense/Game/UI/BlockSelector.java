@@ -8,6 +8,7 @@ import hu.tokingame.towerdefense.Game.GameStage;
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
+import hu.tokingame.towerdefense.MyBaseClasses.UI.MyLabel;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
@@ -49,6 +50,28 @@ public class BlockSelector extends Group {
                 super.init();
                 this.setSize(100, 60);
                 setPosition(275, 295);
+            }
+        });
+
+        addActor(new MyLabel(Globals.costs[0]+" Ft", gameStage.game.getLabelStyle_White()){
+            @Override
+            public void init() {
+                super.init();
+                setPosition(10, 295);
+            }
+        });
+        addActor(new MyLabel(Globals.costs[1]+" Ft", gameStage.game.getLabelStyle_White()){
+            @Override
+            public void init() {
+                super.init();
+                setPosition(10, 170);
+            }
+        });
+        addActor(new MyLabel(Globals.costs[2]+" Ft", gameStage.game.getLabelStyle_White()){
+            @Override
+            public void init() {
+                super.init();
+                setPosition(10, 45);
             }
         });
 

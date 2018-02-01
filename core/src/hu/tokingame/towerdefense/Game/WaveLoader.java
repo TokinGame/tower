@@ -55,7 +55,7 @@ public class WaveLoader implements Runnable {
 
         upcoming = new ArrayList<int[]>();
 
-        gameStage.moneyToBeAdded = 500;
+        gameStage.moneyToBeAdded = 200;
 
         System.out.println("lellvlelelel" + l);
 
@@ -64,7 +64,7 @@ public class WaveLoader implements Runnable {
 
 
             if(l % 10 == 0){
-                gameStage.moneyToBeAdded = 1000;
+                gameStage.moneyToBeAdded = 400;
                 for(int i = 0; i < l/10; i++){
                     int kl[] = {7, i*5};
                     System.out.println("klklklk" + kl);
