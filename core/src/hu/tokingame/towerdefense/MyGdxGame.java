@@ -4,9 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Loading.LoadingScreen;
@@ -44,6 +46,15 @@ public class MyGdxGame extends MyGame {
 	public Label.LabelStyle getLabelStyle_White() {
 		Label.LabelStyle style;
 		style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
+		style.font = Assets.manager.get(Assets.CALIBRI_FONT);
+		style.fontColor = Color.WHITE;
+		return style;
+	}
+
+	public Label.LabelStyle getLabelStyle_White_DarkBG() {
+		Label.LabelStyle style;
+		style = new com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle();
+		style.background = new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.LABEL_BG)));
 		style.font = Assets.manager.get(Assets.CALIBRI_FONT);
 		style.fontColor = Color.WHITE;
 		return style;

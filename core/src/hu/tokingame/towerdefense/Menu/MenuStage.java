@@ -293,7 +293,7 @@ public class MenuStage extends MyStage {
             @Override
             public void init() {
                 super.init();
-                setSize(50, 50);
+                setSize(100, 50);
                 setPosition(200, Globals.WORLD_HEIGHT-this.getHeight()-10);
 
             }

@@ -9,9 +9,11 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
+import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.Menu.MenuScreen;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
+import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.tokingame.towerdefense.MyBaseClasses.UI.MyLabel;
 import hu.tokingame.towerdefense.MyBaseClasses.UI.MyTextButton;
 import hu.tokingame.towerdefense.MyGdxGame;
@@ -36,7 +38,14 @@ public class HighStage extends MyStage {
         game = gam;
         Gdx.input.setCatchBackKey(true);
 
-
+        addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_NOCON)){
+            @Override
+            public void init() {
+                super.init();
+                setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
+                setPosition(0,0);
+            }
+        });
 
         if (Globals.scores.size() > 0) {
             hsV = new ArrayList();

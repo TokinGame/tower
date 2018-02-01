@@ -53,7 +53,9 @@ public class WaveLoader implements Runnable {
             e.printStackTrace();
         }*/
 
-        gameStage.moneyToBeAdded = 500;
+        upcoming = new ArrayList<int[]>();
+
+        gameStage.moneyToBeAdded = 200;
 
         System.out.println("lellvlelelel" + l);
 
@@ -62,7 +64,7 @@ public class WaveLoader implements Runnable {
 
 
             if(l % 10 == 0){
-                gameStage.moneyToBeAdded = 1000;
+                gameStage.moneyToBeAdded = 400;
                 for(int i = 0; i < l/10; i++){
                     int kl[] = {7, i*5};
                     System.out.println("klklklk" + kl);
@@ -92,7 +94,7 @@ public class WaveLoader implements Runnable {
             }
 
 
-            if(rd(1,10) > 9){
+            if(rd(1,100) > 95){
                 int kl[] = {5, 3};
                 System.out.println("BOMBU");
                 upcoming.add(kl);

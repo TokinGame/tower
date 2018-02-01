@@ -8,6 +8,7 @@ import hu.tokingame.towerdefense.Game.GameStage;
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
+import hu.tokingame.towerdefense.MyBaseClasses.UI.MyLabel;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
@@ -26,18 +27,51 @@ public class BlockSelector extends Group {
 
     GameStage gameStage;
 
+    OneSpriteStaticActor nyil;
+
 
     public BlockSelector(GameStage g) {
         super();
         gameStage = g;
-        this.setSize(250,400);
-        this.setPosition(-200, Globals.WORLD_HEIGHT/2f - this.getHeight()/2f);
-        addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BADLOGIC_TEXTURE)){
+        this.setSize(400,400);
+        this.setPosition(-300, Globals.WORLD_HEIGHT/2f - this.getHeight()/2f);
+        addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.STEEL)){
             @Override
             public void init() {
                 super.init();
                 this.setSize(BlockSelector.this.getWidth(),BlockSelector.this.getHeight());
                 this.setPosition(0,0);
+            }
+        });
+
+        addActor(nyil = new OneSpriteStaticActor(Assets.manager.get(Assets.MENHAJ)){
+            @Override
+            public void init() {
+                super.init();
+                this.setSize(100, 60);
+                setPosition(275, 295);
+            }
+        });
+
+        addActor(new MyLabel(Globals.costs[0]+" Ft", gameStage.game.getLabelStyle_White()){
+            @Override
+            public void init() {
+                super.init();
+                setPosition(10, 295);
+            }
+        });
+        addActor(new MyLabel(Globals.costs[1]+" Ft", gameStage.game.getLabelStyle_White()){
+            @Override
+            public void init() {
+                super.init();
+                setPosition(10, 170);
+            }
+        });
+        addActor(new MyLabel(Globals.costs[2]+" Ft", gameStage.game.getLabelStyle_White()){
+            @Override
+            public void init() {
+                super.init();
+                setPosition(10, 45);
             }
         });
 
@@ -59,16 +93,16 @@ public class BlockSelector extends Group {
             }
         });
 
-        addActor(b0 = new BlockSelectButton(125, 275, this, 0, Assets.manager.get(Assets.WALL_TEXTURE)));
-        addActor(b1 = new BlockSelectButton(125, 150, this, 1, Assets.manager.get(Assets.TURRET_TEXTURE)));
-        addActor(b2 = new BlockSelectButton(125, 25, this, 2, Assets.manager.get(Assets.TURRET_TEXTURE)));
+        addActor(b0 = new BlockSelectButton(150, 275, this, 0, Assets.manager.get(Assets.WALL_TEXTURE)));
+        addActor(b1 = new BlockSelectButton(150, 150, this, 1, Assets.manager.get(Assets.TURRET_TEXTURE)));
+        addActor(b2 = new BlockSelectButton(150, 25, this, 2, Assets.manager.get(Assets.TURRET_TEXTURE)));
 
     }
 
     private void slideOut(){
         moving = true;
         state = State.OUT;
-        this.addAction(sequence(moveTo(-75, getY(), 0.5f), run(new Runnable() {
+        this.addAction(sequence(moveTo(0, getY(), 0.5f), run(new Runnable() {
             public void run () {
                 moving = false;
                 BlockSelector.this.removeAction(BlockSelector.this.getActions().first());
@@ -79,7 +113,7 @@ public class BlockSelector extends Group {
     private void slideIn(){
         moving = true;
         state = State.IN;
-        this.addAction(sequence(moveTo(-200, getY(), 0.5f), run(new Runnable() {
+        this.addAction(sequence(moveTo(-300, getY(), 0.5f), run(new Runnable() {
             public void run () {
                 moving = false;
                 BlockSelector.this.removeAction(BlockSelector.this.getActions().first());
@@ -89,9 +123,18 @@ public class BlockSelector extends Group {
 
     public void selected(int id){
         switch(id){
-            case 0: Globals.selectedBlock = Globals.Selectable.WALL; break;
-            case 1: Globals.selectedBlock = Globals.Selectable.TURRET; break;
-            case 2: Globals.selectedBlock = Globals.Selectable.OTHERTURRET; break;
+            case 0:
+                Globals.selectedBlock = Globals.Selectable.WALL;
+                nyil.setPosition(275, 295);
+                break;
+            case 1:
+                Globals.selectedBlock = Globals.Selectable.TURRET;
+                nyil.setPosition(275, 170);
+                break;
+            case 2:
+                Globals.selectedBlock = Globals.Selectable.OTHERTURRET;
+                nyil.setPosition(275, 45);
+                break;
 
         }
         System.out.println(Globals.selectedBlock);

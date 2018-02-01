@@ -72,6 +72,7 @@ public class Globals {
 
     public static boolean soundFX = true, music = prefs.getBoolean("music",true);
 
+
     public static Preferences getPrefs(){
         return prefs;
     }

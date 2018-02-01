@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import java.util.ArrayList;
 
 import hu.tokingame.towerdefense.Game.GameStage;
+import hu.tokingame.towerdefense.Game.UI.Heart;
 import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyRectangle;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
@@ -29,11 +30,6 @@ public abstract class Enemy extends OneSpriteStaticActor {
 
     protected int steps = 0;
 
-    @Override
-    public boolean remove() {
-        stage.removeEnemy(this);
-        return super.remove();
-    }
 
     protected int health = 1;
 
@@ -140,7 +136,16 @@ public abstract class Enemy extends OneSpriteStaticActor {
             stage.enemiesAlive--;
             System.out.println("ded");
             remove();
-
         }
     }
+
+    @Override
+    public boolean remove() {
+        if(Math.random() >= 0.95){
+            stage.getControlStage().addActor(new Heart(this.getX(), this.getY(), stage));
+        }
+        stage.removeEnemy(this);
+        return super.remove();
+    }
+
 }

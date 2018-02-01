@@ -28,6 +28,7 @@ import hu.tokingame.towerdefense.Enemy.GreenAlien;
 import hu.tokingame.towerdefense.Enemy.RedAlien;
 import hu.tokingame.towerdefense.Enemy.YellowAlien;
 import hu.tokingame.towerdefense.Entities.Explosion;
+import hu.tokingame.towerdefense.Game.UI.HealthUpdateLable;
 import hu.tokingame.towerdefense.Game.UI.MoneySpentText;
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Enemy.Alien;
@@ -426,5 +427,16 @@ public class GameStage extends MyStage {
         for(int[] k : waveLoader.getUpcoming()){
             spawnEnemy(k[0], k[1]);
         }
+    }
+
+
+    public void addHP(){
+        healthLeft++;
+        controlStage.setHealthLabel(healthLeft);
+        controlStage.addActor(new HealthUpdateLable("+1 hp", game.getLabelStyle_Green()));
+    }
+
+    public ControlStage getControlStage() {
+        return controlStage;
     }
 }
