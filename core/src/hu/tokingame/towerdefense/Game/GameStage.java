@@ -59,11 +59,12 @@ public class GameStage extends MyStage {
 
 
     public boolean duringWave = false;
-
+    boolean timeoutShown = false;
     public boolean addHealthAfterRound = false;
 
     public float waveTimer = 0;
     public float turretTimer = 0;
+    public float buildTimer = 30;
 
     public int roundsCount = 0;
 
@@ -238,7 +239,21 @@ public class GameStage extends MyStage {
 
         if(duringWave){
             waveTimer += delta;
+
+        }else{
+            buildTimer -= delta;
+            System.out.println(buildTimer);
+
+            if(buildTimer< 0){
+                startWave();
+            }
+
+            if(buildTimer < 10 && !timeoutShown){
+                controlStage.showMessage("10 másodperced van építeni");
+                timeoutShown = true;
+            }
         }
+
 
 
         //System.out.println("wave: " + waveTimer);
@@ -370,6 +385,8 @@ public class GameStage extends MyStage {
         duringWave = true;
         controlStage.showMessage("A(z) "+roundsCount+". kör elkezdődött");
         System.out.println("wave started");
+
+        controlStage.disableButton();
         /*spawnEnemy(0, 1);
         spawnEnemy(0, 4);
         spawnEnemy(0, 7);*/
@@ -396,6 +413,10 @@ public class GameStage extends MyStage {
             pintsz*=2;
         }
         pintsz*=1.2;
+
+        controlStage.enableButton();
+        buildTimer = 30;
+        timeoutShown = false;
     }
 
     boolean hasEnoughMoney(){
