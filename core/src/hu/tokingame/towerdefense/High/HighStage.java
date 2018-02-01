@@ -7,8 +7,12 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.ArrayList;
+
+import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.Menu.MenuScreen;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
+import hu.tokingame.towerdefense.MyBaseClasses.UI.MyLabel;
 import hu.tokingame.towerdefense.MyBaseClasses.UI.MyTextButton;
 import hu.tokingame.towerdefense.MyGdxGame;
 
@@ -23,6 +27,8 @@ public class HighStage extends MyStage {
 
     MyGdxGame game;
 
+    ArrayList<MyLabel> hsV;
+
 
     public HighStage(Viewport viewport, Batch batch, MyGdxGame gam) {
         super(viewport, batch, gam);
@@ -32,6 +38,32 @@ public class HighStage extends MyStage {
 
 
 
+        if (Globals.scores.size() > 0) {
+            hsV = new ArrayList();
+
+            for (int i = 0; i < Globals.scores.size(); i++) {
+                float k = Globals.scores.get(i);
+                int b = Math.round(k * 100) / 100;
+                final int finalI = i;
+                hsV.add(new MyLabel(i + 1 + ". " + b + " pont", game.getLabelStyle_White()) {
+                    @Override
+                    public void init() {
+                        super.init();
+                        setPosition(Globals.WORLD_WIDTH / 2 - this.getWidth() / 2+300, finalI > 0 ? hsV.get(finalI - 1).getY() - 75 : 500);
+                    }
+                });
+                addActor(hsV.get(i));
+            }
+            hsV.clear();
+        } else {
+            addActor(new MyLabel("Még nincs elért eredmény", game.getLabelStyle_White()) {
+                @Override
+                public void init() {
+                    super.init();
+                    setPosition(Globals.WORLD_WIDTH / 2 - this.getWidth() / 2+300, 500);
+                }
+            });
+        }
 
         addActor(new MyTextButton("Vissza",game.getTextButtonStyle()){
             @Override
