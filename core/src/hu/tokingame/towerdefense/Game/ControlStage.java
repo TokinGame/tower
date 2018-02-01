@@ -35,10 +35,10 @@ public class ControlStage extends MyStage {
         for(StackTraceElement s: Thread.currentThread().getStackTrace()){
             System.out.println(s);
         }
-        addActor(new BlockSelector(gameStage));
-
 
         initGrid();
+
+        addActor(new BlockSelector(gameStage));
 
         addActor(message = new MyLabel("", game.getLabelStyle_Yellow()));
         message.setPosition(Globals.WORLD_WIDTH/2-getWidth()/2, 600);
