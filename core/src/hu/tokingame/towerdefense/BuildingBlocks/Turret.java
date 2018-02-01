@@ -3,10 +3,12 @@ package hu.tokingame.towerdefense.BuildingBlocks;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import hu.tokingame.towerdefense.Enemy.Enemy;
 import hu.tokingame.towerdefense.Game.GameStage;
 import hu.tokingame.towerdefense.Globals.Assets;
+import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyActor;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyCircle;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyRectangle;
@@ -59,6 +61,13 @@ public class Turret extends BuildingBlock {
         System.out.println("UPGRADED");
         System.out.println("range "+range+" damage " +damage);
         debugtimer = 2;
+        circle();
+    }
+
+    public void circle(){
+        for(int i=0; i<32;i++) {
+            getStage().addActor(new CircleActor(getX() + getWidth() / 2f, getY() + getHeight() / 2f, 200f*((float)i/5+1), ((MyCircle)getCollisionShape("Range")).getRadius()));
+        }
     }
 
     public void shoot(Enemy enemy){
@@ -130,5 +139,11 @@ public class Turret extends BuildingBlock {
             shapeRenderer.circle(getX(), getY(), (float) (Math.sqrt(getWidth()* range * getHeight()* range) / 2));*/
             //shapeRenderer.end();
         }
+    }
+
+    @Override
+    protected void setStage(Stage stage) {
+        super.setStage(stage);
+        circle();
     }
 }

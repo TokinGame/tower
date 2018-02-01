@@ -36,6 +36,7 @@ public class Assets {
 
     public static final AssetDescriptor<Texture> BADLOGIC_TEXTURE = new AssetDescriptor<Texture>("badlogic.jpg", Texture.class);
 
+    public static final AssetDescriptor<Texture> CIRCLE_TEXTURE = new AssetDescriptor<Texture>("OtherTextures/circle.png", Texture.class);
     public static final AssetDescriptor<Texture> WALL_TEXTURE = new AssetDescriptor<Texture>("Buildings/wall.jpg", Texture.class);
     public static final AssetDescriptor<Texture> TURRET_TEXTURE = new AssetDescriptor<Texture>("Buildings/agyuegybe.jpg", Texture.class);
     public static final AssetDescriptor<Texture> GREEN_ALIEN = new AssetDescriptor<Texture>("Creatures/leny_zold.png", Texture.class);
@@ -76,6 +77,8 @@ public class Assets {
         manager.load(BLUE_ALIEN);
         manager.load(YELLOW_ALIEN);
         manager.load(RED_ALIEN);
+
+        manager.load(CIRCLE_TEXTURE);
     }
 
     public static void afterLoaded() {
