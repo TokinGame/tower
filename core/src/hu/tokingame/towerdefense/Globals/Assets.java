@@ -46,6 +46,10 @@ public class Assets {
     public static final AssetDescriptor<Texture> BACKGROUND = new AssetDescriptor<Texture>("szakkor/hatter.png", Texture.class);
     public static final AssetDescriptor<Texture> EMPTY = new AssetDescriptor<Texture>("OtherTextures/zolipls.png", Texture.class);
     public static final AssetDescriptor<Texture> MENHAJ = new AssetDescriptor<Texture>("szakkor/urhajomagaba2.png", Texture.class);
+    public static final AssetDescriptor<Texture> BACKGROUND_NOCON = new AssetDescriptor<Texture>("UI/hatter_sima.png", Texture.class);
+    public static final AssetDescriptor<Texture> ROBBANT_PARLAMENT = new AssetDescriptor<Texture>("UI/parlament_robbant.png", Texture.class);
+    public static final AssetDescriptor<Texture> STEEL = new AssetDescriptor<Texture>("UI/steel_texture.png", Texture.class);
+    public static final AssetDescriptor<Texture> SZIV = new AssetDescriptor<Texture>("UI/sziv.png", Texture.class);
 
 
 
@@ -76,6 +80,11 @@ public class Assets {
         manager.load(BLUE_ALIEN);
         manager.load(YELLOW_ALIEN);
         manager.load(RED_ALIEN);
+
+        manager.load(BACKGROUND_NOCON);
+        manager.load(ROBBANT_PARLAMENT);
+        manager.load(STEEL);
+        manager.load(SZIV);
     }
 
     public static void afterLoaded() {
