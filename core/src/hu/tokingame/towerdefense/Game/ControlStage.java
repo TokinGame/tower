@@ -46,7 +46,7 @@ public class ControlStage extends MyStage {
         //message.setVisible(false);
         System.out.println("yxcvbnm");
 
-        addActor(new MyTextButton("Kör teszt", game.getTextButtonStyle()){
+        addActor(new MyTextButton("Kör Indítása", game.getTextButtonStyle()){
             @Override
             public void init() {
                 super.init();
@@ -58,7 +58,6 @@ public class ControlStage extends MyStage {
                         System.out.println("KKLIJKJKJK");
                         System.out.println(this);
                         if(!ControlStage.this.gameStage.duringWave)ControlStage.this.gameStage.startWave();
-                        else ControlStage.this.gameStage.endWave();
                     }
                 });
             }

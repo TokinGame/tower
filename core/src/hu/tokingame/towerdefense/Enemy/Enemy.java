@@ -29,6 +29,12 @@ public abstract class Enemy extends OneSpriteStaticActor {
 
     protected int steps = 0;
 
+    @Override
+    public boolean remove() {
+        stage.removeEnemy(this);
+        return super.remove();
+    }
+
     protected int health = 1;
 
     protected boolean flaggedForRemoval = false;

@@ -31,7 +31,7 @@ public class WaveLoader implements Runnable {
     }
 
     public void load(int l){
-        try {
+        /*try {
             InputStreamReader isr = new InputStreamReader(Gdx.files.internal("Waves/"+l+".txt").read());
             BufferedReader br = new BufferedReader(isr);
             //gameStage.nextMoney(new Integer(br.readLine()));
@@ -50,7 +50,16 @@ public class WaveLoader implements Runnable {
         }
         catch (Exception e) {
             e.printStackTrace();
+        }*/
+
+        if(l % 5 == 0){
+            gameStage.addHealthAfterRound = true;
+            gameStage.moneyToBeAdded = 500;
+        }else{
+            gameStage.moneyToBeAdded = 1000;
         }
+
+
 
     }
 
