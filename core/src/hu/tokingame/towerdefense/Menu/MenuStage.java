@@ -40,7 +40,7 @@ public class MenuStage extends MyStage {
 
     public MenuStage(Viewport viewport, Batch batch, MyGdxGame gam) {
         super(viewport, batch, gam);
-        selected=1;
+        selected=0;
         System.out.println("asdf");
         game = gam;
         Gdx.input.setInputProcessor(this);

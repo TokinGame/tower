@@ -115,6 +115,15 @@ public class GameStage extends MyStage {
         waveLoader.load(1);
 
 
+        addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND_GAME)){
+            @Override
+            public void init() {
+                super.init();
+                setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
+                setPosition(0,0);
+            }
+        });
+
 
         addActor(defendedbase = new OneSpriteStaticActor(Assets.manager.get(Assets.BADLOGIC_TEXTURE)){  // bázis, vonja az életet ha belemegy a cucc
             @Override
