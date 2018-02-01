@@ -43,11 +43,16 @@ public class Assets {
     public static final AssetDescriptor<Texture> GREEN_ALIEN = new AssetDescriptor<Texture>("Creatures/leny_zold.png", Texture.class);
     public static final AssetDescriptor<Texture> BLUE_ALIEN = new AssetDescriptor<Texture>("Creatures/leny_kek.png", Texture.class);
     public static final AssetDescriptor<Texture> YELLOW_ALIEN = new AssetDescriptor<Texture>("Creatures/leny_sarga.png", Texture.class);
+    public static final AssetDescriptor<Texture> BOMBU_ALIEN = new AssetDescriptor<Texture>("Creatures/bombu.png", Texture.class);
+    public static final AssetDescriptor<Texture> GREEN_BOSS = new AssetDescriptor<Texture>("Creatures/boss_zold.png", Texture.class);
+    public static final AssetDescriptor<Texture> YELLOW_BOSS = new AssetDescriptor<Texture>("Creatures/boss_sarga.png", Texture.class);
+    public static final AssetDescriptor<Texture> BLUE_BOSS = new AssetDescriptor<Texture>("Creatures/boss_kek.png", Texture.class);
+    public static final AssetDescriptor<Texture> RED_BOSS = new AssetDescriptor<Texture>("Creatures/boss_piros.png", Texture.class);
     public static final AssetDescriptor<Texture> RED_ALIEN = new AssetDescriptor<Texture>("Creatures/leny_piros.png", Texture.class);
     public static final AssetDescriptor<Texture> GRID_SQUARE = new AssetDescriptor<Texture>("UI/grid_square.png", Texture.class);
-    public static final AssetDescriptor<Texture> BACKGROUND = new AssetDescriptor<Texture>("szakkor/hatter.png", Texture.class);
+    public static final AssetDescriptor<Texture> BACKGROUND = new AssetDescriptor<Texture>("UI/hatter.png", Texture.class);
     public static final AssetDescriptor<Texture> EMPTY = new AssetDescriptor<Texture>("OtherTextures/zolipls.png", Texture.class);
-    public static final AssetDescriptor<Texture> MENHAJ = new AssetDescriptor<Texture>("szakkor/urhajomagaba2.png", Texture.class);
+    public static final AssetDescriptor<Texture> MENHAJ = new AssetDescriptor<Texture>("UI/urhajomagaba2.png", Texture.class);
     public static final AssetDescriptor<Texture> BACKGROUND_NOCON = new AssetDescriptor<Texture>("UI/hatter_sima.png", Texture.class);
     public static final AssetDescriptor<Texture> BACKGROUND_GAME = new AssetDescriptor<Texture>("szakkor/jatekhatter.png", Texture.class);
     public static final AssetDescriptor<Texture> ROBBANT_PARLAMENT = new AssetDescriptor<Texture>("UI/parlament_robbant.png", Texture.class);
@@ -55,10 +60,40 @@ public class Assets {
     public static final AssetDescriptor<Texture> SZIV = new AssetDescriptor<Texture>("UI/sziv.png", Texture.class);
     public static final AssetDescriptor<Texture> LABEL_BG = new AssetDescriptor<Texture>("UI/labelbg.png", Texture.class);
     public static final AssetDescriptor<Music> MAIN_MUSIC = new AssetDescriptor<Music>("music/menuzene.wav", Music.class);
+    public static final AssetDescriptor<Texture>[] ROCKET_LAUNCH = new AssetDescriptor[]{
+            new AssetDescriptor<Texture>("rocketlaunch/1.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/2.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/3.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/4.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/5.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/6.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/7.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/8.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/9.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/10.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/11.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/12.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/13.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/14.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/15.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/16.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/17.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/18.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/19.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/20.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/21.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/22.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/23.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/24.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/25.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/26.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/27.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/28.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/29.png", Texture.class),
+            new AssetDescriptor<Texture>("rocketlaunch/30.png", Texture.class)};
 
 
 
-   
 
 
     public static void prepare() {
@@ -93,8 +128,19 @@ public class Assets {
         manager.load(ROBBANT_PARLAMENT);
         manager.load(STEEL);
         manager.load(SZIV);
+
+        manager.load(LABEL_BG);
         manager.load(MAIN_MUSIC);
 
+        manager.load(BOMBU_ALIEN);
+        manager.load(GREEN_BOSS);
+        manager.load(BLUE_BOSS);
+        manager.load(YELLOW_BOSS);
+        manager.load(RED_BOSS);
+
+        for (AssetDescriptor<Texture> frame: ROCKET_LAUNCH) {
+            manager.load(frame);
+        }
     }
 
     public static void afterLoaded() {

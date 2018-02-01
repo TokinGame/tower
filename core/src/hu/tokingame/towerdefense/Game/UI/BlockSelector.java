@@ -53,21 +53,21 @@ public class BlockSelector extends Group {
             }
         });
 
-        addActor(new MyLabel(Globals.costs[0]+" Ft", gameStage.game.getLabelStyle_White()){
+        addActor(new MyLabel(Globals.costs[0]+" Ft", gameStage.game.getLabelStyle_White_DarkBG()){
             @Override
             public void init() {
                 super.init();
                 setPosition(10, 295);
             }
         });
-        addActor(new MyLabel(Globals.costs[1]+" Ft", gameStage.game.getLabelStyle_White()){
+        addActor(new MyLabel(Globals.costs[1]+" Ft", gameStage.game.getLabelStyle_White_DarkBG()){
             @Override
             public void init() {
                 super.init();
                 setPosition(10, 170);
             }
         });
-        addActor(new MyLabel(Globals.costs[2]+" Ft", gameStage.game.getLabelStyle_White()){
+        addActor(new MyLabel(Globals.costs[2]+" Ft", gameStage.game.getLabelStyle_White_DarkBG()){
             @Override
             public void init() {
                 super.init();

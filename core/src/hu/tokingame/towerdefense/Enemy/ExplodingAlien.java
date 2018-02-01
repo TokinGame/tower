@@ -15,7 +15,7 @@ public class ExplodingAlien extends Alien {
     int explodePoint;
 
     public ExplodingAlien(GameStage gameStage) {
-        super(gameStage, Assets.manager.get(Assets.BADLOGIC_TEXTURE), 5, 1.5f);
+        super(gameStage, Assets.manager.get(Assets.BOMBU_ALIEN), 5, 1.5f);
         explodePoint = (int)(Math.random()*(1000 - 280 + 1) +280);
         System.out.println("explode at "+explodePoint);
     }

@@ -26,7 +26,9 @@ import hu.tokingame.towerdefense.Enemy.EnemyAdder;
 import hu.tokingame.towerdefense.Enemy.ExplodingAlien;
 import hu.tokingame.towerdefense.Enemy.GreenAlien;
 import hu.tokingame.towerdefense.Enemy.RedAlien;
+import hu.tokingame.towerdefense.Enemy.RedBoss;
 import hu.tokingame.towerdefense.Enemy.YellowAlien;
+import hu.tokingame.towerdefense.Enemy.YellowBoss;
 import hu.tokingame.towerdefense.Entities.Explosion;
 import hu.tokingame.towerdefense.Game.UI.HealthUpdateLable;
 import hu.tokingame.towerdefense.Game.UI.MoneySpentText;
@@ -337,6 +339,12 @@ public class GameStage extends MyStage {
                     break;
                 case 5:
                     enemiesQueue.add(new EnemyAdder(new ExplodingAlien(this), timing));
+                    break;
+                case 6:
+                    enemiesQueue.add(new EnemyAdder(new YellowBoss(this), timing));
+                    break;
+                case 7:
+                    enemiesQueue.add(new EnemyAdder(new RedBoss(this), timing));
                     break;
                 default:
                     enemiesQueue.add(new EnemyAdder(new GreenAlien(this), timing));
