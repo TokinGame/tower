@@ -11,12 +11,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
- * Created by davim on 2018. 01. 25..
+ * Created by davim on 2018. 01. 25.
  */
 
 public class WaveLoader implements Runnable {
 
 
+    int rd(int a , int b){return (int)(Math.random()*(b-a+1)+a);}
 
     ArrayList<int[]> upcoming = new ArrayList<int[]>();
 
@@ -52,11 +53,46 @@ public class WaveLoader implements Runnable {
             e.printStackTrace();
         }*/
 
+        gameStage.moneyToBeAdded = 500;
+
         if(l % 5 == 0){
             gameStage.addHealthAfterRound = true;
-            gameStage.moneyToBeAdded = 500;
+
+
+            if(l % 10 == 0){
+                gameStage.moneyToBeAdded = 1000;
+                for(int i = 0; i < l/10; i++){
+                    int kl[] = {7, i*5};
+                    System.out.println(kl);
+                    upcoming.add(kl);
+                }
+            }else{
+                for(int i = 0; i < l/5; i++){
+                    int kl[] = {6, i*5};
+                    System.out.println(kl);
+                    upcoming.add(kl);
+                }
+            }
         }else{
-            gameStage.moneyToBeAdded = 1000;
+
+            int ll = l % 5;
+
+            for(int i = 0; i < l /5; i++){
+                int kl[] = {ll, i * 4};
+                System.out.println(kl);
+                upcoming.add(kl);
+            }
+
+            if(rd(1,10) > 8){
+                int kl[] = {5, 4};
+                upcoming.add(kl);
+            }
+
+
+
+
+
+
         }
 
 
