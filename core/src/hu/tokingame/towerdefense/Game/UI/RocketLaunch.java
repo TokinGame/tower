@@ -1,7 +1,5 @@
 package hu.tokingame.towerdefense.Game.UI;
 
-import com.badlogic.gdx.graphics.Texture;
-
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
@@ -28,10 +26,14 @@ public class RocketLaunch extends OneSpriteStaticActor {
             currentImg++;
             actNum = 0;
             if(currentImg > 29){
-                remove();
+                finished();
                 return;
             }
             this.setTexture(Assets.manager.get(Assets.ROCKET_LAUNCH[currentImg]));
         }
+    }
+
+    public void finished(){
+        remove();
     }
 }

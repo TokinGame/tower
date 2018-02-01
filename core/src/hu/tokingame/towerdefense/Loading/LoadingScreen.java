@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Globals.Globals;
+import hu.tokingame.towerdefense.Menu.FirstStartScreen;
 import hu.tokingame.towerdefense.Menu.MenuScreen;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyScreen;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
@@ -62,7 +63,13 @@ public class LoadingScreen extends MyScreen {
         if (elapsedTime > 2.0 && Assets.manager.update()) {
             if (Assets.manager.update()) {
                 Assets.afterLoaded();
-                game.setScreen(new MenuScreen(game));
+                if(Globals.getPrefs().getBoolean("firstRun", true)){
+                    Globals.getPrefs().putBoolean("firstRun", false);
+                    Globals.getPrefs().flush();
+                    game.setScreen(new FirstStartScreen(game));
+                }else{
+                    game.setScreen(new MenuScreen(game));
+                }
             }
         }
         elapsedTime += delta;
