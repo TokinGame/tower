@@ -28,6 +28,14 @@ public class SettingsStage extends MyStage {
 
         game = gam;
 
+        addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND)){
+            @Override
+            public void init() {
+                super.init();
+                setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
+                setPosition(0,0);
+            }
+        });
 
         /*addActor(new MyTextButton(MUSIC_LABEL){
             @Override

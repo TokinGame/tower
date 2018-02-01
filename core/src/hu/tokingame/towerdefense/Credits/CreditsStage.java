@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import hu.tokingame.towerdefense.Exit.ExitScreen;
 import hu.tokingame.towerdefense.Game.GameScreen;
+import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Globals.Globals;
 import hu.tokingame.towerdefense.Menu.MenuScreen;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
@@ -32,6 +33,15 @@ public class CreditsStage extends MyStage {
         game = gam;
         Gdx.input.setCatchBackKey(true);
 
+        addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND)){
+            @Override
+            public void init() {
+                super.init();
+                setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
+                setPosition(0,0);
+            }
+        });
+
         addActor(new MyLabel("Tower\nKészítette a Tökin Game\nTagok:\nBálint Dániel\nDávid Mátyás\nKovács Zoltán\nSchuh Marcell", game.getLabelStyle_White()){
             @Override
             public void init() {
@@ -40,6 +50,8 @@ public class CreditsStage extends MyStage {
                 setAlignment(2);
             }
         });
+
+
 
         addActor(new MyTextButton("Vissza",game.getTextButtonStyle()){
             @Override
