@@ -49,7 +49,7 @@ public class HighStage extends MyStage {
                     @Override
                     public void init() {
                         super.init();
-                        setPosition(Globals.WORLD_WIDTH / 2 - this.getWidth() / 2+300, finalI > 0 ? hsV.get(finalI - 1).getY() - 75 : 500);
+                        setPosition(Globals.WORLD_WIDTH / 2 - this.getWidth() / 2, finalI > 0 ? hsV.get(finalI - 1).getY() - 75 : 500);
                     }
                 });
                 addActor(hsV.get(i));
@@ -60,7 +60,7 @@ public class HighStage extends MyStage {
                 @Override
                 public void init() {
                     super.init();
-                    setPosition(Globals.WORLD_WIDTH / 2 - this.getWidth() / 2+300, 500);
+                    setPosition(Globals.WORLD_WIDTH / 2 - this.getWidth() / 2, 500);
                 }
             });
         }
