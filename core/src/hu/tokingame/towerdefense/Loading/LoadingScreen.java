@@ -34,9 +34,9 @@ public class LoadingScreen extends MyScreen {
 
             }
         };
-        //stage.addActor(backGround= new OneSpriteStaticActor("loadingbg.png"));
-//        backGround.setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
-  //      backGround.setPosition(0,0);
+        stage.addActor(backGround = new OneSpriteStaticActor("UI/hatter_sima.png"));
+        backGround.setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
+        backGround.setPosition(0,0);
         stage.addActor(new OneSpriteAnimatedActor("loading/loading.txt")
         {
             @Override

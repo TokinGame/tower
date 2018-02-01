@@ -25,21 +25,21 @@ public class FirstStartStage extends MyStage {
             @Override
             public void finished() {
                 super.finished();
-                game.setScreen(new MenuScreen(game),false);
+                game.setScreen(new MenuScreen(game),true);
             }
         });
 
-        addActor(label = new MyLabel("2030-at írunk. Magyarország átvette a vezetést az űkutatásban, és a cél már nem a mars, hanem a plutó nevű törpe bolygó.\n" +
-                "A Betyár-2 rakétát 2029 augusztus 20-án lőtték és a különleges Erős Pista hajtóanyag miatt el is érte célját Február 2-ra.\n" +
-                "Viszont bátor űrhajósaink a leszállás után nehézségekbe ütköztek, ugyanis a bolygók nem ők az első értelmes lények.", game.getLabelStyle_White()){
-            @Override
-            public void init() {
-                super.init();
-                this.setPosition(-this.getHeight(), Globals.WORLD_HEIGHT/2f - this.getHeight() / 2f);
-            }
-        });
+        addActor(label = new MyLabel("2030-at írunk. Magyarország átvette a vezetést az űkutatásban,\n" +
+                " és a cél már nem a mars, hanem a plutó nevű törpe bolygó.\n" +
+                "A Betyár-2 rakétát 2029 augusztus 20-án lőtték és a \n" +
+                "különleges Erős Pista hajtóanyag miatt el is érte célját Február 2-ra.\n" +
+                "Viszont bátor űrhajósaink a leszállás után nehézségekbe ütköztek, \n" +
+                "ugyanis a bolygók nem ők az első értelmes lények.", game.getLabelStyle_White()));
 
-        label.addAction(Actions.sequence(Actions.moveTo(label.getX(), 50, 1f), Actions.removeActor()));
+        label.setScale(0.5f);
+        label.setPosition(Globals.WORLD_WIDTH/2f - this.getWidth() / 2f, -getHeight());
+
+        label.addAction(Actions.sequence(Actions.moveTo(label.getX(), 150, 1f)));
     }
 
     @Override
