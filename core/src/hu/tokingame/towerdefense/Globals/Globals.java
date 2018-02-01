@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import hu.tokingame.towerdefense.BuildingBlocks.BuildingBlock;
 
@@ -18,6 +19,8 @@ public class Globals {
     public static final int WORLD_WIDTH = 1280;
     public static final int WORLD_HEIGHT = 720;
 
+    public static float pintsz = 0;//score
+
     public enum Step{
         LEFT,
         RIGHT,
@@ -28,6 +31,25 @@ public class Globals {
     public enum Selectable{
         WALL, TURRET, OTHERTURRET
     }
+    public static ArrayList<Float> scores = new ArrayList<Float>();
+
+    public static void addScore(float pintsz){
+        scores.add(pintsz);
+        Collections.sort(scores);
+        Collections.reverse(scores);
+
+        if(scores.size() > 5){
+            scores = (ArrayList<Float>)scores.subList(0, 5);
+        }
+
+        for(int i = 0; i < scores.size(); i++){
+            prefs.putFloat("s"+i, scores.get(i));
+        }
+
+        prefs.flush();
+    }
+
+
 
     public static final int[] costs = {100, 250, 250};
 

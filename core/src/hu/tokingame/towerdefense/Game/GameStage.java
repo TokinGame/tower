@@ -37,6 +37,8 @@ import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.tokingame.towerdefense.MyGdxGame;
 
+import static hu.tokingame.towerdefense.Globals.Globals.pintsz;
+
 /**
  * Created by M on 1/11/2018.
  */
@@ -50,6 +52,7 @@ public class GameStage extends MyStage {
     Thread pathThread, loadThread;
 
     private Alien testAlien;
+    private int wave=1;
 
 
     public boolean duringWave = false;
@@ -250,6 +253,9 @@ public class GameStage extends MyStage {
 
     public void removeEnemy(Enemy enemy){
         enemies.remove(enemy);
+        if (enemy instanceof ExplodingAlien){
+            pintsz+=100;
+        }
     }
 
 
@@ -331,7 +337,11 @@ public class GameStage extends MyStage {
 
     public void decreaseHealth() {
         if (healthLeft > 1) healthLeft--;
-        else game.setScreenBackByStackPop();     //TODO meghaltál képernyő
+        else{
+            game.setScreenBackByStackPop();
+            Globals.getPrefs().putFloat("pontszam", Globals.pintsz);
+            Globals.getPrefs().flush();
+        }     //TODO meghaltál képernyő
         controlStage.setHealthLabel(healthLeft);
     }
 
@@ -361,6 +371,13 @@ public class GameStage extends MyStage {
         }
         System.out.println("wave ended");
         waveLoader.load(roundsCount+1);
+        if (wave==1){
+            pintsz+=100;
+        }
+        if (wave%5==0){
+            pintsz*=2;
+        }
+        pintsz*=1.2;
     }
 
     boolean hasEnoughMoney(){
