@@ -66,9 +66,9 @@ public class LoadingScreen extends MyScreen {
                 if(Globals.getPrefs().getBoolean("firstRun", true)){
                     Globals.getPrefs().putBoolean("firstRun", false);
                     Globals.getPrefs().flush();
-                    game.setScreen(new FirstStartScreen(game));
+                    game.setScreen(new FirstStartScreen(game),false);
                 }else{
-                    game.setScreen(new MenuScreen(game));
+                    game.setScreen(new MenuScreen(game),false);
                 }
             }
         }

@@ -25,7 +25,7 @@ public class FirstStartStage extends MyStage {
             @Override
             public void finished() {
                 super.finished();
-                game.setScreen(new MenuScreen(game));
+                game.setScreen(new MenuScreen(game),false);
             }
         });
 
