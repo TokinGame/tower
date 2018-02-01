@@ -44,7 +44,14 @@ public class MenuStage extends MyStage {
             System.out.println(s);
         }
 
-
+        addActor(new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND)){
+            @Override
+            public void init() {
+                super.init();
+                setSize(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT);
+                setPosition(0,0);
+            }
+        });
         addActor(new MyTextButton("Játék",game.getTextButtonStyle()){
             @Override
             public void init() {
@@ -141,7 +148,7 @@ public class MenuStage extends MyStage {
             public void init() {
                 super.init();
                 setSize(50, 50);
-                setPosition((Globals.WORLD_WIDTH/2-getWidth()/2), (Globals.WORLD_HEIGHT/2-getHeight()/2)+50);
+                setPosition((Globals.WORLD_WIDTH/2-getWidth()/2)+243, (Globals.WORLD_HEIGHT/2-getHeight()/2)-205);
                 addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
@@ -162,7 +169,7 @@ public class MenuStage extends MyStage {
             public void init() {
                 super.init();
                 setSize(50, 50);
-                setPosition((Globals.WORLD_WIDTH/2-getWidth()/2), (Globals.WORLD_HEIGHT/2-getHeight()/2)-50);
+                setPosition((Globals.WORLD_WIDTH/2-getWidth()/2)+243, (Globals.WORLD_HEIGHT/2-getHeight()/2)-305);
                 addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
@@ -183,7 +190,7 @@ public class MenuStage extends MyStage {
             public void init() {
                 super.init();
                 setSize(50, 50);
-                setPosition((Globals.WORLD_WIDTH/2-getWidth()/2)+50, (Globals.WORLD_HEIGHT/2-getHeight()/2));
+                setPosition((Globals.WORLD_WIDTH/2-getWidth()/2)+193, (Globals.WORLD_HEIGHT/2-getHeight()/2)-255);
                 addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
@@ -204,7 +211,7 @@ public class MenuStage extends MyStage {
             public void init() {
                 super.init();
                 setSize(50, 50);
-                setPosition((Globals.WORLD_WIDTH/2-getWidth()/2)-50, (Globals.WORLD_HEIGHT/2-getHeight()/2));
+                setPosition((Globals.WORLD_WIDTH/2-getWidth()/2)+293, (Globals.WORLD_HEIGHT/2-getHeight()/2)-255);
                 addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
@@ -224,8 +231,8 @@ public class MenuStage extends MyStage {
             @Override
             public void init() {
                 super.init();
-                setSize(50, 50);
-                setPosition((Globals.WORLD_WIDTH/2-getWidth()/2)+150, (Globals.WORLD_HEIGHT/2-getHeight()/2));
+                setSize(100, 100);
+                setPosition((Globals.WORLD_WIDTH/2-getWidth()/2)+525, (Globals.WORLD_HEIGHT/2-getHeight()/2)-255);
                 addListener(new ClickListener(){
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
