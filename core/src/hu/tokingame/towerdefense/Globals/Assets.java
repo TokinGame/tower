@@ -45,6 +45,7 @@ public class Assets {
     public static final AssetDescriptor<Texture> GRID_SQUARE = new AssetDescriptor<Texture>("UI/grid_square.png", Texture.class);
     public static final AssetDescriptor<Texture> BACKGROUND = new AssetDescriptor<Texture>("szakkor/hatter.png", Texture.class);
     public static final AssetDescriptor<Texture> EMPTY = new AssetDescriptor<Texture>("OtherTextures/zolipls.png", Texture.class);
+    public static final AssetDescriptor<Texture> MENHAJ = new AssetDescriptor<Texture>("szakkor/urhajomagaba2.png", Texture.class);
 
 
 
@@ -62,6 +63,7 @@ public class Assets {
         manager.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
         manager.setLoader(BitmapFont.class, ".otf", new FreetypeFontLoader(resolver));
         manager.load(BACKGROUND);
+        manager.load(MENHAJ);
         manager.load(EMPTY);
         manager.load(BADLOGIC_TEXTURE);
         manager.load(CALIBRI_FONT);
