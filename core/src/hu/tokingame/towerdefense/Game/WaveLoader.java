@@ -55,6 +55,8 @@ public class WaveLoader implements Runnable {
 
         gameStage.moneyToBeAdded = 500;
 
+        System.out.println("lellvlelelel" + l);
+
         if(l % 5 == 0){
             gameStage.addHealthAfterRound = true;
 
@@ -63,13 +65,13 @@ public class WaveLoader implements Runnable {
                 gameStage.moneyToBeAdded = 1000;
                 for(int i = 0; i < l/10; i++){
                     int kl[] = {7, i*5};
-                    System.out.println(kl);
+                    System.out.println("klklklk" + kl);
                     upcoming.add(kl);
                 }
             }else{
                 for(int i = 0; i < l/5; i++){
                     int kl[] = {6, i*5};
-                    System.out.println(kl);
+                    System.out.println("klklklk" + kl);
                     upcoming.add(kl);
                 }
             }
@@ -77,14 +79,17 @@ public class WaveLoader implements Runnable {
 
             int ll = l % 5;
 
-            for(int i = 0; i < l /5; i++){
-                int kl[] = {ll, i * 4};
-                System.out.println(kl);
-                upcoming.add(kl);
-            }
+            System.out.println("lllllllll"+ll);
+
+            int hk = l / 5 + 1;
+
+            System.out.println("hhhhhhhhkkkkk "+hk);
+
+
 
             if(rd(1,10) > 8){
-                int kl[] = {5, 4};
+                int kl[] = {5, 3};
+                System.out.println("BOMBU");
                 upcoming.add(kl);
             }
 
