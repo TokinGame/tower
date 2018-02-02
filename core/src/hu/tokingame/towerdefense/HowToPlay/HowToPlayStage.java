@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import hu.tokingame.towerdefense.Game.GameScreen;
 import hu.tokingame.towerdefense.Globals.Assets;
 import hu.tokingame.towerdefense.Globals.Globals;
+import hu.tokingame.towerdefense.Menu.FirstStartScreen;
 import hu.tokingame.towerdefense.Menu.MenuScreen;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.MyStage;
 import hu.tokingame.towerdefense.MyBaseClasses.Scene2D.OneSpriteStaticActor;
@@ -48,6 +49,21 @@ public class HowToPlayStage extends MyStage {
                 setPosition(Globals.WORLD_WIDTH/2-getWidth()/2, 200);
                 setAlignment(2);
 
+            }
+        });
+
+        addActor(new MyTextButton("Intro",game.getTextButtonStyle()){
+            @Override
+            public void init() {
+                super.init();
+                setPosition((Globals.WORLD_WIDTH-getWidth())-10, 10);
+                addListener(new ClickListener(){
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        super.clicked(event, x, y);
+                        game.setScreen(new FirstStartScreen(game));
+                    }
+                });
             }
         });
 
