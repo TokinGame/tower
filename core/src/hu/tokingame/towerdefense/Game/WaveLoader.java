@@ -60,7 +60,7 @@ public class WaveLoader implements Runnable {
         System.out.println("lellvlelelel" + l);
 
         if(l % 5 == 0){
-            gameStage.addHealthAfterRound = true;
+            //gameStage.addHealthAfterRound = true;
 
 
             if(l % 10 == 0){

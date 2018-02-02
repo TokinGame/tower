@@ -25,6 +25,8 @@ public class Heart extends OneSpriteStaticActor {
     private boolean fadeInEffect = false;
     private float fadeInTime = 0;
 
+    private float rem = 0;
+
     private static final float FADE_TIME = 1f;
 
     private GameStage gameStage;
@@ -60,6 +62,11 @@ public class Heart extends OneSpriteStaticActor {
     @Override
     public void act(float delta) {
         super.act(delta);
+        rem += delta;
+        if(rem > 5){
+            remove();
+        }
+
         if (removeEffect){
             removeTime += delta;
             Color c = this.getColor();
