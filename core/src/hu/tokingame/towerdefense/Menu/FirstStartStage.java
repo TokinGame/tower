@@ -1,5 +1,6 @@
 package hu.tokingame.towerdefense.Menu;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -24,15 +25,16 @@ public class FirstStartStage extends MyStage {
 
     public FirstStartStage(Viewport viewport, Batch batch, final MyGdxGame game) {
         super(viewport, batch, game);
+        Gdx.input.setInputProcessor(this);
         addActor(new RocketLaunch(){
             @Override
             public void finished() {
-                super.finished();
-                game.setScreen(new MenuScreen(game),true);
+                //super.finished();
+                //game.setScreen(new MenuScreen(game),true);
             }
         });
 
-        /*addActor(new MyTextButton("Tovább", game.getTextButtonStyle()){
+        addActor(new MyTextButton("Tovább", game.getTextButtonStyle()){
             @Override
             public void init() {
                 super.init();
@@ -41,11 +43,11 @@ public class FirstStartStage extends MyStage {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         super.clicked(event, x, y);
-                        game.setScreen(new MenuScreen(game));
+                        game.setScreen(new MenuScreen(game), true);
                     }
                 });
             }
-        });*/
+        });
 
         addActor(label = new MyLabel("2030-at írunk. Magyarország átvette a vezetést az űkutatásban,\n" +
                 "a cél már nem a mars, hanem a plutó nevű törpe bolygó.\n" +
