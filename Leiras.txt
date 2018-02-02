@@ -1,0 +1,34 @@
+Játékleírás:
+
+	A feladatod megvédeni a magyar bázist a Plútón az ellenséges lényektől. Az ellenség fő célja az ŰrParlament.
+	Találtunk egy olyan területet, amin szabadon lehet építkezni, ezért nem zárhatod el az utat, mert akkor a lények 	olyan helyről próbálkoznak behatolni, ahol nem tudunk védekezni.
+	A legfőbb célod, hogy lövegtornyokat építs, és ezek megsemmisítik a lényeket.
+	
+	Kétféle ágyút használhatsz, az egyik nagy hatótávolságú, kis sebzésű, a másik rövid hatótávolságú, erősebb. 
+	Ezek mellett használhatsz falat is, amellyel az útvonalat hosszabíthatod, hogy az ellenség tovább legyen 
+	hatótávban.
+
+	A játékban az ellenség hullámokban jön, te a hullámok között építhetsz. A lényekből fokozatosan egyre több
+	lesz, és mesterséges intelligencia használatával megtalálják a legoptimálisabb útvonalat.
+
+	Az építményeket pénzért építheted, pénzt minden túlélt kör végén kapsz. A bázisod tíz életről indul, ez minden 	behatolt ellenségnél fogy, de néha egy megsemmisített lény ad extra életet, ha rányomsz a kidobott szívre.
+
+	A már megépített lövegtornyokat tudod fejleszteni, ha rányomsz, és van elég pénzed. Ez növeli a sebzést és 	hatótávot.
+
+	Fél perced van építkezni, de ha előbb végzel, elindíthatod a kört a jobboldali gombbal.
+
+Funkciók:
+
+	- útvonalkereső mesterséges intelligencia
+	- háromféle építmény, amiket felhasználva labirintust építhetsz.
+	- több féle ellenség, különböző sebességgel, életpontokkal (az egyik robban is amivel megsemmisít mindent)
+	- pénz, amit túlélt körökért kapsz, és ebből  építkezhetsz
+	- szépen animált lények és menük
+	- legjobb helyezések tárolása
+	- ágyúk hatótávjának megjelenítése animálva
+	- életpontok növelésének lehetősége, ha elég gyorsan elkapod a szívet (5%-os dobási esély)
+	- boss körök (jóval erősebb ellenség)
+	- robbanó lény, ami megsemmisíti az építményeket
+	- a menüben a kijelölés (űrhajó) irányítható a kontrollerrel a sarokban.
+	- betöltő animáció
+	- Parlament (A III. Magyar köztársaság)
