@@ -86,6 +86,8 @@ public class GameStage extends MyStage {
         super(viewport, batch, game);
         controlStage = new ControlStage(new ExtendViewport(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT, new OrthographicCamera(Globals.WORLD_WIDTH, Globals.WORLD_HEIGHT)),new SpriteBatch(), game, this);
 
+        controlStage.setHealthLabel(healthLeft);
+        
         enemies = new ArrayList<Enemy>();
         enemiesQueue = new ArrayList<EnemyAdder>();
         rem = new ArrayList<EnemyAdder>();
